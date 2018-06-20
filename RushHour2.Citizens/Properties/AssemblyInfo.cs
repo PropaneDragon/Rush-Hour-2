@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Rush Hour 2")]
-[assembly: AssemblyDescription("Modded citizens for Cities Skylines")]
+[assembly: AssemblyTitle("RushHour2.Citizens")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PropaneDragon")]
-[assembly: AssemblyProduct("Rush Hour 2")]
-[assembly: AssemblyCopyright("Copyright © PropaneDragon 2018")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("RushHour2.Citizens")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e16ee6bf-300f-4d6f-ab88-6f6e00fa34ec")]
+[assembly: Guid("622aede5-df49-4c06-b29a-32b5f5590e17")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,4 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
