@@ -1,7 +1,8 @@
 ﻿using ColossalFramework;
 using ICities;
+using RushHour2.Core.Logging;
 
-namespace RushHour2.Core
+namespace RushHour2.Mod
 {
     public class RushHourMod : IUserMod
     {
@@ -10,10 +11,10 @@ namespace RushHour2.Core
 
         public void OnEnabled()
         {
-            DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Rush Hour has been enabled.");
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has started.");
 
-            Singleton<LoadingManager>.Ensure();
-            Singleton<LoadingManager>.instance.m_introLoaded += OnIntroLoaded;
+            var loadingManager = Singleton<LoadingManager>.instance;
+            loadingManager.m_introLoaded += OnIntroLoaded;
         }
 
         private void OnIntroLoaded()
