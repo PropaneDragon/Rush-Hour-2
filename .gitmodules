@@ -1,0 +1,4 @@
+[submodule "Harmony"]
+	path = Harmony
+	url = https://github.com/pardeike/Harmony.git
+	branch = master
