@@ -1,8 +1,8 @@
 ﻿using Harmony;
 
-namespace RushHour2.Core.Harmony
+namespace RushHour2.Patches.HarmonyLocal
 {
-    public static class InstanceHolder
+    public static class HarmonyInstanceHolder
     {
         private static HarmonyInstance _instance = null;
 

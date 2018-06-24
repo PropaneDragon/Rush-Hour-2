@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Rush Hour 2 Mod Controller")]
+[assembly: AssemblyTitle("Rush Hour 2 Patch Controller")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 
@@ -11,4 +11,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5814f6b5-2c0d-45e4-ae42-aeb349453da0")]
+[assembly: Guid("86c9a0ee-b766-46f9-8819-dd35058f90f1")]

@@ -1,7 +1,6 @@
-﻿using Harmony;
-using ICities;
-using RushHour2.Core.Harmony;
+﻿using ICities;
 using RushHour2.Core.Settings;
+using RushHour2.Patches;
 
 namespace RushHour2.Mod.Extensions
 {
@@ -15,11 +14,6 @@ namespace RushHour2.Mod.Extensions
         public override void OnLevelLoaded(LoadMode mode)
         {
             base.OnLevelLoaded(mode);
-
-            if (ShouldRedirect(mode))
-            {
-                InstanceHolder.Ensure();
-            }
         }
 
         public override void OnLevelUnloading()
