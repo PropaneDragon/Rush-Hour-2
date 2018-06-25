@@ -1,13 +1,12 @@
 ﻿using RushHour2.Buildings.Extensions;
 using RushHour2.Citizens.Extensions;
-using RushHour2.Core.Reporting;
+using RushHour2.Citizens.Reporting;
 using System;
 
 namespace RushHour2.Citizens.Location
 {
     public static class LocationHandler
     {
-        private static readonly int ESTIMATED_DISTANCE_PER_MINUTE = 200; //Calculated distance I think you can probably get in an average city per minute.
 
         public static bool Process(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
@@ -28,6 +27,8 @@ namespace RushHour2.Citizens.Location
 
         private static bool ProcessInBuilding(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
+            CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.Visiting);
+
             if (citizen.ValidBuilding())
             {
                 if (citizen.AtHome())
@@ -49,16 +50,34 @@ namespace RushHour2.Citizens.Location
 
         private static bool ProcessVisiting(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
+            CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.Visiting);
+
             var building = citizen.GetBuildingInstance();
             if (building.HasValue)
             {
                 var service = building.Value.Service();
                 if (ValidService(service))
                 {
-                    if (service == ItemClass.Service.Residential)
+                    if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
                     {
+                        residentAI.GoToWork(citizenId, ref citizen);
 
+                        return true;
                     }
+                    else
+                    {
+                        if (citizen.Tired(TimeSpan.FromHours(3)))
+                        {
+                            if (residentAI.GoHome(citizenId, ref citizen))
+                            {
+                                return true;
+                            }
+                        }
+                        else if (service == ItemClass.Service.Residential)
+                        {
+
+                        }
+                    }                        
                 }
             }
 
@@ -67,11 +86,13 @@ namespace RushHour2.Citizens.Location
 
         private static bool ProcessAtWork(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
+            CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.AtWork);
+
             if (!citizen.ShouldBeAtWork())
             {
                 if (citizen.NeedsGoods())
                 {
-                    var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home
+                    var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home, rather than work
 
                     if (residentAI.FindAShop(citizenId, proximityBuilding))
                     {
@@ -88,10 +109,26 @@ namespace RushHour2.Citizens.Location
                 }
                 else
                 {
+                    residentAI.GoHome(citizenId, ref citizen);
 
+                    return true;
                 }
             }
-            else
+
+            return true;
+        }
+
+        private static bool ProcessAtHome(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
+        {
+            CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.AtHome);
+
+            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
+            {
+                residentAI.GoToWork(citizenId, ref citizen);
+
+                return true;
+            }
+            else if (citizen.Tired())
             {
                 return true;
             }
@@ -99,32 +136,22 @@ namespace RushHour2.Citizens.Location
             return false;
         }
 
-        private static bool ProcessAtHome(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
+        private static bool ProcessMoving(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
-            if (citizen.ValidWorkBuilding() && citizen.ShouldBeAtWork(TimeSpan.FromHours(5)))
+            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
             {
-                var homeBuildingInstance = citizen.HomeBuildingInstance();
-                var workBuildingInstance = citizen.WorkBuildingInstance();
+                residentAI.GoToWork(citizenId, ref citizen);
 
-                if (homeBuildingInstance.HasValue && workBuildingInstance.HasValue)
+                return true;
+            }
+            else if (citizen.Tired(TimeSpan.FromHours(3)))
+            {
+                if (residentAI.GoHome(citizenId, ref citizen))
                 {
-                    var homeBuildingLocation = homeBuildingInstance.Value.m_position;
-                    var workBuildingPosition = workBuildingInstance.Value.m_position;
-                    var difference = (homeBuildingLocation - workBuildingPosition).magnitude;
-                    var estimatedTimeToTravelIrl = ESTIMATED_DISTANCE_PER_MINUTE * difference;
-
-                    if (citizen.ShouldBeAtWork(TimeSpan.FromHours(4)))
-                    {
-
-                    }
+                    return true;
                 }
             }
 
-            return false;
-        }
-
-        private static bool ProcessMoving(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
-        {
             return false;
         }
 

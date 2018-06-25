@@ -1,11 +1,16 @@
 ﻿using ColossalFramework;
 using Harmony;
+using RushHour2.Core.Reporting;
 using System;
+using UnityEngine;
 
 namespace RushHour2.Citizens.Extensions
 {
     public static class CitizenExtensions
     {
+        private static readonly int ESTIMATED_DISTANCE_PER_MINUTE = 1500; //Calculated distance I think you can probably get in an average city per minute.
+        private static readonly int MAXIMUM_TRAVEL_HOURS = 5;
+
         public static bool Exists(this Citizen citizen) => citizen.m_homeBuilding != 0 || citizen.m_workBuilding != 0 || citizen.m_visitBuilding != 0 || citizen.m_instance != 0 || citizen.m_vehicle != 0;
 
         public static bool NeedsGoods(this Citizen citizen) => citizen.m_flags.IsFlagSet(Citizen.Flags.NeedGoods);
@@ -54,6 +59,37 @@ namespace RushHour2.Citizens.Extensions
             return citizen.ShouldBeAtWork(new TimeSpan(0));
         }
 
+        public static bool ShouldGoToWork(this Citizen citizen)
+        {
+            if (citizen.ValidWorkBuilding() && citizen.ShouldBeAtWork(TimeSpan.FromHours(MAXIMUM_TRAVEL_HOURS)))
+            {
+                var currentBuildingInstance = citizen.GetBuildingInstance();
+                var workBuildingInstance = citizen.WorkBuildingInstance();
+
+                if (currentBuildingInstance.HasValue && workBuildingInstance.HasValue)
+                {
+                    var simulationManager = Singleton<SimulationManager>.instance;
+                    var homeBuildingLocation = currentBuildingInstance.Value.m_position;
+                    var workBuildingPosition = workBuildingInstance.Value.m_position;
+                    var difference = (homeBuildingLocation - workBuildingPosition).magnitude;
+                    var estimatedTimeToTravelIrl = TimeSpan.FromMinutes(difference / ESTIMATED_DISTANCE_PER_MINUTE);
+                    var irlAverageTimePerStep = TimeSpan.FromTicks(simulationManager.m_simulationProfiler.m_averageStepDuration * 10L);
+                    var timeToTravelFrames = estimatedTimeToTravelIrl.Ticks / irlAverageTimePerStep.Ticks;
+                    var estimatedTimeToTravelInGame = TimeSpan.FromTicks(simulationManager.m_timePerFrame.Ticks * timeToTravelFrames);
+
+                    if (estimatedTimeToTravelInGame.TotalHours >= MAXIMUM_TRAVEL_HOURS)
+                    {
+                        LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Warning, $"Estimated travel time for a citizen was over {MAXIMUM_TRAVEL_HOURS} hours ({estimatedTimeToTravelInGame.Hours} estimated hours) with an estimated IRL time of {estimatedTimeToTravelIrl.Minutes} minutes over a distance of {difference}. This isn't good, so it's been reduced.");
+                        estimatedTimeToTravelInGame = TimeSpan.FromHours(MAXIMUM_TRAVEL_HOURS);
+                    }
+
+                    return citizen.ShouldBeAtWork(estimatedTimeToTravelInGame);
+                }
+            }
+
+            return false;
+        }
+
         public static bool ShouldBeAtWork(this Citizen citizen, TimeSpan offset)
         {
             var simulationManager = Singleton<SimulationManager>.instance;
@@ -82,7 +118,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool Tired(this Citizen citizen, DateTime time)
         {
-            return time.Hour > 10 && time.Hour < 6;
+            return time.Hour > 22 && time.Hour < 6;
         }
 
         public static ushort GetBuilding(this Citizen citizen)

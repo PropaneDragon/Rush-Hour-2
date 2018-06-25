@@ -75,6 +75,7 @@
     <Compile Include="Extensions\ResidentAIExtensions.cs" />
     <Compile Include="Location\LocationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reporting\CitizenMonitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Harmony\Harmony\Harmony.csproj">

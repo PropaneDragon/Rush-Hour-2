@@ -62,6 +62,10 @@
       <Project>{C6AFCEDB-8E3D-4289-BEE9-8FE97B0885FB}</Project>
       <Name>Harmony</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RushHour2.Citizens\RushHour2.Citizens.csproj">
+      <Project>{622AEDE5-DF49-4C06-B29A-32B5F5590E17}</Project>
+      <Name>RushHour2.Citizens</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RushHour2.Core\RushHour2.Core.csproj">
       <Project>{e16ee6bf-300f-4d6f-ab88-6f6e00fa34ec}</Project>
       <Name>RushHour2.Core</Name>

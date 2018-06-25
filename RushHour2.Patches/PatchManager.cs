@@ -12,29 +12,32 @@ namespace RushHour2.Patches
 
         public static bool PatchAll()
         {
+            var patchSuccess = false;
+
             try
             {
                 LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"Patching {PatchAssembly.GetName().Name}...");
 
-                Patcher.PatchAll();
+                patchSuccess = Patcher.PatchAll();
 
                 LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, "Done!");
-
-                return true;
             }
             catch (Exception ex)
             {
                 LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Error, $"Couldn't patch the required methods!");
                 LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex, true);
+            }
 
+            if (!patchSuccess)
+            {
                 MessageBoxWrapper.Show(MessageBoxWrapper.MessageType.Warning,
-                    $"{Details.ModName} couldn't start", $"{Details.ModName} couldn't fully start due to an issue overriding parts of the game.\n" +
-                    $"This is possibly due to a recent update to Cities, and in order to prevent potential issues {Details.ModName} has disabled some functionality.");
+                    $"{Details.ModName} couldn't start", $"{Details.ModName} couldn't fully start due to an issue overriding parts of the game.\n\n" +
+                    $"This is likely due to a recent update to Cities, and in order to prevent potential compatibility issues {Details.ModName} has disabled some functionality by reverting changes until a solution is found. This will result in most mod functionaity being disabled.");
 
                 UnPatchAll();
             }
 
-            return false;
+            return patchSuccess;
         }
 
         public static bool UnPatchAll()

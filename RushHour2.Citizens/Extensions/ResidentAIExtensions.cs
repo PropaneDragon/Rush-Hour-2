@@ -1,4 +1,5 @@
 ﻿using Harmony;
+using RushHour2.Citizens.Reporting;
 
 namespace RushHour2.Citizens.Extensions
 {
@@ -22,6 +23,8 @@ namespace RushHour2.Citizens.Extensions
             if (shoppingReason != TransferManager.TransferReason.None)
             {
                 new Traverse(residentAI).Method("FindVisitPlace", citizenId, proximityBuilding, shoppingReason);
+
+                CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.GoingToVisit);
 
                 return true;
             }
