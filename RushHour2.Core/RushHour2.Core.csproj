@@ -72,10 +72,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Info\Details.cs" />
     <Compile Include="Reporting\LoggingWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Reporting\MessageBoxWrapper.cs" />
     <Compile Include="Settings\FeatureToggles.cs" />
     <Compile Include="Settings\UserModSettings.cs" />
@@ -84,10 +86,6 @@
     <ProjectReference Include="..\Harmony\Harmony\Harmony.csproj">
       <Project>{c6afcedb-8e3d-4289-bee9-8fe97b0885fb}</Project>
       <Name>Harmony</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RushHour2.Citizens\RushHour2.Citizens.csproj">
-      <Project>{622aede5-df49-4c06-b29a-32b5f5590e17}</Project>
-      <Name>RushHour2.Citizens</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

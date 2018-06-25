@@ -2,6 +2,7 @@
 using ICities;
 using RushHour2.Core.Info;
 using RushHour2.Core.Reporting;
+using RushHour2.Mod.Extensions;
 using RushHour2.Patches;
 
 namespace RushHour2.Mod
@@ -17,6 +18,7 @@ namespace RushHour2.Mod
 
             PatchManager.PatchAll();
 
+            SimulationManager.RegisterSimulationManager(new SimulationExtension());
             Singleton<LoadingManager>.instance.m_introLoaded += OnIntroLoaded;
         }
 
@@ -25,7 +27,7 @@ namespace RushHour2.Mod
             LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has ended.");
 
             PatchManager.UnPatchAll();
-
+            
             Singleton<LoadingManager>.instance.m_introLoaded -= OnIntroLoaded;
         }
 

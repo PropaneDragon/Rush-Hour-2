@@ -61,6 +61,7 @@ namespace RushHour2.Patches.HarmonyLocal
 
             patched = patched && Patch(new ResidentAI_UpdateLocation());
             patched = patched && Patch(new SimulationManager_FrameToTime());
+            patched = patched && Patch(new SimulationManager_Update());
 
             return patched;
         }

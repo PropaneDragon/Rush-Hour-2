@@ -4,5 +4,6 @@
     {
         public static bool Enabled = true;
         public static bool LogToFile = true;
+        public static float TimeSpeedMultiplier = 0.25;
     }
 }

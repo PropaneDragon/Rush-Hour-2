@@ -67,12 +67,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Extensions\CitizenExtensions.cs" />
+    <Compile Include="Extensions\HumanAIExtensions.cs" />
+    <Compile Include="Extensions\ResidentAIExtensions.cs" />
     <Compile Include="Location\LocationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Harmony\Harmony\Harmony.csproj">
+      <Project>{C6AFCEDB-8E3D-4289-BEE9-8FE97B0885FB}</Project>
+      <Name>Harmony</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RushHour2.Buildings\RushHour2.Buildings.csproj">
+      <Project>{2D3CE375-60A5-4187-8DAC-AD33F6FC7042}</Project>
+      <Name>RushHour2.Buildings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RushHour2.Core\RushHour2.Core.csproj">
+      <Project>{E16EE6BF-300F-4D6F-AB88-6F6E00FA34EC}</Project>
+      <Name>RushHour2.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /v /e /y "$(TargetDir)*.dll" "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\RushHour2\"</PostBuildEvent>
