@@ -2,6 +2,7 @@
 using RushHour2.Core.Reporting;
 using RushHour2.Patches.AI;
 using RushHour2.Patches.Simulation;
+using RushHour2.Patches.UI;
 using System;
 using System.Linq;
 
@@ -62,6 +63,7 @@ namespace RushHour2.Patches.HarmonyLocal
             patched = patched && Patch(new ResidentAI_UpdateLocation());
             patched = patched && Patch(new SimulationManager_FrameToTime());
             patched = patched && Patch(new SimulationManager_Update());
+            patched = patched && Patch(new NewUIDateTimeWrapper_Check());
 
             return patched;
         }

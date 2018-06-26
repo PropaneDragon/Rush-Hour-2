@@ -71,7 +71,7 @@ namespace RushHour2.Citizens.Extensions
                     var workBuildingPosition = workBuildingInstance.Value.m_position;
                     var difference = (homeBuildingLocation - workBuildingPosition).magnitude;
                     var estimatedTimeToTravelIrl = TimeSpan.FromMinutes(difference / ESTIMATED_DISTANCE_PER_MINUTE);
-                    var irlAverageTimePerStep = TimeSpan.FromTicks(simulationManager.m_simulationProfiler.m_averageStepDuration * 10L);
+                    var irlAverageTimePerStep = TimeSpan.FromTicks(Math.Max(1, simulationManager.m_simulationProfiler.m_averageStepDuration) * 10L);
                     var timeToTravelFrames = estimatedTimeToTravelIrl.Ticks / irlAverageTimePerStep.Ticks;
                     var estimatedTimeToTravelInGame = TimeSpan.FromTicks(simulationManager.m_timePerFrame.Ticks * timeToTravelFrames);
 

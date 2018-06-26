@@ -52,31 +52,31 @@ namespace RushHour2.Citizens.Location
         {
             CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.Visiting);
 
-            var building = citizen.GetBuildingInstance();
-            if (building.HasValue)
+            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
             {
-                var service = building.Value.Service();
-                if (ValidService(service))
+                residentAI.GoToWork(citizenId, ref citizen);
+
+                return true;
+            }
+            else if (citizen.Tired(TimeSpan.FromHours(3)))
+            {
+                residentAI.GoHome(citizenId, ref citizen);
+
+                return true;
+            }
+            else
+            {
+                var building = citizen.GetBuildingInstance();
+                if (building.HasValue)
                 {
-                    if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
+                    var service = building.Value.Service();
+                    if (ValidService(service))
                     {
-                        residentAI.GoToWork(citizenId, ref citizen);
+                        if (service == ItemClass.Service.Residential)
+                        {
 
-                        return true;
+                        }
                     }
-                    else
-                    {
-                        if (citizen.Tired(TimeSpan.FromHours(3)))
-                        {
-                            residentAI.GoHome(citizenId, ref citizen);
-
-                            return true;
-                        }
-                        else if (service == ItemClass.Service.Residential)
-                        {
-
-                        }
-                    }                        
                 }
             }
 

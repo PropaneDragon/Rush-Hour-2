@@ -38,9 +38,10 @@ namespace RushHour2.Patches.Simulation
         public override MethodBase BaseMethod => typeof(SimulationManager).GetMethod("Update", BindingFlags.Instance | BindingFlags.NonPublic, null, Type.EmptyTypes, new ParameterModifier[] { });
         public override MethodInfo Postfix => typeof(SimulationManager_Update).GetMethod(nameof(UpdatePostfix), BindingFlags.Static | BindingFlags.Public);
 
-        public static void UpdatePostfix(SimulationManager __instance, ref DateTime ___m_currentGameTime)
+        public static void UpdatePostfix(ref SimulationManager __instance)
         {
-            ___m_currentGameTime = new DateTime(___m_currentGameTime.Year, ___m_currentGameTime.Month, ___m_currentGameTime.Day).AddHours(__instance.m_currentDayTimeHour);
+            __instance.m_currentGameTime = new DateTime(__instance.m_currentGameTime.Year, __instance.m_currentGameTime.Month, __instance.m_currentGameTime.Day).AddHours(__instance.m_currentDayTimeHour);
+            __instance.m_metaData.m_currentDateTime = __instance.m_currentGameTime;
         }
     }
 }
