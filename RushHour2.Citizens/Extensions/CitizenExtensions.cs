@@ -1,8 +1,6 @@
 ﻿using ColossalFramework;
-using Harmony;
 using RushHour2.Core.Reporting;
 using System;
-using UnityEngine;
 
 namespace RushHour2.Citizens.Extensions
 {

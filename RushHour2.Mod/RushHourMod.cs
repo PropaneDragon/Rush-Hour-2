@@ -16,9 +16,6 @@ namespace RushHour2.Mod
         {
             LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has started.");
 
-            PatchManager.PatchAll();
-
-            SimulationManager.RegisterSimulationManager(new SimulationExtension());
             Singleton<LoadingManager>.instance.m_introLoaded += OnIntroLoaded;
         }
 
@@ -33,6 +30,11 @@ namespace RushHour2.Mod
 
         private void OnIntroLoaded()
         {
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"Patching...");
+
+            PatchManager.PatchAll();
+
+            SimulationManager.RegisterSimulationManager(new SimulationExtension());
         }
 
         public void OnSettingsUI(UIHelperBase helper)

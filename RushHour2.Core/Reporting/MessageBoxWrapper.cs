@@ -1,4 +1,5 @@
-﻿using ColossalFramework.UI;
+﻿using ColossalFramework.Threading;
+using ColossalFramework.UI;
 
 namespace RushHour2.Core.Reporting
 {

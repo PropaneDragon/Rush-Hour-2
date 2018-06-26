@@ -32,7 +32,8 @@ namespace RushHour2.Patches
             {
                 MessageBoxWrapper.Show(MessageBoxWrapper.MessageType.Warning,
                     $"{Details.ModName} couldn't start", $"{Details.ModName} couldn't fully start due to an issue overriding parts of the game.\n\n" +
-                    $"This is likely due to a recent update to Cities, and in order to prevent potential compatibility issues {Details.ModName} has disabled some functionality by reverting changes until a solution is found. This will result in most mod functionaity being disabled.");
+                    $"This is likely due to a recent update to Cities, and in order to prevent potential compatibility issues {Details.ModName} has disabled some functionality by reverting changes until a solution is found. This will result in most mod functionaity being disabled.\n\n" +
+                    $"If this has not previously been reported please do so, otherwise an update to the mod is required to fix the incompatibilites.");
 
                 UnPatchAll();
             }
@@ -42,17 +43,29 @@ namespace RushHour2.Patches
 
         public static bool UnPatchAll()
         {
-            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"Removing patching for {PatchAssembly.GetName().Name}...");
+            var unpatchSuccess = false;
 
-            var patchedMethods = HarmonyInstanceHolder.Instance.GetPatchedMethods();
-            foreach (var patchedMethod in patchedMethods)
+            try
             {
-                HarmonyInstanceHolder.Instance.RemovePatch(patchedMethod, Harmony.HarmonyPatchType.All, HarmonyInstanceHolder.Instance.Id);
+                LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"Removing patching for {PatchAssembly.GetName().Name}...");
+
+                var patchedMethods = HarmonyInstanceHolder.Instance.GetPatchedMethods();
+                foreach (var patchedMethod in patchedMethods)
+                {
+                    HarmonyInstanceHolder.Instance.RemovePatch(patchedMethod, Harmony.HarmonyPatchType.All, HarmonyInstanceHolder.Instance.Id);
+                }
+
+                LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, "Done!");
+
+                unpatchSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Error, $"Couldn't unpatch everything!");
+                LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex, true);
             }
 
-            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, "Done!");
-
-            return true;
+            return unpatchSuccess;
         }
     }
 }
