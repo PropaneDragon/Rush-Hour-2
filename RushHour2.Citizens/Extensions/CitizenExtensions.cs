@@ -1,4 +1,5 @@
 ﻿using ColossalFramework;
+using RushHour2.Citizens.Location;
 using RushHour2.Core.Reporting;
 using System;
 
@@ -16,6 +17,8 @@ namespace RushHour2.Citizens.Extensions
         public static bool IsInsideBuilding(this Citizen citizen) => !citizen.IsMoving();
 
         public static bool IsVisible(this Citizen citizen) => citizen.m_instance != 0;
+
+        public static bool CanMove(this Citizen citizen) => citizen.IsVisible() || LocationHandler.ShouldMove();
 
         public static bool IsMoving(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Moving;
 

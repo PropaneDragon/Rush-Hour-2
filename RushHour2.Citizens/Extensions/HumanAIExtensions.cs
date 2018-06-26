@@ -1,4 +1,5 @@
-﻿using RushHour2.Citizens.Reporting;
+﻿using RushHour2.Citizens.Location;
+using RushHour2.Citizens.Reporting;
 
 namespace RushHour2.Citizens.Extensions
 {
@@ -20,8 +21,13 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool GoToBuilding(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort buildingId)
         {
-            var currentBuildingId = citizen.GetBuilding();
-            return humanAI.StartMoving(citizenId, ref citizen, currentBuildingId, buildingId);
+            if (citizen.CanMove())
+            {
+                var currentBuildingId = citizen.GetBuilding();
+                return humanAI.StartMoving(citizenId, ref citizen, currentBuildingId, buildingId);
+            }
+
+            return false;
         }
     }
 }
