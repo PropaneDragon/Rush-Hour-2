@@ -7,6 +7,16 @@ namespace RushHour2.Citizens.Extensions
     {
         public static bool FindAFunActivity(this ResidentAI residentAI, uint citizenId, ushort proximityBuilding)
         {
+            var entertainmentReason = new Traverse(residentAI).Method("GetEntertainmentReason").GetValue<TransferManager.TransferReason>();
+            if (entertainmentReason != TransferManager.TransferReason.None)
+            {
+                new Traverse(residentAI).Method("FindVisitPlace", citizenId, proximityBuilding, entertainmentReason);
+
+                CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.GoingToVisit);
+
+                return true;
+            }
+
             return false;
         }
 
