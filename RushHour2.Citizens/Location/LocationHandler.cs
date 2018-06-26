@@ -68,10 +68,9 @@ namespace RushHour2.Citizens.Location
                     {
                         if (citizen.Tired(TimeSpan.FromHours(3)))
                         {
-                            if (residentAI.GoHome(citizenId, ref citizen))
-                            {
-                                return true;
-                            }
+                            residentAI.GoHome(citizenId, ref citizen);
+
+                            return true;
                         }
                         else if (service == ItemClass.Service.Residential)
                         {
@@ -102,10 +101,9 @@ namespace RushHour2.Citizens.Location
 
                 if (citizen.Tired(TimeSpan.FromHours(3)))
                 {
-                    if (residentAI.GoHome(citizenId, ref citizen))
-                    {
-                        return true;
-                    }
+                    residentAI.GoHome(citizenId, ref citizen);
+
+                    return true;
                 }
                 else
                 {

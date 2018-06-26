@@ -100,7 +100,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool ShouldBeAtWork(this Citizen citizen, DateTime time)
         {
-            return citizen.ValidWorkBuilding() && time.Hour >= 9 && time.Hour < 17;
+            return citizen.ValidWorkBuilding() && (time.Hour >= 9 || (citizen.AtWork() && time.Hour >= 6)) && time.Hour < 17;
         }
 
         public static bool Tired(this Citizen citizen)
@@ -118,7 +118,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool Tired(this Citizen citizen, DateTime time)
         {
-            return time.Hour > 22 && time.Hour < 6;
+            return time.Hour > 22 || time.Hour < 5;
         }
 
         public static ushort GetBuilding(this Citizen citizen)
