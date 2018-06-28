@@ -1,15 +1,12 @@
 ﻿using ColossalFramework;
 using RushHour2.Citizens.Location;
-using RushHour2.Core.Reporting;
+using RushHour2.Core.Settings;
 using System;
 
 namespace RushHour2.Citizens.Extensions
 {
     public static class CitizenExtensions
     {
-        private static readonly int ESTIMATED_DISTANCE_PER_MINUTE = 1500; //Calculated distance I think you can probably get in an average city per minute.
-        private static readonly int MAXIMUM_TRAVEL_HOURS = 5;
-
         public static bool Exists(this Citizen citizen) => citizen.m_homeBuilding != 0 || citizen.m_workBuilding != 0 || citizen.m_visitBuilding != 0 || citizen.m_instance != 0 || citizen.m_vehicle != 0;
 
         public static bool NeedsGoods(this Citizen citizen) => citizen.m_flags.IsFlagSet(Citizen.Flags.NeedGoods);
@@ -55,40 +52,43 @@ namespace RushHour2.Citizens.Extensions
             return validHome || validWork || validVisit;
         }
 
-        public static bool ShouldBeAtWork(this Citizen citizen)
+        public static bool ShouldGoHome(this Citizen citizen)
         {
-            return citizen.ShouldBeAtWork(new TimeSpan(0));
+            if (citizen.ValidHomeBuilding() && citizen.Tired(TimeSpan.FromHours(6)))
+            {
+                var currentBuildingInstance = citizen.GetBuildingInstance();
+                var homeBuildingInstance = citizen.HomeBuildingInstance();
+
+                if (currentBuildingInstance.HasValue && homeBuildingInstance.HasValue)
+                {
+                    var travelTime = TravelTime.EstimateTravelTime(currentBuildingInstance.Value, homeBuildingInstance.Value);
+                    return citizen.Tired(travelTime);
+                }
+            }
+
+            return false;
         }
 
         public static bool ShouldGoToWork(this Citizen citizen)
         {
-            if (citizen.ValidWorkBuilding() && citizen.ShouldBeAtWork(TimeSpan.FromHours(MAXIMUM_TRAVEL_HOURS)))
+            if (citizen.ValidWorkBuilding() && citizen.ShouldBeAtWork(TimeSpan.FromHours(6)))
             {
                 var currentBuildingInstance = citizen.GetBuildingInstance();
                 var workBuildingInstance = citizen.WorkBuildingInstance();
 
                 if (currentBuildingInstance.HasValue && workBuildingInstance.HasValue)
                 {
-                    var simulationManager = Singleton<SimulationManager>.instance;
-                    var homeBuildingLocation = currentBuildingInstance.Value.m_position;
-                    var workBuildingPosition = workBuildingInstance.Value.m_position;
-                    var difference = (homeBuildingLocation - workBuildingPosition).magnitude;
-                    var estimatedTimeToTravelIrl = TimeSpan.FromMinutes(difference / ESTIMATED_DISTANCE_PER_MINUTE);
-                    var irlAverageTimePerStep = TimeSpan.FromTicks(Math.Max(1, simulationManager.m_simulationProfiler.m_averageStepDuration) * 10L);
-                    var timeToTravelFrames = estimatedTimeToTravelIrl.Ticks / irlAverageTimePerStep.Ticks;
-                    var estimatedTimeToTravelInGame = TimeSpan.FromTicks(simulationManager.m_timePerFrame.Ticks * timeToTravelFrames);
-
-                    if (estimatedTimeToTravelInGame.TotalHours >= MAXIMUM_TRAVEL_HOURS)
-                    {
-                        LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Warning, $"Estimated travel time for a citizen was over {MAXIMUM_TRAVEL_HOURS} hours ({estimatedTimeToTravelInGame.Hours} estimated hours) with an estimated IRL time of {estimatedTimeToTravelIrl.Minutes} minutes over a distance of {difference}. This isn't good, so it's been reduced.");
-                        estimatedTimeToTravelInGame = TimeSpan.FromHours(MAXIMUM_TRAVEL_HOURS);
-                    }
-
-                    return citizen.ShouldBeAtWork(estimatedTimeToTravelInGame);
+                    var travelTime = TravelTime.EstimateTravelTime(currentBuildingInstance.Value, workBuildingInstance.Value);
+                    return citizen.ShouldBeAtWork(travelTime);
                 }
             }
 
             return false;
+        }
+
+        public static bool ShouldBeAtWork(this Citizen citizen)
+        {
+            return citizen.ShouldBeAtWork(new TimeSpan(0));
         }
 
         public static bool ShouldBeAtWork(this Citizen citizen, TimeSpan offset)
@@ -101,7 +101,24 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool ShouldBeAtWork(this Citizen citizen, DateTime time)
         {
-            return citizen.ValidWorkBuilding() && (time.Hour >= 9 || (citizen.AtWork() && time.Hour >= 6)) && time.Hour < 17;
+            if (citizen.ValidWorkBuilding())
+            {
+                var ageGroup = Citizen.GetAgeGroup(citizen.m_age);
+                if (ageGroup <= Citizen.AgeGroup.Teen)
+                {
+                    return UserModSettings.TimeIsBetween(time, UserModSettings.StartTime_Schools, UserModSettings.Duration_Schools) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.StartTime_Schools));
+                }
+                else if (ageGroup <= Citizen.AgeGroup.Young && citizen.Education3)
+                {
+                    return UserModSettings.TimeIsBetween(time, UserModSettings.StartTime_University, UserModSettings.Duration_University) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.StartTime_University));
+                }
+                else if (ageGroup <= Citizen.AgeGroup.Senior)
+                {
+                    return UserModSettings.TimeIsBetween(time, UserModSettings.StartTime_Work, UserModSettings.Duration_Work) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.StartTime_Work));
+                }
+            }
+
+            return false;
         }
 
         public static bool Tired(this Citizen citizen)
@@ -119,7 +136,53 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool Tired(this Citizen citizen, DateTime time)
         {
-            return time.Hour > 22 || time.Hour < 5;
+            var timeLater = time.AddHours(6);
+            var weekendLater = timeLater.DayOfWeek == DayOfWeek.Saturday || timeLater.DayOfWeek == DayOfWeek.Sunday;
+            var needsToWorkSoon = !weekendLater && citizen.ValidWorkBuilding();
+            var ageGroup = Citizen.GetAgeGroup(citizen.m_age);
+            var wealth = citizen.WealthLevel;
+            var health = citizen.m_health;
+            var healthLevel = Citizen.GetHealthLevel(health);
+            var wellbeing = citizen.m_wellbeing;
+            var happiness = Citizen.GetHappiness(health, wellbeing);
+            var happinessLevel = Citizen.GetHappinessLevel(happiness);
+            var education = citizen.EducationLevel;
+            var simulationManager = Singleton<SimulationManager>.instance;
+
+            if (ageGroup <= Citizen.AgeGroup.Child)
+            {
+                return time.Hour >= 18 + (int)happinessLevel || time.Hour < 6; //Happier they are, the longer they want to stay awake
+            }
+            else if (ageGroup <= Citizen.AgeGroup.Teen)
+            {
+                var adjustedHour = time.Hour < 12 ? time.Hour + 24 : time.Hour;
+
+                return adjustedHour >= 26 - (int)happinessLevel && adjustedHour < (24 + 6); //Happier they are, the more sleep they get
+            }
+            else if (ageGroup <= Citizen.AgeGroup.Young)
+            {
+                if (needsToWorkSoon)
+                {
+                    return time.Hour >= 23 - ((int)happinessLevel / 2d) || time.Hour < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they go to bed and the earlier they wake
+                }
+
+                return time.Hour >= ((int)happinessLevel / 2d) + (int)wealth || time.Hour < 10 - ((int)happinessLevel / 1.5d);
+            }
+            else if (ageGroup <= Citizen.AgeGroup.Adult)
+            {
+                if (needsToWorkSoon)
+                {
+                    return time.Hour >= 22 || time.Hour < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they wake
+                }
+
+                return time.Hour >= ((int)happinessLevel / 2d) + (int)wealth || time.Hour < 10 - ((int)happinessLevel / 1.5d);
+            }
+            else if (ageGroup <= Citizen.AgeGroup.Senior)
+            {
+                return time.Hour >= 20 + ((int)healthLevel / 2) || time.Hour < 8 - ((int)healthLevel / 2); //Unhealthy seniors go to bed earlier and get up later
+            }
+
+            return time.Hour >= 22 || time.Hour < 5;
         }
 
         public static ushort GetBuilding(this Citizen citizen)

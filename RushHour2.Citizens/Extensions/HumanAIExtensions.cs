@@ -7,14 +7,14 @@ namespace RushHour2.Citizens.Extensions
     {
         public static bool GoHome(this HumanAI humanAI, uint citizenId, ref Citizen citizen)
         {
-            CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.GoingHome);
+            CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GoingHome);
 
             return humanAI.GoToBuilding(citizenId, ref citizen, citizen.HomeBuilding());
         }
 
         public static bool GoToWork(this HumanAI humanAI, uint citizenId, ref Citizen citizen)
         {
-            CitizenMonitor.LogActivity(citizenId, CitizenMonitor.Activity.GoingToWork);
+            CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GoingToWork);
 
             return humanAI.GoToBuilding(citizenId, ref citizen, citizen.WorkBuilding());
         }

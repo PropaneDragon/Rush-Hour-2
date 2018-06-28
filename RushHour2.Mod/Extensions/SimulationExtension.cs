@@ -69,7 +69,7 @@ namespace RushHour2.Mod.Extensions
 
             if (_nextLogTime < DateTime.Now)
             {
-                CitizenMonitor.WriteLog(LoggingWrapper.LogArea.Hidden);
+                CitizenActivityMonitor.WriteLog(LoggingWrapper.LogArea.Hidden);
 
                 _nextLogTime = DateTime.Now + CITIZEN_LOG_INTERVAL;
             }
