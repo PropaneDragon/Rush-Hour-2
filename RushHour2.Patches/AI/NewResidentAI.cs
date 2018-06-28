@@ -12,7 +12,7 @@ namespace RushHour2.Patches.AI
 
         public static bool UpdateLocationPrefix(ResidentAI __instance, uint citizenID, ref Citizen data)
         {
-            return !LocationHandler.Process(ref __instance, citizenID, ref data);
+            return !ResidentLocationHandler.Process(ref __instance, citizenID, ref data);
         }
     }
 }

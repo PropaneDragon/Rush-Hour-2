@@ -15,7 +15,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool IsVisible(this Citizen citizen) => citizen.m_instance != 0;
 
-        public static bool CanMove(this Citizen citizen) => citizen.IsVisible() || LocationHandler.ShouldMove();
+        public static bool CanMove(this Citizen citizen) => citizen.IsVisible() || GlobalLocationHandler.ShouldMove();
 
         public static bool IsMoving(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Moving;
 
@@ -93,7 +93,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool ShouldBeAtWork(this Citizen citizen, TimeSpan offset)
         {
-            var simulationManager = Singleton<SimulationManager>.instance;
+            var simulationManager = SimulationManager.instance;
             var currentTime = simulationManager.m_currentGameTime;
 
             return citizen.ShouldBeAtWork(currentTime + offset);
@@ -128,7 +128,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool Tired(this Citizen citizen, TimeSpan offset)
         {
-            var simulationManager = Singleton<SimulationManager>.instance;
+            var simulationManager = SimulationManager.instance;
             var currentTime = simulationManager.m_currentGameTime;
 
             return citizen.Tired(currentTime + offset);
@@ -147,7 +147,7 @@ namespace RushHour2.Citizens.Extensions
             var happiness = Citizen.GetHappiness(health, wellbeing);
             var happinessLevel = Citizen.GetHappinessLevel(happiness);
             var education = citizen.EducationLevel;
-            var simulationManager = Singleton<SimulationManager>.instance;
+            var simulationManager = SimulationManager.instance;
 
             if (ageGroup <= Citizen.AgeGroup.Child)
             {
@@ -187,7 +187,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static ushort GetBuilding(this Citizen citizen)
         {
-            var buildingManager = Singleton<BuildingManager>.instance;
+            var buildingManager = BuildingManager.instance;
 
             if (citizen.AtHome() && citizen.ValidHomeBuilding())
             {
@@ -207,7 +207,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static Building? GetBuildingInstance(this Citizen citizen)
         {
-            var buildingManager = Singleton<BuildingManager>.instance;
+            var buildingManager = BuildingManager.instance;
             var buildingId = citizen.GetBuilding();
 
             return GetBuildingFromId(buildingId);
@@ -217,7 +217,7 @@ namespace RushHour2.Citizens.Extensions
         {
             if (buildingId != 0)
             {
-                var buildingManager = Singleton<BuildingManager>.instance;
+                var buildingManager = BuildingManager.instance;
                 return buildingManager.m_buildings.m_buffer[buildingId];
             }
 
