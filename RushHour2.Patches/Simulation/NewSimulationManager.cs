@@ -13,7 +13,7 @@ namespace RushHour2.Patches.Simulation
 
         public static void UpdatePostfix(ref SimulationManager __instance)
         {
-            var idealTimePerFrame = new TimeSpan(TimeSpan.FromHours(24).Ticks / SimulationManager.DAYTIME_FRAMES);
+            var idealTimePerFrame = new TimeSpan((long)((double)(TimeSpan.FromHours(24).Ticks / SimulationManager.DAYTIME_FRAMES) * UserModSettings.TimeSpeedMultiplier));
 
             if (__instance.m_timePerFrame.TotalMilliseconds != idealTimePerFrame.TotalMilliseconds)
             {
@@ -22,7 +22,8 @@ namespace RushHour2.Patches.Simulation
                 __instance.m_timePerFrame = idealTimePerFrame;
             }
 
-            __instance.m_currentGameTime = new DateTime(((long)(__instance.m_referenceFrameIndex + __instance.m_dayTimeOffsetFrames + __instance.m_referenceTimer) * __instance.m_timePerFrame.Ticks) /*+ __instance.m_timeOffsetTicks*/);
+            __instance.m_currentGameTime = new DateTime((long)(__instance.m_referenceFrameIndex + __instance.m_referenceTimer) * __instance.m_timePerFrame.Ticks);
+            __instance.m_currentGameTime = __instance.m_currentGameTime.AddHours(__instance.m_currentDayTimeHour - __instance.m_currentGameTime.TimeOfDay.TotalHours);
         }
     }
 }

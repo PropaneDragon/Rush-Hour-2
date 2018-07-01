@@ -9,7 +9,7 @@ namespace RushHour2.Citizens.Extensions
     {
         public static bool Exists(this Citizen citizen) => citizen.m_homeBuilding != 0 || citizen.m_workBuilding != 0 || citizen.m_visitBuilding != 0 || citizen.m_instance != 0 || citizen.m_vehicle != 0;
 
-        public static bool NeedsGoods(this Citizen citizen) => citizen.m_flags.IsFlagSet(Citizen.Flags.NeedGoods);
+        public static bool NeedsGoods(this Citizen citizen) => citizen.m_flags.IsFlagSet(Citizen.Flags.NeedGoods) && SimulationManager.instance.m_randomizer.Int32(10) > 7;
 
         public static bool IsInsideBuilding(this Citizen citizen) => !citizen.IsMoving();
 
@@ -22,6 +22,8 @@ namespace RushHour2.Citizens.Extensions
         public static bool AtHome(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Home;
 
         public static bool AtWork(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Work;
+
+        public static bool InHotel(this Citizen citizen) => (citizen.VisitBuildingInstance()?.Info.m_class.m_subService ?? ItemClass.SubService.None) == ItemClass.SubService.CommercialTourist;
 
         public static bool IsVisiting(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Visit;
 
@@ -59,10 +61,14 @@ namespace RushHour2.Citizens.Extensions
                 var currentBuildingInstance = citizen.GetBuildingInstance();
                 var homeBuildingInstance = citizen.HomeBuildingInstance();
 
-                if (currentBuildingInstance.HasValue && homeBuildingInstance.HasValue)
+                if (currentBuildingInstance.HasValue)
                 {
                     var travelTime = TravelTime.EstimateTravelTime(currentBuildingInstance.Value, homeBuildingInstance.Value);
                     return citizen.Tired(travelTime);
+                }
+                else
+                {
+                    return citizen.Tired(TimeSpan.FromHours(2));
                 }
             }
 
@@ -71,15 +77,19 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool ShouldGoToWork(this Citizen citizen)
         {
-            if (citizen.ValidWorkBuilding() && citizen.ShouldBeAtWork(TimeSpan.FromHours(6)))
+            if (citizen.ValidWorkBuilding() && (citizen.ShouldBeAtWork() || citizen.ShouldBeAtWork(TimeSpan.FromHours(6))))
             {
                 var currentBuildingInstance = citizen.GetBuildingInstance();
                 var workBuildingInstance = citizen.WorkBuildingInstance();
 
-                if (currentBuildingInstance.HasValue && workBuildingInstance.HasValue)
+                if (currentBuildingInstance.HasValue)
                 {
                     var travelTime = TravelTime.EstimateTravelTime(currentBuildingInstance.Value, workBuildingInstance.Value);
                     return citizen.ShouldBeAtWork(travelTime);
+                }
+                else
+                {
+                    return citizen.ShouldBeAtWork(TimeSpan.FromHours(2));
                 }
             }
 
@@ -187,8 +197,6 @@ namespace RushHour2.Citizens.Extensions
 
         public static ushort GetBuilding(this Citizen citizen)
         {
-            var buildingManager = BuildingManager.instance;
-
             if (citizen.AtHome() && citizen.ValidHomeBuilding())
             {
                 return citizen.HomeBuilding();
@@ -207,7 +215,6 @@ namespace RushHour2.Citizens.Extensions
 
         public static Building? GetBuildingInstance(this Citizen citizen)
         {
-            var buildingManager = BuildingManager.instance;
             var buildingId = citizen.GetBuilding();
 
             return GetBuildingFromId(buildingId);

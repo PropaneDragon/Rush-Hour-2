@@ -40,7 +40,7 @@ namespace RushHour2.Mod.Extensions
 
         public void SimulationStep(int subStep)
         {
-            var _simulation = Singleton<SimulationManager>.instance;
+            var _simulation = SimulationManager.instance;
 
             if (_simulation.m_enableDayNight)
             {

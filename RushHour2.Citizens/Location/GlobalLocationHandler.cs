@@ -1,23 +1,24 @@
-﻿using ColossalFramework;
-
-namespace RushHour2.Citizens.Location
+﻿namespace RushHour2.Citizens.Location
 {
     public static class GlobalLocationHandler
     {
         public static bool ShouldMove()
         {
-            var vehicleCount = (uint)Singleton<VehicleManager>.instance.m_vehicleCount;
-            var citizenCount = (uint)Singleton<CitizenManager>.instance.m_instanceCount;
-            var simulationManager = Singleton<SimulationManager>.instance;
+            var vehicleCount = VehicleManager.instance.m_vehicleCount;
+            var citizenCount = CitizenManager.instance.m_instanceCount;
+            var percentageVehicles = (vehicleCount / (double)VehicleManager.MAX_VEHICLE_COUNT) * 100d;
+            var percentageCitizens = (citizenCount / (double)CitizenManager.MAX_CITIZEN_COUNT) * 100d;
+            var simulationManager = SimulationManager.instance;
+            var randomPercentage = ((simulationManager.m_randomizer.Int32(int.MaxValue) / (double)int.MaxValue) * 100d);
 
-            if (vehicleCount * CitizenManager.MAX_INSTANCE_COUNT > citizenCount * VehicleManager.MAX_VEHICLE_COUNT)
-            {
-                return simulationManager.m_randomizer.UInt32(VehicleManager.MAX_VEHICLE_COUNT) >= vehicleCount;
-            }
-            else
-            {
-                return simulationManager.m_randomizer.UInt32(CitizenManager.MAX_INSTANCE_COUNT) >= citizenCount;
-            }
+            return randomPercentage > percentageCitizens;
+        }
+
+        public static bool GoodBuildingToVisit(ref Building building, ref Citizen citizen)
+        {
+            var info = building.Info;
+
+            return true;
         }
     }
 }

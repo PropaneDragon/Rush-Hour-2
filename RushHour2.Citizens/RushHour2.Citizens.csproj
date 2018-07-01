@@ -71,6 +71,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Extensions\CitizenExtensions.cs" />
+    <Compile Include="Extensions\TouristAIExtensions.cs" />
     <Compile Include="Extensions\HumanAIExtensions.cs" />
     <Compile Include="Extensions\ResidentAIExtensions.cs" />
     <Compile Include="Location\GlobalLocationHandler.cs" />

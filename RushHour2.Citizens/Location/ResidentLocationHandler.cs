@@ -11,6 +11,8 @@ namespace RushHour2.Citizens.Location
         {
             if (!citizen.Arrested && !citizen.Sick && !citizen.Collapsed && !citizen.Dead && citizen.Exists())
             {
+                CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Unknown);
+
                 if (citizen.IsInsideBuilding())
                 {
                     ProcessInBuilding(ref residentAI, citizenId, ref citizen);
@@ -28,8 +30,6 @@ namespace RushHour2.Citizens.Location
 
         private static bool ProcessInBuilding(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
-            CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Visiting);
-
             if (citizen.ValidBuilding())
             {
                 var buildingInstance = citizen.GetBuildingInstance();
@@ -57,7 +57,7 @@ namespace RushHour2.Citizens.Location
 
         private static bool ProcessVisiting(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
-            CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Visiting);
+            CitizenActivityMonitor.LogActivity(citizenId, GetBuildingActivity(ref citizen));
 
             if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
             {
@@ -73,7 +73,7 @@ namespace RushHour2.Citizens.Location
             }
             else
             {
-                var simulationManager = Singleton<SimulationManager>.instance;
+                var simulationManager = SimulationManager.instance;
                 var shouldStay = simulationManager.m_randomizer.UInt32(10) < 5;
                 
                 if (!shouldStay)
@@ -117,7 +117,7 @@ namespace RushHour2.Citizens.Location
                 }
                 else
                 {
-                    var simulationManager = Singleton<SimulationManager>.instance;
+                    var simulationManager = SimulationManager.instance;
                     var time = simulationManager.m_currentGameTime;
                     var ageGroup = Citizen.GetAgeGroup(citizen.Age);
                     var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
@@ -133,7 +133,6 @@ namespace RushHour2.Citizens.Location
                                 var closeLeisure = residentAI.FindCloseLeisure(citizenId, ref citizen, 1000f, citizen.WorkBuildingInstance().Value);
                                 if (closeLeisure != 0 && residentAI.TryVisit(citizenId, ref citizen, closeLeisure))
                                 {
-                                    CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GoingOutAfterWork);
                                     return true;
                                 }
                             }
@@ -170,18 +169,13 @@ namespace RushHour2.Citizens.Location
             }
             else if (citizen.Tired())
             {
+                residentAI.GoToSleep(citizenId);
+
                 return true;
-            }
-            else if (citizen.NeedsGoods())
-            {
-                if (residentAI.FindAShop(citizenId, citizen.HomeBuilding()))
-                {
-                    return true;
-                }
             }
             else
             {
-                var simulationManager = Singleton<SimulationManager>.instance;
+                var simulationManager = SimulationManager.instance;
                 var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
                 var wealth = citizen.WealthLevel;
                 var happinessLevel = Citizen.GetHappinessLevel(happiness);
@@ -196,13 +190,11 @@ namespace RushHour2.Citizens.Location
 
                 return true;
             }
-
-            return false;
         }
 
         private static bool ProcessActivity(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
-            var simulationManager = Singleton<SimulationManager>.instance;
+            var simulationManager = SimulationManager.instance;
             var ageGroup = Citizen.GetAgeGroup(citizen.Age);
             var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
             var wealth = citizen.WealthLevel;
@@ -220,7 +212,7 @@ namespace RushHour2.Citizens.Location
 
                     if (closeActivity != 0)
                     {
-                        var closeActivityBuilding = Singleton<BuildingManager>.instance.m_buildings.m_buffer[closeActivity];
+                        var closeActivityBuilding = BuildingManager.instance.m_buildings.m_buffer[closeActivity];
                         if (!citizen.Tired(TravelTime.EstimateTravelTime(currentBuildingInstance.Value, closeActivityBuilding)))
                         {
                             residentAI.TryVisit(citizenId, ref citizen, closeActivity);
@@ -236,7 +228,7 @@ namespace RushHour2.Citizens.Location
                         var ventureDistance = 1000f * ((int)happinessLevel + 1);
                         ushort closeActivity = 0;
 
-                        if (randomActivityNumber < 26 || simulationManager.m_currentGameTime.Hour > 21)
+                        if (randomActivityNumber < 26 || simulationManager.m_currentGameTime.Hour >= 21)
                         {
                             closeActivity = residentAI.FindCloseLeisure(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value);
                         }
@@ -251,7 +243,7 @@ namespace RushHour2.Citizens.Location
 
                         if (closeActivity != 0)
                         {
-                            var closeActivityBuilding = Singleton<BuildingManager>.instance.m_buildings.m_buffer[closeActivity];
+                            var closeActivityBuilding = BuildingManager.instance.m_buildings.m_buffer[closeActivity];
                             if (!citizen.Tired(TravelTime.EstimateTravelTime(currentBuildingInstance.Value, closeActivityBuilding)))
                             {
                                 residentAI.TryVisit(citizenId, ref citizen, closeActivity);
@@ -260,7 +252,16 @@ namespace RushHour2.Citizens.Location
                     }
                     else
                     {
-                        residentAI.FindAFunActivity(citizenId, currentBuilding);
+                        var goShopping = simulationManager.m_randomizer.Int32(10) < 5;
+
+                        if (goShopping)
+                        {
+                            residentAI.FindAShop(citizenId, ref citizen);
+                        }
+                        else
+                        {
+                            residentAI.FindAFunActivity(citizenId, currentBuilding);
+                        }
                     }
 
                     return true;
@@ -272,6 +273,8 @@ namespace RushHour2.Citizens.Location
 
         private static bool ProcessMoving(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
         {
+            CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Moving);
+
             if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
             {
                 residentAI.GoToWork(citizenId, ref citizen);
@@ -287,6 +290,58 @@ namespace RushHour2.Citizens.Location
             return service != ItemClass.Service.PoliceDepartment &&
                    service != ItemClass.Service.Disaster &&
                    service != ItemClass.Service.HealthCare;
+        }
+
+        private static CitizenActivityMonitor.Activity GetBuildingActivity(ref Citizen citizen)
+        {
+            var building = citizen.GetBuildingInstance();
+            if (building.HasValue)
+            {
+                var info = building.Value.Info;
+                var service = info.m_class.m_service;
+                
+                switch (service)
+                {
+                    case ItemClass.Service.Beautification:
+                        return CitizenActivityMonitor.Activity.VisitingPark;
+                    case ItemClass.Service.Citizen:
+                        return CitizenActivityMonitor.Activity.VisitingCitizen;
+                    case ItemClass.Service.Commercial:
+                        return CitizenActivityMonitor.Activity.VisitingShop;
+                    case ItemClass.Service.Disaster:
+                        return CitizenActivityMonitor.Activity.InShelter;
+                    case ItemClass.Service.Education:
+                        return CitizenActivityMonitor.Activity.VisitingSchool;
+                    case ItemClass.Service.Electricity:
+                        return CitizenActivityMonitor.Activity.VisitingElectricity;
+                    case ItemClass.Service.FireDepartment:
+                        return CitizenActivityMonitor.Activity.VisitingFireDepartment;
+                    case ItemClass.Service.Garbage:
+                        return CitizenActivityMonitor.Activity.VisitingGarbage;
+                    case ItemClass.Service.HealthCare:
+                        return CitizenActivityMonitor.Activity.VisitingHealthcare;
+                    case ItemClass.Service.Industrial:
+                        return CitizenActivityMonitor.Activity.VisitingIndustrial;
+                    case ItemClass.Service.Monument:
+                        return CitizenActivityMonitor.Activity.VisitingMonumnet;
+                    case ItemClass.Service.Natural:
+                        return CitizenActivityMonitor.Activity.VisitingNature;
+                    case ItemClass.Service.Office:
+                        return CitizenActivityMonitor.Activity.VisitingOffice;
+                    case ItemClass.Service.PoliceDepartment:
+                        return CitizenActivityMonitor.Activity.VisitingPolice;
+                    case ItemClass.Service.PublicTransport:
+                        return CitizenActivityMonitor.Activity.OnPublicTransport;
+                    case ItemClass.Service.Residential:
+                        return CitizenActivityMonitor.Activity.AtAHouse;
+                    case ItemClass.Service.Road:
+                        return CitizenActivityMonitor.Activity.OnARoad;
+                    case ItemClass.Service.Tourism:
+                        return CitizenActivityMonitor.Activity.AtATouristAttraction;
+                }
+            }
+
+            return CitizenActivityMonitor.Activity.Visiting;
         }
     }
 }

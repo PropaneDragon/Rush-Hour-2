@@ -16,7 +16,7 @@ namespace RushHour2.Mod
         {
             LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has started.");
 
-            Singleton<LoadingManager>.instance.m_introLoaded += OnIntroLoaded;
+            LoadingManager.instance.m_introLoaded += OnIntroLoaded;
         }
 
         public void OnDisabled()
@@ -25,7 +25,7 @@ namespace RushHour2.Mod
 
             PatchManager.UnPatchAll();
             
-            Singleton<LoadingManager>.instance.m_introLoaded -= OnIntroLoaded;
+            LoadingManager.instance.m_introLoaded -= OnIntroLoaded;
         }
 
         private void OnIntroLoaded()

@@ -62,6 +62,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="UI\NewInfoPanel.cs" />
     <Compile Include="UI\NewUIDateTimeWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
