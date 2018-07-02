@@ -111,7 +111,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool ShouldBeAtWork(this Citizen citizen, DateTime time)
         {
-            if (citizen.ValidWorkBuilding())
+            if (citizen.ValidWorkBuilding() && time.DayOfWeek != DayOfWeek.Saturday && time.DayOfWeek != DayOfWeek.Sunday)
             {
                 var ageGroup = Citizen.GetAgeGroup(citizen.m_age);
                 if (ageGroup <= Citizen.AgeGroup.Teen)
