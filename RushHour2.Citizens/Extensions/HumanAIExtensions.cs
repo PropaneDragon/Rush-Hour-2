@@ -101,7 +101,7 @@ namespace RushHour2.Citizens.Extensions
             var closeBuildings = humanAI.FindAllClosePlaces(citizenId, ref citizen, distance, position, service, subService);
             if (closeBuildings.Count > 0)
             {
-                var randomBuilding = simulationManager.m_randomizer.Int32(0, closeBuildings.Count);
+                var randomBuilding = simulationManager.m_randomizer.Int32(0, closeBuildings.Count - 1);
                 return closeBuildings[randomBuilding];
             }
 
