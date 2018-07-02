@@ -71,6 +71,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Extensions\BuildingExtensions.cs" />
+    <Compile Include="Extensions\BuildingManagerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

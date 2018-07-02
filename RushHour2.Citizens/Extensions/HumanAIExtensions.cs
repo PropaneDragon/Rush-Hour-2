@@ -1,6 +1,8 @@
 ﻿using Harmony;
+using RushHour2.Buildings.Extensions;
 using RushHour2.Citizens.Reporting;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RushHour2.Citizens.Extensions
@@ -95,16 +97,30 @@ namespace RushHour2.Citizens.Extensions
 
         public static ushort FindSomewhereClose(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Vector3 position, ItemClass.Service service, ItemClass.SubService subService)
         {
+            var simulationManager = SimulationManager.instance;
+            var closeBuildings = humanAI.FindAllClosePlaces(citizenId, ref citizen, distance, position, service, subService);
+            if (closeBuildings.Count > 0)
+            {
+                var randomBuilding = simulationManager.m_randomizer.Int32(0, closeBuildings.Count);
+                return closeBuildings[randomBuilding];
+            }
+
+            return 0;
+        }
+
+        public static List<ushort> FindAllClosePlaces(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Vector3 position, ItemClass.Service service, ItemClass.SubService subService)
+        {
+            var simulationManager = SimulationManager.instance;
             var currentBuilding = citizen.GetBuilding();
             if (currentBuilding != 0)
             {
                 var buildingManager = BuildingManager.instance;
-                var closeBuilding = buildingManager.FindBuilding(position, distance, service, subService, Building.Flags.Active, Building.Flags.Demolishing | Building.Flags.Deleted);
+                var closeBuildings = buildingManager.FindAllBuildings(position, distance, service, subService, Building.Flags.Active, Building.Flags.Demolishing | Building.Flags.Deleted);
 
-                return closeBuilding;
+                return closeBuildings;
             }
 
-            return 0;
+            return null;
         }
 
         public static bool TryVisit(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort buildingId)

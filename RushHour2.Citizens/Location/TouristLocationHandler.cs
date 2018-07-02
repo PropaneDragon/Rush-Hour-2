@@ -69,7 +69,7 @@ namespace RushHour2.Citizens.Location
                 }
 
                 var foundHotel = touristAI.FindCloseHotel(citizenId, ref citizen, 2000, currentBuildingInstance);
-                if (foundHotel != 0 && simulationManager.m_randomizer.Int32(10) < 7)
+                if (foundHotel != 0 && simulationManager.m_randomizer.Int32(10) < 8)
                 {
                     var foundHotelInstance = BuildingManager.instance.m_buildings.m_buffer[foundHotel];
                     var estimatedTravelTime = TravelTime.EstimateTravelTime(currentBuildingInstance, foundHotelInstance);
