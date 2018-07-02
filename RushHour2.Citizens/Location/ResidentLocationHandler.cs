@@ -127,11 +127,26 @@ namespace RushHour2.Citizens.Location
                     {
                         if (time.DayOfWeek == DayOfWeek.Friday && (ageGroup == Citizen.AgeGroup.Adult || ageGroup == Citizen.AgeGroup.Young))
                         {
-                            var goOut = simulationManager.m_randomizer.Int32(5) <= 2;
+                            var goOut = simulationManager.m_randomizer.Int32(10) <= 6;
                             if (goOut)
                             {
-                                var closeLeisure = residentAI.FindCloseLeisure(citizenId, ref citizen, 1000f, citizen.WorkBuildingInstance().Value);
-                                if (closeLeisure != 0 && residentAI.TryVisit(citizenId, ref citizen, closeLeisure))
+                                var allLeisure = residentAI.FindAllClosePlaces(citizenId, ref citizen, 1000f, citizen.WorkBuildingInstance().Value.m_position, ItemClass.Service.Commercial, ItemClass.SubService.CommercialLeisure);
+                                var currentBuildingInt = (int)citizen.GetBuilding();
+                                var closest = -1;
+                                var chosenBuilding = (ushort)0;
+                                
+                                foreach (var leisure in allLeisure)
+                                {
+                                    var leisureInt = (int)leisure;
+                                    var difference = Math.Abs(leisureInt - currentBuildingInt);
+                                    if (closest < 0 || difference < closest)
+                                    {
+                                        closest = difference;
+                                        chosenBuilding = leisure;
+                                    }
+                                }
+                                
+                                if (chosenBuilding != 0 && residentAI.TryVisit(citizenId, ref citizen, chosenBuilding))
                                 {
                                     return true;
                                 }
