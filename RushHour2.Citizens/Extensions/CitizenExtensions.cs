@@ -176,7 +176,7 @@ namespace RushHour2.Citizens.Extensions
                     return time.Hour >= 23 - ((int)happinessLevel / 2d) || time.Hour < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they go to bed and the earlier they wake
                 }
 
-                return time.Hour >= ((int)happinessLevel / 2d) + (int)wealth || time.Hour < 10 - ((int)happinessLevel / 1.5d);
+                return time.Hour >= 22 + (((int)happinessLevel / 2d) + (int)wealth) || time.Hour < 10 - ((int)happinessLevel / 1.5d);
             }
             else if (ageGroup <= Citizen.AgeGroup.Adult)
             {
@@ -185,7 +185,7 @@ namespace RushHour2.Citizens.Extensions
                     return time.Hour >= 22 || time.Hour < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they wake
                 }
 
-                return time.Hour >= ((int)happinessLevel / 2d) + (int)wealth || time.Hour < 10 - ((int)happinessLevel / 1.5d);
+                return time.Hour >= 20 + (((int)happinessLevel / 2d) + (int)wealth) || time.Hour < 10 - ((int)happinessLevel / 1.5d);
             }
             else if (ageGroup <= Citizen.AgeGroup.Senior)
             {
