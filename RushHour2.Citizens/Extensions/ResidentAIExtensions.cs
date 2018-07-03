@@ -5,8 +5,21 @@ namespace RushHour2.Citizens.Extensions
 {
     public static class ResidentAIExtensions
     {
-        public static bool FindAFunActivity(this ResidentAI residentAI, uint citizenId, ushort proximityBuilding)
+        public static bool FindAFunActivity(this ResidentAI residentAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding)
         {
+            var visitMonument = SimulationManager.instance.m_randomizer.Int32(10) < 3;
+            if (visitMonument && proximityBuilding != 0)
+            {
+                var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
+                var monument = residentAI.FindSomewhereClose(citizenId, ref citizen, BuildingManager.BUILDINGGRID_RESOLUTION * BuildingManager.BUILDINGGRID_CELL_SIZE, proximityBuildingInstance, new[] { ItemClass.Service.Monument }, new[] { ItemClass.SubService.None });
+                if (monument != 0)
+                {
+                    residentAI.GoToBuilding(citizenId, ref citizen, monument);
+
+                    return true;
+                }
+            }
+
             var entertainmentReason = new Traverse(residentAI).Method("GetEntertainmentReason").GetValue<TransferManager.TransferReason>();
             if (entertainmentReason != TransferManager.TransferReason.None)
             {

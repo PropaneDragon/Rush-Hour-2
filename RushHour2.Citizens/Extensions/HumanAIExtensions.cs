@@ -66,39 +66,39 @@ namespace RushHour2.Citizens.Extensions
 
         public static ushort FindCloseLeisure(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Building building)
         {
-            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, ItemClass.Service.Commercial, ItemClass.SubService.CommercialLeisure);
+            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure });
         }
 
         public static ushort FindCloseHotel(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Building building)
         {
-            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, ItemClass.Service.Commercial, ItemClass.SubService.CommercialTourist);
+            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialTourist });
         }
 
         public static ushort FindCloseShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Building building)
         {
-            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, ItemClass.Service.Commercial, ItemClass.SubService.CommercialHigh | ItemClass.SubService.CommercialLow);
+            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialHigh, ItemClass.SubService.CommercialLow });
         }
 
         public static ushort FindClosePark(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Building building)
         {
-            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, ItemClass.Service.Beautification | ItemClass.Service.Monument | ItemClass.Service.Natural, ItemClass.SubService.None);
+            return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, new[] { ItemClass.Service.Beautification, ItemClass.Service.Monument, ItemClass.Service.Natural }, new[] { ItemClass.SubService.None });
         }
 
-        public static ushort FindSomewhereClose(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Building building, ItemClass.Service service, ItemClass.SubService subService)
+        public static ushort FindSomewhereClose(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Building building, ItemClass.Service[] services, ItemClass.SubService[] subServices)
         {
             var buildingInstance = citizen.GetBuildingInstance();
             if (buildingInstance.HasValue)
             {
-                return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, buildingInstance.Value.m_position, service, subService);
+                return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, buildingInstance.Value.m_position, services, subServices);
             }
 
             return 0;
         }
 
-        public static ushort FindSomewhereClose(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Vector3 position, ItemClass.Service service, ItemClass.SubService subService)
+        public static ushort FindSomewhereClose(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Vector3 position, ItemClass.Service[] services, ItemClass.SubService[] subServices)
         {
             var simulationManager = SimulationManager.instance;
-            var closeBuildings = humanAI.FindAllClosePlaces(citizenId, ref citizen, distance, position, service, subService);
+            var closeBuildings = humanAI.FindAllClosePlaces(citizenId, ref citizen, distance, position, services, subServices);
             if (closeBuildings.Count > 0)
             {
                 var randomBuilding = simulationManager.m_randomizer.Int32(0, closeBuildings.Count - 1);
@@ -108,14 +108,14 @@ namespace RushHour2.Citizens.Extensions
             return 0;
         }
 
-        public static List<ushort> FindAllClosePlaces(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Vector3 position, ItemClass.Service service, ItemClass.SubService subService)
+        public static List<ushort> FindAllClosePlaces(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Vector3 position, ItemClass.Service[] services, ItemClass.SubService[] subServices)
         {
             var simulationManager = SimulationManager.instance;
             var currentBuilding = citizen.GetBuilding();
             if (currentBuilding != 0)
             {
                 var buildingManager = BuildingManager.instance;
-                var closeBuildings = buildingManager.FindAllBuildings(position, distance, service, subService, Building.Flags.Active, Building.Flags.Demolishing | Building.Flags.Deleted);
+                var closeBuildings = buildingManager.FindAllBuildings(position, distance, services, subServices, Building.Flags.Active, Building.Flags.Demolishing | Building.Flags.Deleted);
 
                 return closeBuildings;
             }

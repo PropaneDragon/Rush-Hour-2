@@ -68,7 +68,7 @@ namespace RushHour2.Citizens.Location
                     return true;
                 }
 
-                var foundHotel = touristAI.FindCloseHotel(citizenId, ref citizen, 600, currentBuildingInstance);
+                var foundHotel = touristAI.FindCloseHotel(citizenId, ref citizen, (BuildingManager.BUILDINGGRID_CELL_SIZE * 4), currentBuildingInstance);
                 if (foundHotel != 0 && simulationManager.m_randomizer.Int32(10) < 8)
                 {
                     var foundHotelInstance = BuildingManager.instance.m_buildings.m_buffer[foundHotel];
@@ -95,7 +95,7 @@ namespace RushHour2.Citizens.Location
                 var keepItLocal = simulationManager.m_randomizer.Int32(10) < 6;
                 if (keepItLocal)
                 {
-                    var ventureDistance = 100f + (simulationManager.m_randomizer.Int32(3) * 100);
+                    var ventureDistance = (BuildingManager.BUILDINGGRID_CELL_SIZE * 2) + (simulationManager.m_randomizer.Int32(3) * BuildingManager.BUILDINGGRID_CELL_SIZE);
                     var randomActivityNumber = simulationManager.m_randomizer.Int32(9);
                     ushort closeActivity = 0;
 

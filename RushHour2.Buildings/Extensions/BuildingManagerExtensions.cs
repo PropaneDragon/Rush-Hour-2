@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace RushHour2.Buildings.Extensions
 {
     public static class BuildingManagerExtensions
     {
-        public static List<ushort> FindAllBuildings(this BuildingManager buildingManager, Vector3 position, float maxDistance, ItemClass.Service service, ItemClass.SubService subService, Building.Flags flagsRequired, Building.Flags flagsForbidden)
+        public static List<ushort> FindAllBuildings(this BuildingManager buildingManager, Vector3 position, float maxDistance, ItemClass.Service[] services, ItemClass.SubService[] subServices, Building.Flags flagsRequired, Building.Flags flagsForbidden)
         {
             List<ushort> buildings = new List<ushort>();
 
@@ -27,7 +28,7 @@ namespace RushHour2.Buildings.Extensions
                         var building = buildingManager.m_buildings.m_buffer[potentialBuildingId];
                         var buildingInfo = building.Info;
 
-                        if ((buildingInfo.m_class.m_service == service || service == ItemClass.Service.None) && (buildingInfo.m_class.m_subService == subService || subService == ItemClass.SubService.None) && (building.m_flags & (flagsRequired | flagsForbidden)) == flagsRequired)
+                        if ((services.Contains(buildingInfo.m_class.m_service) || services.Contains(ItemClass.Service.None) || services.Count() == 0) && (subServices.Contains(buildingInfo.m_class.m_subService) || subServices.Contains(ItemClass.SubService.None) || subServices.Count() == 0) && (building.m_flags & (flagsRequired | flagsForbidden)) == flagsRequired)
                         {
                             var magnitude = Vector3.SqrMagnitude(position - building.m_position);
                             if (magnitude < area)
