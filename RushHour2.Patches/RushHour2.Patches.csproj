@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\NewCommercialBuildingAI.cs" />
     <Compile Include="AI\NewTouristAI.cs" />
     <Compile Include="AI\NewResidentAI.cs" />
     <Compile Include="HarmonyLocal\HarmonyInstanceHolder.cs" />
