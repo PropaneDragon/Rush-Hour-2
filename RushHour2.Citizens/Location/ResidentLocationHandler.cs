@@ -74,7 +74,8 @@ namespace RushHour2.Citizens.Location
             else
             {
                 var simulationManager = SimulationManager.instance;
-                var shouldStay = simulationManager.m_randomizer.UInt32(10) < 5;
+                var buildingInstance = citizen.GetBuildingInstance().Value;
+                var shouldStay = GlobalLocationHandler.GoodBuildingToVisit(ref buildingInstance, ref citizen) && simulationManager.m_randomizer.UInt32(10) < 5;
                 
                 if (!shouldStay)
                 {
@@ -130,7 +131,7 @@ namespace RushHour2.Citizens.Location
                             var goOut = simulationManager.m_randomizer.Int32(10) <= 6;
                             if (goOut)
                             {
-                                var allLeisure = residentAI.FindAllClosePlaces(citizenId, ref citizen, 400f, citizen.WorkBuildingInstance().Value.m_position, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure });
+                                var allLeisure = residentAI.FindAllClosePlaces(citizenId, ref citizen, BuildingManager.BUILDINGGRID_CELL_SIZE, citizen.WorkBuildingInstance().Value.m_position, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure });
                                 var currentBuildingInt = (int)citizen.GetBuilding();
                                 var closest = -1;
                                 var chosenBuilding = (ushort)0;
@@ -222,7 +223,7 @@ namespace RushHour2.Citizens.Location
             {
                 if (ageGroup <= Citizen.AgeGroup.Child || ageGroup > Citizen.AgeGroup.Adult)
                 {
-                    var ventureDistance = (BuildingManager.BUILDINGGRID_CELL_SIZE * 2) * ((int)happinessLevel + 1);
+                    var ventureDistance = BuildingManager.BUILDINGGRID_CELL_SIZE * ((int)happinessLevel + 1);
                     var closeActivity = randomActivityNumber < 50 ? residentAI.FindClosePark(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value) : residentAI.FindCloseShop(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value);
 
                     if (closeActivity != 0)
@@ -240,7 +241,7 @@ namespace RushHour2.Citizens.Location
                 {
                     if (randomActivityNumber < 80)
                     {
-                        var ventureDistance = (BuildingManager.BUILDINGGRID_CELL_SIZE * 3) * ((int)happinessLevel + 1);
+                        var ventureDistance = (BuildingManager.BUILDINGGRID_CELL_SIZE * 2) * ((int)happinessLevel + 1);
                         ushort closeActivity = 0;
 
                         if (randomActivityNumber < 26 || simulationManager.m_currentGameTime.Hour >= 21)

@@ -28,7 +28,7 @@ namespace RushHour2.Buildings.Extensions
                         var building = buildingManager.m_buildings.m_buffer[potentialBuildingId];
                         var buildingInfo = building.Info;
 
-                        if ((services.Contains(buildingInfo.m_class.m_service) || services.Contains(ItemClass.Service.None) || services.Count() == 0) && (subServices.Contains(buildingInfo.m_class.m_subService) || subServices.Contains(ItemClass.SubService.None) || subServices.Count() == 0) && (building.m_flags & (flagsRequired | flagsForbidden)) == flagsRequired)
+                        if ((services.Contains(buildingInfo.GetService()) || services.Contains(ItemClass.Service.None) || services.Count() == 0) && (subServices.Contains(buildingInfo.GetSubService()) || subServices.Contains(ItemClass.SubService.None) || subServices.Count() == 0) && (building.m_flags & (flagsRequired | flagsForbidden)) == flagsRequired)
                         {
                             var magnitude = Vector3.SqrMagnitude(position - building.m_position);
                             if (magnitude < area)

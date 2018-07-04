@@ -17,6 +17,9 @@
         public static bool GoodBuildingToVisit(ref Building building, ref Citizen citizen)
         {
             var info = building.Info;
+            var @class = info.m_class;
+            var ageGroup = Citizen.GetAgeGroup(citizen.Age);
+
 
             return true;
         }
