@@ -23,6 +23,12 @@ namespace RushHour2.Patches.Simulation
             }
 
             __instance.m_currentGameTime = new DateTime((long)(__instance.m_referenceFrameIndex + __instance.m_referenceTimer) * __instance.m_timePerFrame.Ticks);
+            
+            if (__instance.m_currentDayTimeHour > __instance.m_currentGameTime.TimeOfDay.TotalHours)
+            {
+                __instance.m_currentGameTime = __instance.m_currentGameTime.AddDays(-1);
+            }
+
             __instance.m_currentGameTime = __instance.m_currentGameTime.AddHours(__instance.m_currentDayTimeHour - __instance.m_currentGameTime.TimeOfDay.TotalHours);
         }
     }
