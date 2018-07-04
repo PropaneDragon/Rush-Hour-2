@@ -189,7 +189,7 @@ namespace RushHour2.Citizens.Extensions
             }
             else if (ageGroup <= Citizen.AgeGroup.Senior)
             {
-                return time.Hour >= 20 + ((int)healthLevel / 2) || time.Hour < 8 - ((int)healthLevel / 2); //Unhealthy seniors go to bed earlier and get up later
+                return time.Hour >= 20 + ((int)healthLevel / 2d) || time.Hour < 8 - ((int)healthLevel / 2d); //Unhealthy seniors go to bed earlier and get up later
             }
 
             return time.Hour >= 22 || time.Hour < 5;

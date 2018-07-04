@@ -23,7 +23,7 @@ namespace RushHour2.Patches.AI
             {
                 var simulationManager = SimulationManager.instance;
                 var date = simulationManager.m_currentGameTime;
-                if ((date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday) || date.Hour < 12 || date.Hour > 21)
+                if ((date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday) || date.Hour < 12 || date.Hour >= 21)
                 {
                     buildingData.m_outgoingProblemTimer = _lastProblemTimer;
                 }

@@ -115,7 +115,7 @@ namespace RushHour2.Citizens.Extensions
             if (currentBuilding != 0)
             {
                 var buildingManager = BuildingManager.instance;
-                var closeBuildings = buildingManager.FindAllBuildings(position, distance, services, subServices, Building.Flags.Active, Building.Flags.Demolishing | Building.Flags.Deleted);
+                var closeBuildings = buildingManager.FindAllBuildings(position, distance, services, subServices, Building.Flags.Created, Building.Flags.Demolishing | Building.Flags.Deleted | Building.Flags.Abandoned);
 
                 return closeBuildings;
             }
