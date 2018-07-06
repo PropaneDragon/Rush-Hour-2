@@ -6,6 +6,7 @@ namespace RushHour2.Core.Settings
     {
         public static bool Enabled = true;
         public static bool LogToFile = true;
+        public static bool Citizens_IgnoreVehicleCount = false;
         public static float TimeSpeedMultiplier = 0.25f;
 
         public static TimeSpan StartTime_Schools = TimeSpan.FromHours(8.5);

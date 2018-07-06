@@ -32,7 +32,7 @@ namespace RushHour2.Patches
             {
                 MessageBoxWrapper.Show(MessageBoxWrapper.MessageType.Warning,
                     $"{Details.ModName} couldn't start", $"{Details.ModName} couldn't fully start due to an issue overriding parts of the game.\n\n" +
-                    $"This is likely due to a recent update to Cities, and in order to prevent potential compatibility issues {Details.ModName} has disabled some functionality by reverting changes until a solution is found. This will result in most mod functionaity being disabled.\n\n" +
+                    $"This is likely due to a recent update to Cities, and in order to prevent potential compatibility issues {Details.BaseModName} has disabled some functionality by reverting changes until a solution is found. This will result in most mod functionaity being disabled.\n\n" +
                     $"If this has not previously been reported please do so, otherwise an update to the mod is required to fix the incompatibilites.");
 
                 UnPatchAll();
