@@ -5,52 +5,64 @@ using RushHour2.Patches.Simulation;
 using RushHour2.Patches.UI;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace RushHour2.Patches.HarmonyLocal
 {
     public static class Patcher
     {
+        private static readonly int REPATCH_TRY_TIMES = 5;
+        private static readonly TimeSpan REPATCH_WAIT_TIME = TimeSpan.FromMilliseconds(100);
+
         public static bool Patch(IPatchable patchable)
         {
             var patchableName = patchable?.GetType()?.Name;
+            var repatchTries = 1;
 
-            try
+            while (repatchTries <= REPATCH_TRY_TIMES)
             {
-                var original = patchable.BaseMethod;
-                var prefix = patchable.Prefix;
-                var postfix = patchable.Postfix;
-
                 try
                 {
-                    if (original != null && (prefix != null || postfix != null))
+                    var original = patchable.BaseMethod;
+                    var prefix = patchable.Prefix;
+                    var postfix = patchable.Postfix;
+
+                    try
                     {
-                        var originalInstanceString = $"{original.Name}({string.Join(", ", original.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})";
-                        var prefixInstanceString = prefix != null ? $"{prefix.Name}({string.Join(", ", prefix.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})" : "";
-                        var postfixInstanceString = postfix != null ? $"{postfix.Name}({string.Join(", ", postfix.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})" : "";
+                        if (original != null && (prefix != null || postfix != null))
+                        {
+                            var originalInstanceString = $"{original.Name}({string.Join(", ", original.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})";
+                            var prefixInstanceString = prefix != null ? $"{prefix.Name}({string.Join(", ", prefix.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})" : "";
+                            var postfixInstanceString = postfix != null ? $"{postfix.Name}({string.Join(", ", postfix.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})" : "";
 
-                        LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Message, $"Attempting to patch {originalInstanceString} to prefix: {prefixInstanceString} or postfix: {postfixInstanceString}");
+                            LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Message, $"Attempting to patch {originalInstanceString} to prefix: {prefixInstanceString} or postfix: {postfixInstanceString} (try {repatchTries})");
 
-                        HarmonyInstanceHolder.Instance.Patch(original, new HarmonyMethod(prefix), new HarmonyMethod(postfix));
+                            HarmonyInstanceHolder.Instance.Patch(original, new HarmonyMethod(prefix), new HarmonyMethod(postfix));
 
-                        LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Message, $"Patched {originalInstanceString}");
+                            LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Message, $"Patched {originalInstanceString}");
 
-                        return true;
+                            return true;
+                        }
+                        else
+                        {
+                            LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Couldn't patch {patchableName} onto {original?.Name ?? "null"}!");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
                         LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Couldn't patch {patchableName} onto {original?.Name ?? "null"}!");
+                        LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex);
                     }
                 }
                 catch (Exception ex)
                 {
-                    LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Couldn't patch {patchableName} onto {original?.Name ?? "null"}!");
+                    LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Patchable {patchableName ?? "unknown"} is invalid!");
                     LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex);
                 }
-            }
-            catch (Exception ex)
-            {
-                LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Patchable {patchableName ?? "unknown"} is invalid!");
-                LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex);
+
+                ++repatchTries;
+
+                Thread.Sleep(REPATCH_WAIT_TIME);
             }
 
             return false;
