@@ -1,5 +1,4 @@
-﻿using ColossalFramework;
-using ColossalFramework.IO;
+﻿using ColossalFramework.IO;
 using RushHour2.Citizens.Reporting;
 using RushHour2.Core.Info;
 using RushHour2.Core.Reporting;
@@ -69,7 +68,7 @@ namespace RushHour2.Mod.Extensions
 
             if (_nextLogTime < DateTime.Now)
             {
-                CitizenActivityMonitor.WriteLog(LoggingWrapper.LogArea.Hidden);
+                CitizenActivityMonitor.WriteLog(LoggingWrapper.LogArea.File);
 
                 _nextLogTime = DateTime.Now + CITIZEN_LOG_INTERVAL;
             }

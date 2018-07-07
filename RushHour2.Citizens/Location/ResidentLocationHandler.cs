@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using RushHour2.Citizens.Extensions;
 using RushHour2.Citizens.Reporting;
+using RushHour2.Core.Settings;
 using System;
 
 namespace RushHour2.Citizens.Location
@@ -126,7 +127,7 @@ namespace RushHour2.Citizens.Location
                     
                     if (happinessLevel >= Citizen.Happiness.Good)
                     {
-                        if (time.DayOfWeek == DayOfWeek.Friday && (ageGroup == Citizen.AgeGroup.Adult || ageGroup == Citizen.AgeGroup.Young))
+                        if (UserModSettings.Settings.Citizens_AllowLeisureAfterWork && time.DayOfWeek == DayOfWeek.Friday && (ageGroup == Citizen.AgeGroup.Adult || ageGroup == Citizen.AgeGroup.Young))
                         {
                             var goOut = simulationManager.m_randomizer.Int32(10) <= 6;
                             if (goOut)

@@ -11,9 +11,10 @@ namespace RushHour2.Core.Reporting
         [Flags]
         public enum LogArea
         {
-            File,
-            Console,
-            Debug,
+            None = 0,
+            File = 1,
+            Console = 2,
+            Debug = 4,
             Hidden = File | Debug,
             All = File | Console | Debug
         }
@@ -29,17 +30,17 @@ namespace RushHour2.Core.Reporting
         {
             message = $"[{Details.ModName}] {message}";
 
-            if ((area & LogArea.Console) != 0)
+            if ((area & LogArea.Console) != LogArea.None)
             {
                 LogToConsole(type, message);
             }
 
-            if ((area & LogArea.File) != 0)
+            if ((area & LogArea.File) != LogArea.None)
             {
                 LogToFile(type, message);
             }
 
-            if ((area & LogArea.Debug) != 0)
+            if ((area & LogArea.Debug) != LogArea.None)
             {
                 LogToDebug(type, message);
             }
@@ -59,13 +60,27 @@ namespace RushHour2.Core.Reporting
         {
             if (UserModSettings.Settings.Logging_ToFile)
             {
-
+                switch (type)
+                {
+                    case LogType.Error:
+                        FileLogger.LogError(message);
+                        break;
+                    case LogType.Message:
+                        FileLogger.LogMessage(message);
+                        break;
+                    case LogType.Warning:
+                        FileLogger.LogWarning(message);
+                        break;
+                }
             }
         }
 
         private static void LogToConsole(LogType type, string message)
         {
-            DebugOutputPanel.AddMessage(ConvertToConsoleMessageType(type), message);
+            if (UserModSettings.Settings.Logging_ToConsole)
+            {
+                DebugOutputPanel.AddMessage(ConvertToConsoleMessageType(type), message);
+            }
         }
 
         private static PluginManager.MessageType ConvertToConsoleMessageType(LogType type)
@@ -85,17 +100,20 @@ namespace RushHour2.Core.Reporting
 
         private static void LogToDebug(LogType type, string message)
         {
-            switch (type)
+            if (UserModSettings.Settings.Logging_ToDebug)
             {
-                case LogType.Error:
-                    Debug.LogError(message);
-                    break;
-                case LogType.Message:
-                    Debug.Log(message);
-                    break;
-                case LogType.Warning:
-                    Debug.LogWarning(message);
-                    break;
+                switch (type)
+                {
+                    case LogType.Error:
+                        Debug.LogError(message);
+                        break;
+                    case LogType.Message:
+                        Debug.Log(message);
+                        break;
+                    case LogType.Warning:
+                        Debug.LogWarning(message);
+                        break;
+                }
             }
         }
     }

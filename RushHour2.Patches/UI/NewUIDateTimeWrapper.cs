@@ -1,4 +1,5 @@
-﻿using RushHour2.Patches.HarmonyLocal;
+﻿using RushHour2.Core.Settings;
+using RushHour2.Patches.HarmonyLocal;
 using System;
 using System.Reflection;
 
@@ -11,10 +12,15 @@ namespace RushHour2.Patches.UI
 
         public static bool CheckPrefix(DateTime newVal, ref DateTime ___m_Value, ref string ___m_String)
         {
-            ___m_Value = newVal;
-            ___m_String = ___m_Value.ToString("dddd HH:mm");
+            if (UserModSettings.Settings.Enabled && UserModSettings.Settings.DateTimeBar_Modify)
+            {
+                ___m_Value = newVal;
+                ___m_String = ___m_Value.ToString("dddd HH:mm");
 
-            return false;
+                return false;
+            }
+
+            return true;
         }
     }
 }

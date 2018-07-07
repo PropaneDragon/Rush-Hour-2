@@ -1,4 +1,5 @@
 ﻿using RushHour2.Citizens.Location;
+using RushHour2.Core.Settings;
 using RushHour2.Patches.HarmonyLocal;
 using System;
 using System.Reflection;
@@ -12,7 +13,12 @@ namespace RushHour2.Patches.AI
 
         public static bool UpdateLocationPrefix(TouristAI __instance, uint citizenID, ref Citizen data)
         {
-            return !TouristLocationHandler.Process(ref __instance, citizenID, ref data);
+            if (UserModSettings.Settings.Enabled && UserModSettings.Settings.Tourists_Override)
+            {
+                return !TouristLocationHandler.Process(ref __instance, citizenID, ref data);
+            }
+
+            return true;
         }
     }
 }

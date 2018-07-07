@@ -1,4 +1,6 @@
-﻿namespace RushHour2.Citizens.Location
+﻿using RushHour2.Core.Settings;
+
+namespace RushHour2.Citizens.Location
 {
     public static class GlobalLocationHandler
     {
@@ -11,7 +13,12 @@
             var simulationManager = SimulationManager.instance;
             var randomPercentage = ((simulationManager.m_randomizer.Int32(int.MaxValue) / (double)int.MaxValue) * 100d);
 
-            return randomPercentage > percentageCitizens;
+            if (UserModSettings.Settings.Citizens_IgnoreVehicleCount)
+            {
+                return randomPercentage > percentageCitizens;
+            }
+
+            return randomPercentage > (percentageCitizens > percentageVehicles ? percentageCitizens : percentageVehicles);
         }
 
         public static bool GoodBuildingToVisit(ref Building building, ref Citizen citizen)

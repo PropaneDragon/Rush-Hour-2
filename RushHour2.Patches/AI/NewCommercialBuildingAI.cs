@@ -1,4 +1,5 @@
-﻿using RushHour2.Patches.HarmonyLocal;
+﻿using RushHour2.Core.Settings;
+using RushHour2.Patches.HarmonyLocal;
 using System;
 using System.Reflection;
 
@@ -14,18 +15,24 @@ namespace RushHour2.Patches.AI
 
         public static void SimulationStepActivePrefix(CommercialBuildingAI __instance, ref Building buildingData)
         {
-            _lastProblemTimer = buildingData.m_outgoingProblemTimer;
+            if (UserModSettings.Settings.Enabled)
+            {
+                _lastProblemTimer = buildingData.m_outgoingProblemTimer;
+            }
         }
 
         public static void SimulationStepActivePostfix(CommercialBuildingAI __instance, ref Building buildingData)
         {
-            if (buildingData.m_outgoingProblemTimer > _lastProblemTimer)
+            if (UserModSettings.Settings.Enabled)
             {
-                var simulationManager = SimulationManager.instance;
-                var date = simulationManager.m_currentGameTime;
-                if ((date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday) || date.Hour < 12 || date.Hour >= 21)
+                if (buildingData.m_outgoingProblemTimer > _lastProblemTimer)
                 {
-                    buildingData.m_outgoingProblemTimer = _lastProblemTimer;
+                    var simulationManager = SimulationManager.instance;
+                    var date = simulationManager.m_currentGameTime;
+                    if ((date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday) || date.Hour < 12 || date.Hour >= 21)
+                    {
+                        buildingData.m_outgoingProblemTimer = _lastProblemTimer;
+                    }
                 }
             }
         }

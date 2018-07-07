@@ -14,8 +14,8 @@ namespace RushHour2.Core.Settings
 
         private static XmlSerializer Serializer => new XmlSerializer(typeof(UserModSettingsHolder));
 
-        public static string SAVE_FILE_NAME => $"{Details.BaseModName} Settings.xml";
-        public static string SAVE_FILE_PATH => SAVE_FILE_NAME;
+        public static string SaveFileName => $"{Details.BaseModName} Settings.xml";
+        public static string SaveFilePath => SaveFileName;
 
         public static UserModSettingsHolder Settings => settingsHolder;
 
@@ -41,23 +41,23 @@ namespace RushHour2.Core.Settings
 
         public static bool Save()
         {
-            LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Attempting to save settings to {SAVE_FILE_PATH}");
+            LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Attempting to save settings to {SaveFilePath}");
 
             try
             {
-                using (var saveFile = File.CreateText(SAVE_FILE_PATH))
+                using (var saveFile = File.CreateText(SaveFilePath))
                 {
                     var serialiser = Serializer;
                     serialiser.Serialize(saveFile, settingsHolder);
 
-                    LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Saved settings to {SAVE_FILE_PATH}");
+                    LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Saved settings to {SaveFilePath}");
 
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Unable to save settings to {SAVE_FILE_PATH}");
+                LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Unable to save settings to {SaveFilePath}");
                 LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex);
             }
 
@@ -66,23 +66,26 @@ namespace RushHour2.Core.Settings
 
         public static bool Load()
         {
-            LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Attempting to load settings from {SAVE_FILE_PATH}");
+            LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Attempting to load settings from {SaveFilePath}");
 
             try
             {
-                using (var saveFile = File.OpenRead(SAVE_FILE_PATH))
+                if (File.Exists(SaveFilePath))
                 {
-                    var serialiser = Serializer;
-                    settingsHolder = serialiser.Deserialize(saveFile) as UserModSettingsHolder;
+                    using (var saveFile = File.OpenRead(SaveFilePath))
+                    {
+                        var serialiser = Serializer;
+                        settingsHolder = serialiser.Deserialize(saveFile) as UserModSettingsHolder;
 
-                    LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Loaded settings from {SAVE_FILE_PATH}");
+                        LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Loaded settings from {SaveFilePath}");
 
-                    return true;
+                        return true;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Unable to load settings from {SAVE_FILE_PATH}");
+                LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Error, $"Unable to load settings from {SaveFilePath}");
                 LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex);
             }
 

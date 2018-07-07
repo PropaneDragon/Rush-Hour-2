@@ -79,6 +79,7 @@
     <Compile Include="Info\Compatibility.cs" />
     <Compile Include="Info\Details.cs" />
     <Compile Include="Info\IncompatibleMod.cs" />
+    <Compile Include="Reporting\FileLogger.cs" />
     <Compile Include="Reporting\LoggingWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporting\MessageBoxWrapper.cs" />

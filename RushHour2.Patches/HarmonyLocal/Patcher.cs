@@ -28,11 +28,11 @@ namespace RushHour2.Patches.HarmonyLocal
                         var prefixInstanceString = prefix != null ? $"{prefix.Name}({string.Join(", ", prefix.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})" : "";
                         var postfixInstanceString = postfix != null ? $"{postfix.Name}({string.Join(", ", postfix.GetParameters().Select(parameter => parameter.ParameterType.Name).ToArray())})" : "";
 
-                        LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Attempting to patch {originalInstanceString} to prefix: {prefixInstanceString} or postfix: {postfixInstanceString}");
+                        LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Message, $"Attempting to patch {originalInstanceString} to prefix: {prefixInstanceString} or postfix: {postfixInstanceString}");
 
                         HarmonyInstanceHolder.Instance.Patch(original, new HarmonyMethod(prefix), new HarmonyMethod(postfix));
 
-                        LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Patched {originalInstanceString}");
+                        LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Message, $"Patched {originalInstanceString}");
 
                         return true;
                     }
