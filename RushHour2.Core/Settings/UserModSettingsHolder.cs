@@ -11,7 +11,7 @@ namespace RushHour2.Core.Settings
         public bool Enabled = true;
 
         [XmlIgnore]
-        public Version LastVersion = Details.Version;
+        public Version LastVersion = new Version();
 
         [XmlElement]
         public string LastVersion_String

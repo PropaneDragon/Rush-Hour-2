@@ -79,6 +79,8 @@ namespace RushHour2.Core.Settings
         {
             LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Attempting to load settings from {SaveFilePath}");
 
+            var success = false;
+
             try
             {
                 if (File.Exists(SaveFilePath))
@@ -91,10 +93,10 @@ namespace RushHour2.Core.Settings
                         LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Loaded settings from {SaveFilePath}");
                     }
 
-                    CheckIfModHasUpdated();
-
-                    return true;
+                    success = true;
                 }
+
+                CheckIfModHasUpdated();
             }
             catch (Exception ex)
             {
@@ -102,7 +104,7 @@ namespace RushHour2.Core.Settings
                 LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, ex);
             }
 
-            return false;
+            return success;
         }
 
         private static List<FieldInfo> GetSaveableFields()
