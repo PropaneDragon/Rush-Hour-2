@@ -116,15 +116,15 @@ namespace RushHour2.Citizens.Extensions
                 var ageGroup = Citizen.GetAgeGroup(citizen.m_age);
                 if (ageGroup <= Citizen.AgeGroup.Teen)
                 {
-                    return UserModSettings.TimeIsBetween(time, UserModSettings.StartTime_Schools, UserModSettings.Duration_Schools) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.StartTime_Schools));
+                    return UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_Schools, UserModSettings.Settings.Duration_Schools) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_Schools));
                 }
                 else if (ageGroup <= Citizen.AgeGroup.Young && citizen.Education3)
                 {
-                    return UserModSettings.TimeIsBetween(time, UserModSettings.StartTime_University, UserModSettings.Duration_University) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.StartTime_University));
+                    return UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_University, UserModSettings.Settings.Duration_University) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_University));
                 }
                 else if (ageGroup <= Citizen.AgeGroup.Senior)
                 {
-                    return UserModSettings.TimeIsBetween(time, UserModSettings.StartTime_Work, UserModSettings.Duration_Work) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.StartTime_Work));
+                    return UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_Work, UserModSettings.Settings.Duration_Work) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_Work));
                 }
             }
 

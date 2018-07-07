@@ -22,7 +22,7 @@ namespace RushHour2.Mod.Extensions
 
         private bool ShouldRedirect(LoadMode mode)
         {
-            return UserModSettings.Enabled && ValidMode(mode);
+            return UserModSettings.Settings.Enabled && ValidMode(mode);
         }
 
         private bool ValidMode(LoadMode mode)

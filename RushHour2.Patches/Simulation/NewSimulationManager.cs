@@ -13,7 +13,7 @@ namespace RushHour2.Patches.Simulation
 
         public static void UpdatePostfix(ref SimulationManager __instance)
         {
-            var idealTimePerFrame = new TimeSpan((long)((double)(TimeSpan.FromHours(24).Ticks / SimulationManager.DAYTIME_FRAMES) * UserModSettings.TimeSpeedMultiplier));
+            var idealTimePerFrame = new TimeSpan((long)((double)(TimeSpan.FromHours(24).Ticks / SimulationManager.DAYTIME_FRAMES) * UserModSettings.Settings.Simulation_Speed));
 
             if (__instance.m_timePerFrame.TotalMilliseconds != idealTimePerFrame.TotalMilliseconds)
             {

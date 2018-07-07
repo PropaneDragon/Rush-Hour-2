@@ -66,6 +66,7 @@
       <HintPath>$(SteamDir)\SteamApps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>$(SteamDir)\SteamApps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -82,7 +83,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporting\MessageBoxWrapper.cs" />
     <Compile Include="Settings\FeatureToggles.cs" />
+    <Compile Include="Settings\SaveFileAttribute.cs" />
     <Compile Include="Settings\UserModSettings.cs" />
+    <Compile Include="Settings\UserModSettingsHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Harmony\Harmony\Harmony.csproj">

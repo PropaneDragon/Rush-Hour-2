@@ -46,7 +46,7 @@ namespace RushHour2.Mod.Extensions
             {
                 if (!_simulation.SimulationPaused && !_simulation.ForcedSimulationPaused)
                 {
-                    var timeMultiplier = UserModSettings.TimeSpeedMultiplier;
+                    var timeMultiplier = UserModSettings.Settings.Simulation_Speed;
 
                     if (timeMultiplier >= 1f)
                     {

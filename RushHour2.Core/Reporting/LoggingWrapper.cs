@@ -25,16 +25,6 @@ namespace RushHour2.Core.Reporting
             Error
         }
 
-        public static void Log(LogArea area, Exception exception, bool recurse = false)
-        {
-            Log(area, LogType.Error, $"{exception?.Message ?? "null exception"}\n{exception.Source ?? "null source"}\n{exception?.StackTrace ?? "null stack"}");
-
-            if (recurse && exception?.InnerException != null)
-            {
-                Log(area, exception.InnerException, recurse);
-            }
-        }
-
         public static void Log(LogArea area, LogType type, string message)
         {
             message = $"[{Details.ModName}] {message}";
@@ -43,7 +33,7 @@ namespace RushHour2.Core.Reporting
             {
                 LogToConsole(type, message);
             }
-            
+
             if ((area & LogArea.File) != 0)
             {
                 LogToFile(type, message);
@@ -55,9 +45,19 @@ namespace RushHour2.Core.Reporting
             }
         }
 
+        public static void Log(LogArea area, Exception exception, bool recurse = false)
+        {
+            Log(area, LogType.Error, $"{exception?.Message ?? "null exception"}\n{exception.Source ?? "null source"}\n{exception?.StackTrace ?? "null stack"}");
+
+            if (recurse && exception?.InnerException != null)
+            {
+                Log(area, exception.InnerException, recurse);
+            }
+        }
+
         private static void LogToFile(LogType type, string message)
         {
-            if (UserModSettings.LogToFile)
+            if (UserModSettings.Settings.Logging_ToFile)
             {
 
             }
