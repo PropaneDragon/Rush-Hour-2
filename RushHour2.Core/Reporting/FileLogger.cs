@@ -38,7 +38,7 @@ namespace RushHour2.Core.Reporting
 
                         try
                         {
-                            File.AppendAllText(SaveFilePath, string.Join("\n", _queue.ToArray()));
+                            File.AppendAllText(SaveFilePath, string.Join("\n", _queue.ToArray()) + "\n");
                         }
                         catch (Exception ex)
                         {
@@ -98,7 +98,7 @@ namespace RushHour2.Core.Reporting
         {
             lock (_logLock)
             {
-                var currentTime = DateTime.Now.ToString("HH:mm:ss:FFFF");
+                var currentTime = DateTime.Now.ToString("HH:mm:ss.F");
                 _queue.Add($"[{currentTime}] {prefix} {message}");
             }
         }
