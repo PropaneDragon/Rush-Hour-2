@@ -3,8 +3,10 @@ using ColossalFramework.PlatformServices;
 using ICities;
 using RushHour2.Core.Info;
 using RushHour2.Core.Reporting;
+using RushHour2.Core.Settings;
 using RushHour2.Mod.Extensions;
 using RushHour2.Patches;
+using RushHour2.UI.MainMenuScreen;
 using RushHour2.UI.Settings;
 
 namespace RushHour2.Mod
@@ -34,14 +36,14 @@ namespace RushHour2.Mod
 
         private void OnIntroLoaded()
         {
+            UserModSettings.Load();
+
             CheckForExperimentalVersion();
             CheckForIncompatibilities();
 
-            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"Patching...");
-
             PatchManager.PatchAll();
-
             SimulationManager.RegisterSimulationManager(new SimulationExtension());
+            UpdateText.DisplayIfRequired();
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -51,7 +53,7 @@ namespace RushHour2.Mod
 
         private static void CheckForExperimentalVersion()
         {
-            if (Details.ExperimentalBuild)
+            if (Details.ExperimentalBuild && UserModSettings.RecentlyUpdated)
             {
                 MessageBoxWrapper.Show(MessageBoxWrapper.MessageType.Warning,
                     $"{Details.BaseModName} - experimental build",

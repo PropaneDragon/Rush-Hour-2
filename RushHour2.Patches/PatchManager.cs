@@ -14,6 +14,8 @@ namespace RushHour2.Patches
         {
             var patchSuccess = false;
 
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"Patching...");
+
             try
             {
                 LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"Patching {PatchAssembly.GetName().Name}...");

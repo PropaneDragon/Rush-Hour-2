@@ -10,19 +10,16 @@ namespace RushHour2.Core.Settings
 {
     public static class UserModSettings
     {
-        private static UserModSettingsHolder settingsHolder = new UserModSettingsHolder();
-
+        private static bool _justUpdated = false;
+        private static UserModSettingsHolder _settingsHolder = new UserModSettingsHolder();
         private static XmlSerializer Serializer => new XmlSerializer(typeof(UserModSettingsHolder));
 
+        public static bool RecentlyUpdated => _justUpdated;
         public static string SaveFileName => $"{Details.BaseModName} Settings.xml";
         public static string SaveFilePath => SaveFileName;
+        public static UserModSettingsHolder Settings => _settingsHolder;
 
-        public static UserModSettingsHolder Settings => settingsHolder;
-
-        public static bool TimeIsBetween(DateTime currentTime, TimeSpan startTime, TimeSpan duration)
-        {
-            return !TimeIsBefore(currentTime, startTime) && !TimeIsAfter(currentTime, startTime, duration);
-        }
+        public static bool TimeIsBetween(DateTime currentTime, TimeSpan startTime, TimeSpan duration) => !TimeIsBefore(currentTime, startTime) && !TimeIsAfter(currentTime, startTime, duration);
 
         public static bool TimeIsBefore(DateTime currentTime, TimeSpan startTime)
         {
@@ -39,6 +36,20 @@ namespace RushHour2.Core.Settings
             return currentTime > ends;
         }
 
+        public static void CheckIfModHasUpdated()
+        {
+            var lastVersion = Settings.LastVersion;
+            var currentVersion = Details.Version;
+
+            LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Checking whether mod has updated ({lastVersion} vs {currentVersion}).");
+
+            _justUpdated = _justUpdated || Settings.LastVersion != Details.Version;
+
+            Settings.LastVersion = Details.Version;
+
+            Save();
+        }
+
         public static bool Save()
         {
             LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Attempting to save settings to {SaveFilePath}");
@@ -48,7 +59,7 @@ namespace RushHour2.Core.Settings
                 using (var saveFile = File.CreateText(SaveFilePath))
                 {
                     var serialiser = Serializer;
-                    serialiser.Serialize(saveFile, settingsHolder);
+                    serialiser.Serialize(saveFile, _settingsHolder);
 
                     LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Saved settings to {SaveFilePath}");
 
@@ -75,12 +86,14 @@ namespace RushHour2.Core.Settings
                     using (var saveFile = File.OpenRead(SaveFilePath))
                     {
                         var serialiser = Serializer;
-                        settingsHolder = serialiser.Deserialize(saveFile) as UserModSettingsHolder;
+                        _settingsHolder = serialiser.Deserialize(saveFile) as UserModSettingsHolder;
 
                         LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Loaded settings from {SaveFilePath}");
-
-                        return true;
                     }
+
+                    CheckIfModHasUpdated();
+
+                    return true;
                 }
             }
             catch (Exception ex)

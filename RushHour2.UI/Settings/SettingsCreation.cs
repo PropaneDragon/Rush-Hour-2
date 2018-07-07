@@ -11,8 +11,6 @@ namespace RushHour2.UI.Settings
     {
         public static void Create(UIHelperBase helper)
         {
-            UserModSettings.Load();
-
             if (helper.AddButton("Save to disk", new OnButtonClicked(() => UserModSettings.Save())) is UIButton button)
             {
                 button.tooltip = "Settings are applied automatically ingame. Clicking this button saves these settings to disk and will be loaded again on a restart.";

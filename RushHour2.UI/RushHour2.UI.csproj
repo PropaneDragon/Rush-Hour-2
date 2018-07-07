@@ -71,6 +71,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Extensions\UIHelperBaseExtensions.cs" />
+    <Compile Include="MainMenuScreen\UpdateText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\SettingsCreation.cs" />
   </ItemGroup>
