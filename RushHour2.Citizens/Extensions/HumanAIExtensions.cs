@@ -1,7 +1,6 @@
 ﻿using Harmony;
 using RushHour2.Buildings.Extensions;
 using RushHour2.Citizens.Reporting;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,7 +57,18 @@ namespace RushHour2.Citizens.Extensions
             if (citizen.CanMove())
             {
                 var currentBuildingId = citizen.GetBuilding();
-                return humanAI.StartMoving(citizenId, ref citizen, currentBuildingId, buildingId);
+                var moving = humanAI.StartMoving(citizenId, ref citizen, currentBuildingId, buildingId);
+
+                if (buildingId != citizen.WorkBuilding() && buildingId != citizen.HomeBuilding())
+                {
+                    citizen.SetVisitplace(citizenId, buildingId, 0U);
+                }
+                else
+                {
+                    citizen.SetVisitplace(citizenId, 0, 0U);
+                }
+
+                return moving;
             }
 
             return false;
@@ -127,15 +137,13 @@ namespace RushHour2.Citizens.Extensions
         {
             var currentBuilding = citizen.GetBuilding();
 
-            if (buildingId != 0 && currentBuilding != 0 && citizen.CanMove())
+            if (buildingId != 0 && currentBuilding != 0)
             {
-                humanAI.StartMoving(citizenId, ref citizen, currentBuilding, buildingId);
-                citizen.SetVisitplace(citizenId, buildingId, 0U);
-                citizen.m_visitBuilding = buildingId;
+                var moving = humanAI.GoToBuilding(citizenId, ref citizen, buildingId);
 
                 CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GoingToVisit);
 
-                return true;
+                return moving;
             }
 
             return false;
