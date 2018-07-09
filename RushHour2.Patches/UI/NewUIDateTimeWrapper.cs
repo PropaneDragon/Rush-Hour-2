@@ -10,7 +10,7 @@ namespace RushHour2.Patches.UI
         public override MethodBase BaseMethod => typeof(UIDateTimeWrapper).GetMethod("Check", BindingFlags.Instance | BindingFlags.Public, null, new Type[] { typeof(DateTime) }, new ParameterModifier[] { });
         public override MethodInfo Prefix => typeof(NewUIDateTimeWrapper_Check).GetMethod(nameof(CheckPrefix), BindingFlags.Static | BindingFlags.Public);
 
-        public static bool CheckPrefix(DateTime newVal, ref DateTime ___m_Value, ref string ___m_String)
+        public static bool CheckPrefix(UIDateTimeWrapper __instance, DateTime newVal, ref DateTime ___m_Value, ref string ___m_String)
         {
             if (UserModSettings.Settings.Enabled && UserModSettings.Settings.DateTimeBar_Modify)
             {
