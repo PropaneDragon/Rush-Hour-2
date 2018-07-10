@@ -197,7 +197,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool GettingWet(this Citizen citizen)
         {
-            if (citizen.IsVisible())
+            if (citizen.IsVisible() && UserModSettings.Settings.Citizens_ReactToWeather)
             {
                 var weatherManager = WeatherManager.instance;
                 var simulationManager = SimulationManager.instance;
@@ -214,7 +214,7 @@ namespace RushHour2.Citizens.Extensions
             var weatherManager = WeatherManager.instance;
             var currentRain = weatherManager.m_currentRain;
 
-            return currentRain > 0.15;
+            return UserModSettings.Settings.Citizens_ReactToWeather && currentRain > 0.15;
         }
 
         public static ushort GetBuilding(this Citizen citizen)

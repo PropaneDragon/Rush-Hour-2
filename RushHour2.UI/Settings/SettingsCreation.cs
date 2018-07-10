@@ -42,7 +42,12 @@ namespace RushHour2.UI.Settings
             {
                 workHours.AddTimeSpanHoursSlider("Start time", TimeSpan.FromHours(6), TimeSpan.FromHours(11), UserModSettings.Settings.StartTime_Work, new OnValueChanged(value => UserModSettings.Settings.StartTime_Work = TimeSpan.FromHours(value)));
                 workHours.AddTimeSpanHoursSlider("Duration", TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_Work, new OnValueChanged(value => UserModSettings.Settings.Duration_Work = TimeSpan.FromHours(value)), "HH'h' mm'm'");
-                workHours.AddCheckbox("Allow some workers to go to leisure areas after work on Fridays", UserModSettings.Settings.Citizens_AllowLeisureAfterWork, new OnCheckChanged(value => { }));
+                workHours.AddCheckbox("Allow some workers to go to leisure areas after work on Fridays", UserModSettings.Settings.Citizens_AllowLeisureAfterWork, new OnCheckChanged(value => { UserModSettings.Settings.Citizens_AllowLeisureAfterWork = value; }));
+            }
+
+            var citizens = helper.AddGroup("Citizens");
+            {
+                citizens.AddCheckbox("React to weather", UserModSettings.Settings.Citizens_ReactToWeather, new OnCheckChanged(value => { UserModSettings.Settings.Citizens_ReactToWeather = value; }));
             }
 
             var dangerZone = helper.AddGroup("Danger zone");

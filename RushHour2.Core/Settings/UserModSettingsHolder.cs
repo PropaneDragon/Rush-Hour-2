@@ -61,6 +61,9 @@ namespace RushHour2.Core.Settings
         public bool Citizens_AllowLeisureAfterWork = true;
 
         [XmlElement]
+        public bool Citizens_ReactToWeather = true;
+
+        [XmlElement]
         public bool Tourists_Override = true;
 
         [XmlElement(DataType = "duration")]
