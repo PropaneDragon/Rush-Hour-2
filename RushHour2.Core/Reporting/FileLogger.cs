@@ -13,7 +13,7 @@ namespace RushHour2.Core.Reporting
         private static DateTime _lastSaveTime = DateTime.Now;
         private static List<string> _queue = new List<string>();
 
-        public static string SaveFileName => $"{Details.BaseModName} Log.xml";
+        public static string SaveFileName => $"{Details.BaseModName} Log.txt";
         public static string SaveFilePath => SaveFileName;
 
         public static void Save()
