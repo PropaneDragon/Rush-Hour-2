@@ -52,9 +52,9 @@ namespace RushHour2.Citizens.Extensions
             return humanAI.GoToBuilding(citizenId, ref citizen, citizen.WorkBuilding());
         }
 
-        public static bool GoToBuilding(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort buildingId)
+        public static bool GoToBuilding(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort buildingId, bool ignoreSameBuilding = false)
         {
-            if (citizen.CanMove())
+            if (citizen.CanMove() && (citizen.GetBuilding() != buildingId || ignoreSameBuilding))
             {
                 var currentBuildingId = citizen.GetBuilding();
                 var moving = humanAI.StartMoving(citizenId, ref citizen, currentBuildingId, buildingId);
@@ -69,6 +69,16 @@ namespace RushHour2.Citizens.Extensions
                 }
 
                 return moving;
+            }
+
+            return false;
+        }
+
+        public static bool GoToSameBuilding(this HumanAI humanAI, uint citizenId, ref Citizen citizen)
+        {
+            if (citizen.IsVisible() && citizen.ValidBuilding() && citizen.IsAtABuilding())
+            {
+                return GoToBuilding(humanAI, citizenId, ref citizen, citizen.GetBuilding(), true);
             }
 
             return false;
@@ -137,7 +147,7 @@ namespace RushHour2.Citizens.Extensions
         {
             var currentBuilding = citizen.GetBuilding();
 
-            if (buildingId != 0 && currentBuilding != 0)
+            if (buildingId != 0 && currentBuilding != 0 && currentBuilding != buildingId)
             {
                 var moving = humanAI.GoToBuilding(citizenId, ref citizen, buildingId);
 

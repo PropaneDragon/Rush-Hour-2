@@ -14,7 +14,7 @@ namespace RushHour2.Citizens.Location
             {
                 CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Unknown);
 
-                if (citizen.IsInsideBuilding())
+                if (citizen.IsAtABuilding())
                 {
                     ProcessInBuilding(ref residentAI, citizenId, ref citizen);
                 }
@@ -76,7 +76,7 @@ namespace RushHour2.Citizens.Location
             {
                 var simulationManager = SimulationManager.instance;
                 var buildingInstance = citizen.GetBuildingInstance().Value;
-                var shouldStay = GlobalLocationHandler.GoodBuildingToVisit(ref buildingInstance, ref citizen) && simulationManager.m_randomizer.UInt32(10) < 5;
+                var shouldStay = GlobalLocationHandler.GoodBuildingToVisit(ref buildingInstance, ref citizen) && (citizen.AfraidOfGettingWet() || simulationManager.m_randomizer.UInt32(10) < 6);
                 
                 if (!shouldStay)
                 {
@@ -89,6 +89,12 @@ namespace RushHour2.Citizens.Location
                     {
                         residentAI.GoHome(citizenId, ref citizen);
                     }
+                }
+                else if (citizen.GettingWet())
+                {
+                    CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GettingWet);
+
+                    residentAI.GoHome(citizenId, ref citizen);
                 }
 
                 return true;

@@ -11,7 +11,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool NeedsGoods(this Citizen citizen) => citizen.m_flags.IsFlagSet(Citizen.Flags.NeedGoods) && SimulationManager.instance.m_randomizer.Int32(10) > 7;
 
-        public static bool IsInsideBuilding(this Citizen citizen) => !citizen.IsMoving();
+        public static bool IsAtABuilding(this Citizen citizen) => !citizen.IsMoving();
 
         public static bool IsVisible(this Citizen citizen) => citizen.m_instance != 0;
 
@@ -193,6 +193,28 @@ namespace RushHour2.Citizens.Extensions
             }
 
             return time.Hour >= 22 || time.Hour < 5;
+        }
+
+        public static bool GettingWet(this Citizen citizen)
+        {
+            if (citizen.IsVisible())
+            {
+                var weatherManager = WeatherManager.instance;
+                var simulationManager = SimulationManager.instance;
+                var currentRainPercentage = weatherManager.m_currentRain * 100d;
+
+                return currentRainPercentage > 0d && simulationManager.m_randomizer.Int32(0, 100) < currentRainPercentage;
+            }
+
+            return false;
+        }
+
+        public static bool AfraidOfGettingWet(this Citizen citizen)
+        {
+            var weatherManager = WeatherManager.instance;
+            var currentRain = weatherManager.m_currentRain;
+
+            return currentRain > 0.15;
         }
 
         public static ushort GetBuilding(this Citizen citizen)

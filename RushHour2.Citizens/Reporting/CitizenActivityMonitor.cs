@@ -40,6 +40,7 @@ namespace RushHour2.Citizens.Reporting
             AtAHouse,
             OnARoad,
             AtATouristAttraction,
+            GettingWet,
         }
 
         private static object _logLockObject = new object();

@@ -13,7 +13,7 @@ namespace RushHour2.Citizens.Location
             {
                 CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Unknown);
 
-                if (citizen.IsInsideBuilding())
+                if (citizen.IsAtABuilding())
                 {
                     return ProcessInBuilding(ref touristAI, citizenId, ref citizen);
                 }
@@ -56,6 +56,7 @@ namespace RushHour2.Citizens.Location
                 return false;
             }
 
+            var touristHotelSearchRadius = BuildingManager.BUILDINGGRID_CELL_SIZE * 4;
             var currentBuildingInstance = citizen.VisitBuildingInstance().Value;
             var simulationManager = SimulationManager.instance;
 
@@ -68,7 +69,7 @@ namespace RushHour2.Citizens.Location
                     return true;
                 }
 
-                var foundHotel = touristAI.FindCloseHotel(citizenId, ref citizen, (BuildingManager.BUILDINGGRID_CELL_SIZE * 4), currentBuildingInstance);
+                var foundHotel = touristAI.FindCloseHotel(citizenId, ref citizen, touristHotelSearchRadius, currentBuildingInstance);
                 if (foundHotel != 0 && simulationManager.m_randomizer.Int32(10) < 8)
                 {
                     var foundHotelInstance = BuildingManager.instance.m_buildings.m_buffer[foundHotel];
@@ -89,7 +90,7 @@ namespace RushHour2.Citizens.Location
                 }
             }
 
-            var goSomewhere = simulationManager.m_randomizer.Int32(10) < 3 || citizen.InHotel();
+            var goSomewhere = (simulationManager.m_randomizer.Int32(10) < 3 || citizen.InHotel()) && !citizen.AfraidOfGettingWet();
             if (goSomewhere)
             {
                 var keepItLocal = simulationManager.m_randomizer.Int32(10) < 6;
@@ -133,6 +134,12 @@ namespace RushHour2.Citizens.Location
                         touristAI.FindAFunActivity(citizenId, citizen.GetBuilding());
                     }
                 }
+            }
+            else if (citizen.GettingWet())
+            {
+                CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GettingWet);
+
+                touristAI.FindCloseHotel(citizenId, ref citizen, touristHotelSearchRadius, currentBuildingInstance);
             }
 
             return true;
