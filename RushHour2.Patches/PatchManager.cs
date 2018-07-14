@@ -54,7 +54,7 @@ namespace RushHour2.Patches
                 var patchedMethods = HarmonyInstanceHolder.Instance.GetPatchedMethods();
                 foreach (var patchedMethod in patchedMethods)
                 {
-                    HarmonyInstanceHolder.Instance.RemovePatch(patchedMethod, Harmony.HarmonyPatchType.All, HarmonyInstanceHolder.Instance.Id);
+                    HarmonyInstanceHolder.Instance.Unpatch(patchedMethod, Harmony.HarmonyPatchType.All, HarmonyInstanceHolder.Instance.Id);
                 }
 
                 LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, "Done!");
