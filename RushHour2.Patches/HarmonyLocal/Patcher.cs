@@ -77,7 +77,8 @@ namespace RushHour2.Patches.HarmonyLocal
             patched = patched && Patch(new SimulationManager_Update());
             patched = patched && Patch(new NewUIDateTimeWrapper_Check());
             patched = patched && Patch(new NewInfoPanel_Update());
-            patched = patched && Patch(new NewCommercialBuildingAI_SimulationStepActive());            
+            patched = patched && Patch(new NewCommercialBuildingAI_SimulationStepActive());
+            patched = patched && Patch(new NewBuildingAI_CalculateUnspawnPosition());
 
             return patched;
         }

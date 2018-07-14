@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using RushHour2.Citizens.Extensions;
 using RushHour2.Citizens.Reporting;
+using RushHour2.Core.Reporting;
 using RushHour2.Core.Settings;
 using System;
 
@@ -87,7 +88,9 @@ namespace RushHour2.Citizens.Location
 
                     if (!visitSomewhereElse || !ProcessActivity(ref residentAI, citizenId, ref citizen))
                     {
-                        residentAI.GoHome(citizenId, ref citizen);
+                        if (!residentAI.GoHome(citizenId, ref citizen))
+                        {
+                        }
                     }
                 }
                 else if (citizen.GettingWet())

@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using RushHour2.Citizens.Extensions;
 using RushHour2.Citizens.Reporting;
+using RushHour2.Core.Reporting;
 using System;
 
 namespace RushHour2.Citizens.Location
@@ -139,7 +140,11 @@ namespace RushHour2.Citizens.Location
             {
                 CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GettingWet);
 
-                touristAI.FindCloseHotel(citizenId, ref citizen, touristHotelSearchRadius, currentBuildingInstance);
+                var hotel = touristAI.FindCloseHotel(citizenId, ref citizen, touristHotelSearchRadius, currentBuildingInstance);
+                if (hotel != 0)
+                {
+                    touristAI.TryVisit(citizenId, ref citizen, hotel);
+                }
             }
 
             return true;

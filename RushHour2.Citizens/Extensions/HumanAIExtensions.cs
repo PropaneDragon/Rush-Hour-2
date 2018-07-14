@@ -74,16 +74,6 @@ namespace RushHour2.Citizens.Extensions
             return false;
         }
 
-        public static bool GoToSameBuilding(this HumanAI humanAI, uint citizenId, ref Citizen citizen)
-        {
-            if (citizen.IsVisible() && citizen.ValidBuilding() && citizen.IsAtABuilding())
-            {
-                return GoToBuilding(humanAI, citizenId, ref citizen, citizen.GetBuilding(), true);
-            }
-
-            return false;
-        }
-
         public static ushort FindCloseLeisure(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance, Building building)
         {
             return humanAI.FindSomewhereClose(citizenId, ref citizen, distance, building, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure });
