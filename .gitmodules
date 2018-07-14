@@ -2,3 +2,7 @@
 	path = Harmony
 	url = https://github.com/pardeike/Harmony.git
 	branch = master
+[submodule "SimpleJSON"]
+	path = SimpleJSON
+	url = https://github.com/HenrikPoulsen/SimpleJSON.git
+	branch = master
