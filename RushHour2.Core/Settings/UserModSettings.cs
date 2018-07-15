@@ -12,7 +12,7 @@ namespace RushHour2.Core.Settings
     {
         private static bool _justUpdated = false;
         private static UserModSettingsHolder _settingsHolder = new UserModSettingsHolder();
-        private static XmlSerializer Serializer => new XmlSerializer(typeof(UserModSettingsHolder));
+        private static XmlSerializer Serialiser => new XmlSerializer(typeof(UserModSettingsHolder));
 
         public static bool RecentlyUpdated => _justUpdated;
         public static string SaveFileName => $"{Details.BaseModName} Settings.xml";
@@ -58,7 +58,7 @@ namespace RushHour2.Core.Settings
             {
                 using (var saveFile = File.CreateText(SaveFilePath))
                 {
-                    var serialiser = Serializer;
+                    var serialiser = Serialiser;
                     serialiser.Serialize(saveFile, _settingsHolder);
 
                     LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Saved settings to {SaveFilePath}");
@@ -87,7 +87,7 @@ namespace RushHour2.Core.Settings
                 {
                     using (var saveFile = File.OpenRead(SaveFilePath))
                     {
-                        var serialiser = Serializer;
+                        var serialiser = Serialiser;
                         _settingsHolder = serialiser.Deserialize(saveFile) as UserModSettingsHolder;
 
                         LoggingWrapper.Log(LoggingWrapper.LogArea.Hidden, LoggingWrapper.LogType.Message, $"Loaded settings from {SaveFilePath}");

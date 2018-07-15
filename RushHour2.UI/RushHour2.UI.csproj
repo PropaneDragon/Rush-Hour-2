@@ -80,6 +80,10 @@
       <Project>{E16EE6BF-300F-4D6F-AB88-6F6E00FA34EC}</Project>
       <Name>RushHour2.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RushHour2.Localisation\RushHour2.Localisation.csproj">
+      <Project>{55DE2D6A-5CAC-4FC4-9D56-A09938CA694A}</Project>
+      <Name>RushHour2.Localisation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

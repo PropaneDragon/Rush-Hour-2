@@ -1,5 +1,6 @@
 ﻿using ColossalFramework.HTTP;
 using RushHour2.Core.Reporting;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using UnityEngine;
@@ -18,8 +19,10 @@ namespace RushHour2.Localisation.Language
             request.acceptGzip = false;
 
             request.Send();
+
+            var timeout = DateTime.Now + TimeSpan.FromSeconds(5);
             
-            while (!request.isDone)
+            while (!request.isDone || DateTime.Now > timeout)
             {
                 Thread.Sleep(10);
             }
@@ -59,7 +62,7 @@ namespace RushHour2.Localisation.Language
                                 }
                             }
 
-                            return fullString + "[*]";
+                            return fullString + "*";
                         }
                     }
                 }

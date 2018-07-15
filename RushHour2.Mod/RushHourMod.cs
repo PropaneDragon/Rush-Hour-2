@@ -4,6 +4,7 @@ using ICities;
 using RushHour2.Core.Info;
 using RushHour2.Core.Reporting;
 using RushHour2.Core.Settings;
+using RushHour2.Localisation.Language;
 using RushHour2.Mod.Extensions;
 using RushHour2.Patches;
 using RushHour2.UI.MainMenuScreen;
@@ -23,6 +24,10 @@ namespace RushHour2.Mod
             LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has started.");
 
             LoadingManager.instance.m_introLoaded += OnIntroLoaded;
+
+            LocalisationHolder.Load();
+            UserModSettings.Load();
+            LocalisationHolder.ChangeLocalisationFromName(UserModSettings.Settings.Language);
         }
 
         public void OnDisabled()
@@ -36,8 +41,6 @@ namespace RushHour2.Mod
 
         private void OnIntroLoaded()
         {
-            UserModSettings.Load();
-
             CheckForExperimentalVersion();
             CheckForIncompatibilities();
 

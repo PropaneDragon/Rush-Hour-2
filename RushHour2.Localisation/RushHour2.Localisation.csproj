@@ -62,6 +62,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>$(SteamDir)\SteamApps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -72,11 +73,11 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Language\GoogleTranslate.cs" />
+    <Compile Include="Language\LocalisationHolder.cs" />
+    <Compile Include="Language\Localisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Stored\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\RushHour2.Core\RushHour2.Core.csproj">
       <Project>{E16EE6BF-300F-4D6F-AB88-6F6E00FA34EC}</Project>
@@ -89,6 +90,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /v /e /y "$(TargetDir)*.dll" "%25SteamDir%25\SteamApps\workshop\content\255710\1432430887\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /v /e /y "$(TargetDir)*.dll" "%25SteamDir%25\SteamApps\workshop\content\255710\1432430887\"
+xcopy /v /e /y "$(ProjectDir)Languages\*.xml" "%25SteamDir%25\SteamApps\workshop\content\255710\1432430887\Localisations"</PostBuildEvent>
   </PropertyGroup>
 </Project>

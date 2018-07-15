@@ -21,6 +21,9 @@ namespace RushHour2.Core.Settings
         }
 
         [XmlElement]
+        public string Language = "English (GB)";
+
+        [XmlElement]
         public bool Logging_ToFile = true;
 
         [XmlElement]

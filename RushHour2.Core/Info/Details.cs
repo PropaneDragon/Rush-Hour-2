@@ -13,6 +13,7 @@ namespace RushHour2.Core.Info
         public static string BaseModName => "Rush Hour II";
         public static string ModName => BaseModName + (ExperimentalBuild ? " - Development" : "");
         public static string ModDescription => "Implements Rush Hour traffic and improves Citizen simulations.";
+        public static string ModPath => GetModPath();
         public static bool ExperimentalBuild => IsExperimental();
         public static Version Version => CurrentAssembly?.GetName()?.Version ?? new Version();
         public static PluginInfo Info => PluginManager.instance.FindPluginInfo(CurrentAssembly);
@@ -28,6 +29,17 @@ namespace RushHour2.Core.Info
             }
 
             return false;
+        }
+
+        private static string GetModPath()
+        {
+            var info = Info;
+            if (info != null)
+            {
+                return info.modPath;
+            }
+
+            return null;
         }
     }
 }
