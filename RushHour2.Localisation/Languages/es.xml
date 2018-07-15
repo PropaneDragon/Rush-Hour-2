@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Localisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <IsoLanguageCode>en-gb</IsoLanguageCode>
-  <ReadableName>English (GB)</ReadableName>
-  <CanTranslateIfUnavailable>false</CanTranslateIfUnavailable>
+  <IsoLanguageCode>es</IsoLanguageCode>
+  <ReadableName>Español (ES)</ReadableName>
+  <CanTranslateIfUnavailable>true</CanTranslateIfUnavailable>
   <Settings_SaveToDisk>Save to disk</Settings_SaveToDisk>
   <Settings_SaveToDisk_Tooltip>Settings are applied automatically ingame. Clicking this button saves these settings to disk and will be loaded again on a restart.</Settings_SaveToDisk_Tooltip>
   <Settings_Group_Core>Core</Settings_Group_Core>

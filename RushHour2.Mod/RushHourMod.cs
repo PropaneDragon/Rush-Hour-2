@@ -58,11 +58,10 @@ namespace RushHour2.Mod
         {
             if (Details.ExperimentalBuild && UserModSettings.RecentlyUpdated)
             {
-                MessageBoxWrapper.Show(MessageBoxWrapper.MessageType.Warning,
-                    $"{Details.BaseModName} - experimental build",
-                    $"You currently have an experimental build of {Details.BaseModName} running.\n\n" +
-                    $"This build may have bugs and issues, as well as incomplete features as it is intended for testing only. " +
-                    $"Please subscribe to the non-experimental version of the mod if you don't intend on testing {Details.BaseModName}.");
+                var title = string.Format(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.ExperimentalBuild_Title), Details.BaseModName);
+                var description = string.Format(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.ExperimentalBuild_Description), Details.BaseModName);
+
+                MessageBoxWrapper.Show(MessageBoxWrapper.MessageType.Warning, title, description);
             }
         }
 

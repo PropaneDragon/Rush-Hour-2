@@ -15,7 +15,7 @@ namespace RushHour2.Patches.UI
             if (UserModSettings.Settings.Enabled && UserModSettings.Settings.DateTimeBar_Modify)
             {
                 ___m_Value = newVal;
-                ___m_String = ___m_Value.ToString("dddd HH:mm");
+                ___m_String = ___m_Value.ToString(UserModSettings.Settings.Time_24Hour ? "dddd HH:mm" : "ddd hh:mm tt");
 
                 return false;
             }

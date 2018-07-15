@@ -52,6 +52,9 @@ namespace RushHour2.Core.Settings
         public bool DateTimeBar_Modify = true;
 
         [XmlElement]
+        public bool Time_24Hour = true;
+
+        [XmlElement]
         public string DateTimeBar_Format = "dddd HH:mm";
 
         [XmlElement]

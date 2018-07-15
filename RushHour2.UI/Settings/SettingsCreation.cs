@@ -24,9 +24,14 @@ namespace RushHour2.UI.Settings
             {
                 core.AddDropdown(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Core_Language), LocalisationHolder.Localisations.Select(localisation => localisation.ReadableName).ToArray(), LocalisationHolder.CurrentLocalisationIndex, new OnDropdownSelectionChanged(index => UserModSettings.Settings.Language = LocalisationHolder.Localisations[index].ReadableName));
                 core.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Core_Enabled), UserModSettings.Settings.Enabled, new OnCheckChanged(value => UserModSettings.Settings.Enabled = value));
-                core.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Core_ModifyDateTimeBar), UserModSettings.Settings.DateTimeBar_Modify, new OnCheckChanged(value => UserModSettings.Settings.DateTimeBar_Modify = value));
                 core.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Core_ModifyCitizenBehaviour), UserModSettings.Settings.Citizens_Override, new OnCheckChanged(value => UserModSettings.Settings.Citizens_Override = value));
                 core.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Core_ModifyTouristBehaviour), UserModSettings.Settings.Tourists_Override, new OnCheckChanged(value => UserModSettings.Settings.Tourists_Override = value));
+            }
+
+            var time = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Time));
+            {
+                time.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Time_ModifyDateTimeBar), UserModSettings.Settings.DateTimeBar_Modify, new OnCheckChanged(value => UserModSettings.Settings.DateTimeBar_Modify = value));
+                time.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Time_24hrTime), UserModSettings.Settings.Time_24Hour, new OnCheckChanged(value => UserModSettings.Settings.Time_24Hour = value));
             }
 
             var schoolHours = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_School));

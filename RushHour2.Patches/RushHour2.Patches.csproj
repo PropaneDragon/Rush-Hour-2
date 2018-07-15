@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Harmony\Harmony\bin\Debug\net35\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\Program Files (x86)\Steam\SteamApps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
@@ -68,10 +71,6 @@
     <Compile Include="UI\NewUIDateTimeWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Harmony\Harmony\Harmony.csproj">
-      <Project>{C6AFCEDB-8E3D-4289-BEE9-8FE97B0885FB}</Project>
-      <Name>Harmony</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RushHour2.Citizens\RushHour2.Citizens.csproj">
       <Project>{622AEDE5-DF49-4C06-B29A-32B5F5590E17}</Project>
       <Name>RushHour2.Citizens</Name>

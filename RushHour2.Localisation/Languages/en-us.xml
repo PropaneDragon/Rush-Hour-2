@@ -37,4 +37,8 @@
   <Settings_Logging_LogToConsole>Log to console</Settings_Logging_LogToConsole>
   <Settings_Logging_LogToFileInterval>Log to file interval</Settings_Logging_LogToFileInterval>
   <Settings_Logging_LogToFileIntervalFormat>m'm' ss's'</Settings_Logging_LogToFileIntervalFormat>
+  <ExperimentalBuild_Title>{0} - experimental build</ExperimentalBuild_Title>
+  <ExperimentalBuild_Description>You currently have an experimental build of {0} running.
+
+This build may have bugs and issues, as well as incomplete features as it is intended for testing only. Please subscribe to the non-experimental version of the mod if you don't intend on testing {0}.</ExperimentalBuild_Description>
 </Localisation>

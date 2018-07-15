@@ -18,9 +18,12 @@
         public string Settings_Group_Core = "Core";
         public string Settings_Core_Language = "Language";
         public string Settings_Core_Enabled = "Enabled";
-        public string Settings_Core_ModifyDateTimeBar = "Modify the date/time bar to show the time";
         public string Settings_Core_ModifyCitizenBehaviour = "Modify citizen behaviours";
         public string Settings_Core_ModifyTouristBehaviour = "Modify tourist behaviours";
+
+        public string Settings_Group_Time = "Time";
+        public string Settings_Time_ModifyDateTimeBar = "Modify the date/time bar to show the time";
+        public string Settings_Time_24hrTime = "24 hour clock";
 
         public string Settings_Group_School = "School";
         public string Settings_School_StartTime = "Start time";
@@ -53,5 +56,10 @@
         public string Settings_Logging_LogToConsole = "Log to console";
         public string Settings_Logging_LogToFileInterval = "Log to file interval";
         public string Settings_Logging_LogToFileIntervalFormat = "m'm' ss's'";
+
+        public string ExperimentalBuild_Title = "{0} - experimental build";
+        public string ExperimentalBuild_Description = "You currently have an experimental build of {0} running.\n\n" +
+                    "This build may have bugs and issues, as well as incomplete features as it is intended for testing only. " +
+                    "Please subscribe to the non-experimental version of the mod if you don't intend on testing {0}.";
     }
 }
