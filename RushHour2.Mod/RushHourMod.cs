@@ -21,37 +21,49 @@ namespace RushHour2.Mod
 
         public void OnEnabled()
         {
-            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has started.");
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has been enabled.");
 
             LoadingManager.instance.m_introLoaded += OnIntroLoaded;
 
             LocalisationHolder.Load();
             UserModSettings.Load();
             LocalisationHolder.ChangeLocalisationFromName(UserModSettings.Settings.Language);
+
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has finished enabling.");
         }
 
         public void OnDisabled()
         {
-            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has ended.");
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has been disabled.");
 
             PatchManager.UnPatchAll();
             
             LoadingManager.instance.m_introLoaded -= OnIntroLoaded;
+
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has finished disabling.");
         }
 
         private void OnIntroLoaded()
         {
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} is loading post intro.");
+
             CheckForExperimentalVersion();
             CheckForIncompatibilities();
 
             PatchManager.PatchAll();
             SimulationManager.RegisterSimulationManager(new SimulationExtension());
             UpdateText.DisplayIfRequired();
+
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has loaded post intro.");
         }
 
         public void OnSettingsUI(UIHelperBase helper)
         {
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} is creating settings.");
+
             SettingsCreation.Create(helper);
+
+            LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has created settings.");
         }
 
         private static void CheckForExperimentalVersion()
