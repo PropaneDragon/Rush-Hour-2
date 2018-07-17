@@ -3,42 +3,42 @@
   <IsoLanguageCode>zh</IsoLanguageCode>
   <ReadableName>中文 (ZH)</ReadableName>
   <CanTranslateIfUnavailable>true</CanTranslateIfUnavailable>
-  <Settings_SaveToDisk>Save to disk</Settings_SaveToDisk>
-  <Settings_SaveToDisk_Tooltip>Settings are applied automatically ingame. Clicking this button saves these settings to disk and will be loaded again on a restart.</Settings_SaveToDisk_Tooltip>
-  <Settings_Group_Core>Core</Settings_Group_Core>
-  <Settings_Core_Language>Language</Settings_Core_Language>
-  <Settings_Core_Enabled>Enabled</Settings_Core_Enabled>
-  <Settings_Core_ModifyDateTimeBar>Modify the date/time bar to show the time</Settings_Core_ModifyDateTimeBar>
-  <Settings_Core_ModifyCitizenBehaviour>Modify citizen behaviours</Settings_Core_ModifyCitizenBehaviour>
-  <Settings_Core_ModifyTouristBehaviour>Modify tourist behaviours</Settings_Core_ModifyTouristBehaviour>
-  <Settings_Group_School>School</Settings_Group_School>
-  <Settings_School_StartTime>Start time</Settings_School_StartTime>
-  <Settings_School_Duration>Duration</Settings_School_Duration>
-  <Settings_School_DurationFormat>HH'h' mm'm'</Settings_School_DurationFormat>
-  <Settings_Group_University>University</Settings_Group_University>
-  <Settings_University_StartTime>Start time</Settings_University_StartTime>
-  <Settings_University_Duration>Duration</Settings_University_Duration>
-  <Settings_University_DurationFormat>HH'h' mm'm'</Settings_University_DurationFormat>
-  <Settings_Group_Work>University</Settings_Group_Work>
-  <Settings_Work_StartTime>Start time</Settings_Work_StartTime>
-  <Settings_Work_Duration>Duration</Settings_Work_Duration>
-  <Settings_Work_DurationFormat>HH'h' mm'm'</Settings_Work_DurationFormat>
-  <Settings_Work_AllowLeisure>Allow some workers to go to leisure areas after work on Fridays</Settings_Work_AllowLeisure>
-  <Settings_Group_Citizens>Citizens</Settings_Group_Citizens>
-  <Settings_Citizens_ReactToWeather>React to weather</Settings_Citizens_ReactToWeather>
-  <Settings_Group_DangerZone>Danger zone</Settings_Group_DangerZone>
-  <Settings_DangerZone_IgnoreVehiclePercentages>Ignore vehicle percentages when spawning citizens</Settings_DangerZone_IgnoreVehiclePercentages>
-  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>Enabling this will allow more citizens to spawn, however it may cause vehicles to randomly disappear if you are near the maximum allowed vehicles in your city.</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
-  <Settings_DangerZone_EnableMessageBoxes>Enable message boxes</Settings_DangerZone_EnableMessageBoxes>
-  <Settings_DangerZone_EnableMessageBoxes_Tooltip>Disabling this will prevent all {0} message boxes from appearing. This could lead to you missing out on important information.</Settings_DangerZone_EnableMessageBoxes_Tooltip>
-  <Settings_Group_Logging>Logging</Settings_Group_Logging>
-  <Settings_Logging_LogToFile>Log to file</Settings_Logging_LogToFile>
-  <Settings_Logging_LogToDebugPanel>Log to debug panel</Settings_Logging_LogToDebugPanel>
-  <Settings_Logging_LogToConsole>Log to console</Settings_Logging_LogToConsole>
-  <Settings_Logging_LogToFileInterval>Log to file interval</Settings_Logging_LogToFileInterval>
+  <Settings_SaveToDisk>保存设置</Settings_SaveToDisk>
+  <Settings_SaveToDisk_Tooltip>设置将自动应用。点此按钮以将设置保存至磁盘上，并在下次启动时读取。</Settings_SaveToDisk_Tooltip>
+  <Settings_Group_Core>核心</Settings_Group_Core>
+  <Settings_Core_Language>语言</Settings_Core_Language>
+  <Settings_Core_Enabled>启用</Settings_Core_Enabled>
+  <Settings_Core_ModifyDateTimeBar>更改日期/时间栏以显示时间</Settings_Core_ModifyDateTimeBar>
+  <Settings_Core_ModifyCitizenBehaviour>更改市民行为</Settings_Core_ModifyCitizenBehaviour>
+  <Settings_Core_ModifyTouristBehaviour>更改游客行为</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Group_School>学校</Settings_Group_School>
+  <Settings_School_StartTime>开始时间</Settings_School_StartTime>
+  <Settings_School_Duration>持续时间</Settings_School_Duration>
+  <Settings_School_DurationFormat>HH时mm分</Settings_School_DurationFormat>
+  <Settings_Group_University>大学</Settings_Group_University>
+  <Settings_University_StartTime>开始时间</Settings_University_StartTime>
+  <Settings_University_Duration>持续时间</Settings_University_Duration>
+  <Settings_University_DurationFormat>HH时mm分</Settings_University_DurationFormat>
+  <Settings_Group_Work>工作</Settings_Group_Work>
+  <Settings_Work_StartTime>开始时间</Settings_Work_StartTime>
+  <Settings_Work_Duration>持续时间</Settings_Work_Duration>
+  <Settings_Work_DurationFormat>HH时mm分</Settings_Work_DurationFormat>
+  <Settings_Work_AllowLeisure>允许一些上班族在周五下班后去娱乐。</Settings_Work_AllowLeisure>
+  <Settings_Group_Citizens>市民</Settings_Group_Citizens>
+  <Settings_Citizens_ReactToWeather>对天气作出反应</Settings_Citizens_ReactToWeather>
+  <Settings_Group_DangerZone>危险区</Settings_Group_DangerZone>
+  <Settings_DangerZone_IgnoreVehiclePercentages>生成市民时忽略交通工具比例</Settings_DangerZone_IgnoreVehiclePercentages>
+  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>启用此选项将允许生成更多市民，但若城市中交通工具已接近极限，可能导致交通工具随机消失。</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
+  <Settings_DangerZone_EnableMessageBoxes>启用消息框</Settings_DangerZone_EnableMessageBoxes>
+  <Settings_DangerZone_EnableMessageBoxes_Tooltip>禁用此选项将防止出现 {0} 消息框，同时可能使你错过重要信息。</Settings_DangerZone_EnableMessageBoxes_Tooltip>
+  <Settings_Group_Logging>日志</Settings_Group_Logging>
+  <Settings_Logging_LogToFile>写入日志文件</Settings_Logging_LogToFile>
+  <Settings_Logging_LogToDebugPanel>写入debug面板</Settings_Logging_LogToDebugPanel>
+  <Settings_Logging_LogToConsole>写入控制台</Settings_Logging_LogToConsole>
+  <Settings_Logging_LogToFileInterval>写入间隔文件</Settings_Logging_LogToFileInterval>
   <Settings_Logging_LogToFileIntervalFormat>m'm' ss's'</Settings_Logging_LogToFileIntervalFormat>
-  <ExperimentalBuild_Title>{0} - experimental build</ExperimentalBuild_Title>
-  <ExperimentalBuild_Description>You currently have an experimental build of {0} running.
+  <ExperimentalBuild_Title>{0} - 实验版本</ExperimentalBuild_Title>
+  <ExperimentalBuild_Description>你目前在使用 {0} 的实验版本。
 
-This build may have bugs and issues, as well as incomplete features as it is intended for testing only. Please subscribe to the non-experimental version of the mod if you don't intend on testing {0}.</ExperimentalBuild_Description>
+此版本可能有bug或未完成的特性，因为此版本是用于测试的。若不想参与测试 {0}，请订阅此mod的非实验版本。</ExperimentalBuild_Description>
 </Localisation>
