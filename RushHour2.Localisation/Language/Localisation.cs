@@ -22,6 +22,7 @@
         public string Settings_Core_ModifyTouristBehaviour = "Modify tourist behaviours";
 
         public string Settings_Group_Time = "Time";
+        public string Settings_SimulationSpeed = "Simulation speed modifier";
         public string Settings_Time_ModifyDateTimeBar = "Modify the date/time bar to show the time";
         public string Settings_Time_24hrTime = "24 hour clock";
 
@@ -35,7 +36,7 @@
         public string Settings_University_Duration = "Duration";
         public string Settings_University_DurationFormat = "HH'h' mm'm'";
 
-        public string Settings_Group_Work = "University";
+        public string Settings_Group_Work = "Work";
         public string Settings_Work_StartTime = "Start time";
         public string Settings_Work_Duration = "Duration";
         public string Settings_Work_DurationFormat = "HH'h' mm'm'";

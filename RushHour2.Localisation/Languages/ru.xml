@@ -8,9 +8,12 @@
   <Settings_Group_Core>Core</Settings_Group_Core>
   <Settings_Core_Language>Language</Settings_Core_Language>
   <Settings_Core_Enabled>Enabled</Settings_Core_Enabled>
-  <Settings_Core_ModifyDateTimeBar>Modify the date/time bar to show the time</Settings_Core_ModifyDateTimeBar>
   <Settings_Core_ModifyCitizenBehaviour>Modify citizen behaviours</Settings_Core_ModifyCitizenBehaviour>
   <Settings_Core_ModifyTouristBehaviour>Modify tourist behaviours</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Group_Time>Time</Settings_Group_Time>
+  <Settings_SimulationSpeed>Simulation speed modifier</Settings_SimulationSpeed>
+  <Settings_Time_ModifyDateTimeBar>Modify the date/time bar to show the time</Settings_Time_ModifyDateTimeBar>
+  <Settings_Time_24hrTime>24 hour clock</Settings_Time_24hrTime>
   <Settings_Group_School>School</Settings_Group_School>
   <Settings_School_StartTime>Start time</Settings_School_StartTime>
   <Settings_School_Duration>Duration</Settings_School_Duration>
@@ -19,7 +22,6 @@
   <Settings_University_StartTime>Start time</Settings_University_StartTime>
   <Settings_University_Duration>Duration</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'h' mm'm'</Settings_University_DurationFormat>
-  <Settings_Group_Work>University</Settings_Group_Work>
   <Settings_Work_StartTime>Start time</Settings_Work_StartTime>
   <Settings_Work_Duration>Duration</Settings_Work_Duration>
   <Settings_Work_DurationFormat>HH'h' mm'm'</Settings_Work_DurationFormat>
