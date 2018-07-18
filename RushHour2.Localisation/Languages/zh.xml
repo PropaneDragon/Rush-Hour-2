@@ -37,8 +37,8 @@
   <Settings_Logging_LogToConsole>記錄至控制台</Settings_Logging_LogToConsole>
   <Settings_Logging_LogToFileInterval>記錄至文件間隔</Settings_Logging_LogToFileInterval>
   <Settings_Logging_LogToFileIntervalFormat>m'分' ss'秒'</Settings_Logging_LogToFileIntervalFormat>
-  <ExperimentalBuild_Title>{0} - 實驗性版本</ExperimentalBuild_Title>
-  <ExperimentalBuild_Description>Rush Hour II 實驗性版本 {0} 正在運行中。
+  <ExperimentalBuild_Title>{0} - 实验版本</ExperimentalBuild_Title>
+  <ExperimentalBuild_Description>你目前在使用 {0} 的实验版本。
 
-本版本或存在錯誤和問題，以及不完整的功能，因為它僅供測試用途。如果您不打算協助測試 {0} ，請訂閱本模組的正式發行版本</ExperimentalBuild_Description>
+此版本可能有bug或未完成的特性，因为此版本是用于测试的。若不想参与测试 {0}，请订阅此mod的非实验版本。</ExperimentalBuild_Description>
 </Localisation>
