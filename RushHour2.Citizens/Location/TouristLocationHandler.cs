@@ -70,7 +70,7 @@ namespace RushHour2.Citizens.Location
                     return true;
                 }
 
-                var foundHotel = touristAI.FindCloseHotel(citizenId, ref citizen, touristHotelSearchRadius, currentBuildingInstance);
+                var foundHotel = touristAI.FindHotel(citizenId, ref citizen, currentBuildingInstance, touristHotelSearchRadius);
                 if (foundHotel != 0 && simulationManager.m_randomizer.Int32(10) < 8)
                 {
                     var foundHotelInstance = BuildingManager.instance.m_buildings.m_buffer[foundHotel];
@@ -103,15 +103,15 @@ namespace RushHour2.Citizens.Location
 
                     if (randomActivityNumber < 3 || simulationManager.m_currentGameTime.Hour >= 21)
                     {
-                        closeActivity = touristAI.FindCloseLeisure(citizenId, ref citizen, ventureDistance, currentBuildingInstance);
+                        closeActivity = touristAI.FindLeisure(citizenId, ref citizen, currentBuildingInstance, ventureDistance);
                     }
                     else if (randomActivityNumber < 6)
                     {
-                        closeActivity = touristAI.FindClosePark(citizenId, ref citizen, ventureDistance, currentBuildingInstance);
+                        closeActivity = touristAI.FindPark(citizenId, ref citizen, currentBuildingInstance, ventureDistance);
                     }
                     else
                     {
-                        closeActivity = touristAI.FindCloseShop(citizenId, ref citizen, ventureDistance, currentBuildingInstance);
+                        closeActivity = touristAI.FindShop(citizenId, ref citizen, currentBuildingInstance, ventureDistance);
                     }
 
                     if (closeActivity != 0)
@@ -140,7 +140,7 @@ namespace RushHour2.Citizens.Location
             {
                 CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.GettingWet);
 
-                var hotel = touristAI.FindCloseHotel(citizenId, ref citizen, touristHotelSearchRadius, currentBuildingInstance);
+                var hotel = touristAI.FindHotel(citizenId, ref citizen, currentBuildingInstance, touristHotelSearchRadius);
                 if (hotel != 0)
                 {
                     touristAI.TryVisit(citizenId, ref citizen, hotel);

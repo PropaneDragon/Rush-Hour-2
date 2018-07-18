@@ -146,6 +146,7 @@ namespace RushHour2.Citizens.Extensions
 
         public static bool Tired(this Citizen citizen, DateTime time)
         {
+            var timeOfDay = time.TimeOfDay;
             var timeLater = time.AddHours(6);
             var weekendLater = timeLater.DayOfWeek == DayOfWeek.Saturday || timeLater.DayOfWeek == DayOfWeek.Sunday;
             var needsToWorkSoon = !weekendLater && citizen.ValidWorkBuilding();
@@ -161,11 +162,11 @@ namespace RushHour2.Citizens.Extensions
 
             if (ageGroup <= Citizen.AgeGroup.Child)
             {
-                return time.Hour >= 18 + (int)happinessLevel || time.Hour < 6; //Happier they are, the longer they want to stay awake
+                return timeOfDay.TotalHours >= 18 + ((int)happinessLevel / 2f) || timeOfDay.TotalHours < 6; //Happier they are, the longer they want to stay awake
             }
             else if (ageGroup <= Citizen.AgeGroup.Teen)
             {
-                var adjustedHour = time.Hour < 12 ? time.Hour + 24 : time.Hour;
+                var adjustedHour = timeOfDay.TotalHours < 12 ? timeOfDay.TotalHours + 24 : timeOfDay.TotalHours;
 
                 return adjustedHour >= 26 - (int)happinessLevel && adjustedHour < (24 + 6); //Happier they are, the more sleep they get
             }
@@ -173,26 +174,26 @@ namespace RushHour2.Citizens.Extensions
             {
                 if (needsToWorkSoon)
                 {
-                    return time.Hour >= 23 - ((int)happinessLevel / 2d) || time.Hour < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they go to bed and the earlier they wake
+                    return timeOfDay.TotalHours >= 23 - ((int)happinessLevel / 2d) || timeOfDay.TotalHours < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they go to bed and the earlier they wake
                 }
 
-                return time.Hour >= 22 + (((int)happinessLevel / 2d) + (int)wealth) || time.Hour < 10 - ((int)happinessLevel / 1.5d);
+                return timeOfDay.TotalHours >= 22 + (((int)happinessLevel / 2d) + (int)wealth) || timeOfDay.TotalHours < 10 - ((int)happinessLevel / 1.5d);
             }
             else if (ageGroup <= Citizen.AgeGroup.Adult)
             {
                 if (needsToWorkSoon)
                 {
-                    return time.Hour >= 22 || time.Hour < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they wake
+                    return timeOfDay.TotalHours >= 22 || timeOfDay.TotalHours < 7 - ((int)happinessLevel / 2.5d); //Happier they are, the earlier they wake
                 }
 
-                return time.Hour >= 20 + (((int)happinessLevel / 2d) + (int)wealth) || time.Hour < 10 - ((int)happinessLevel / 1.5d);
+                return timeOfDay.TotalHours >= 20 + (((int)happinessLevel / 2d) + (int)wealth) || timeOfDay.TotalHours < 10 - ((int)happinessLevel / 1.5d);
             }
             else if (ageGroup <= Citizen.AgeGroup.Senior)
             {
-                return time.Hour >= 20 + ((int)healthLevel / 2d) || time.Hour < 8 - ((int)healthLevel / 2d); //Unhealthy seniors go to bed earlier and get up later
+                return timeOfDay.TotalHours >= 18 + ((int)healthLevel / 2d) || timeOfDay.TotalHours < 8 - ((int)healthLevel / 2d); //Unhealthy seniors go to bed earlier and get up later
             }
 
-            return time.Hour >= 22 || time.Hour < 5;
+            return timeOfDay.TotalHours >= 22 || timeOfDay.TotalHours < 5;
         }
 
         public static bool GettingWet(this Citizen citizen)

@@ -8,10 +8,11 @@ namespace RushHour2.Citizens.Extensions
         public static bool FindAFunActivity(this ResidentAI residentAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding)
         {
             var visitMonument = SimulationManager.instance.m_randomizer.Int32(10) < 3;
+            var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
+
             if (visitMonument && proximityBuilding != 0)
             {
-                var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
-                var monument = residentAI.FindSomewhereClose(citizenId, ref citizen, BuildingManager.BUILDINGGRID_RESOLUTION * BuildingManager.BUILDINGGRID_CELL_SIZE, proximityBuildingInstance, new[] { ItemClass.Service.Monument }, new[] { ItemClass.SubService.None });
+                var monument = residentAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Monument }, new[] { ItemClass.SubService.None });
                 if (monument != 0)
                 {
                     residentAI.GoToBuilding(citizenId, ref citizen, monument);
@@ -20,12 +21,10 @@ namespace RushHour2.Citizens.Extensions
                 }
             }
 
-            var entertainmentReason = new Traverse(residentAI).Method("GetEntertainmentReason").GetValue<TransferManager.TransferReason>();
-            if (entertainmentReason != TransferManager.TransferReason.None)
+            var foundBuilding = residentAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Beautification | ItemClass.Service.Commercial | ItemClass.Service.Natural | ItemClass.Service.Tourism }, new[] { ItemClass.SubService.None });
+            if (foundBuilding != 0)
             {
-                new Traverse(residentAI).Method("FindVisitPlace", citizenId, proximityBuilding, entertainmentReason);
-
-                CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.AttemptingToGoForEntertainment);
+                residentAI.GoToBuilding(citizenId, ref citizen, foundBuilding);
 
                 return true;
             }
@@ -37,17 +36,17 @@ namespace RushHour2.Citizens.Extensions
         {
             var buildingId = citizen.GetBuilding();
 
-            return residentAI.FindAShop(citizenId, buildingId);
+            return residentAI.FindAShop(citizenId, ref citizen, buildingId);
         }
 
-        public static bool FindAShop(this ResidentAI residentAI, uint citizenId, ushort proximityBuilding)
+        public static bool FindAShop(this ResidentAI residentAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding)
         {
-            var shoppingReason = new Traverse(residentAI).Method("GetShoppingReason").GetValue<TransferManager.TransferReason>();
-            if (shoppingReason != TransferManager.TransferReason.None)
-            {
-                new Traverse(residentAI).Method("FindVisitPlace", citizenId, proximityBuilding, shoppingReason);
+            var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
+            var foundBuilding = residentAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialEco | ItemClass.SubService.CommercialHigh | ItemClass.SubService.CommercialLow });
 
-                CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.AttemptingToGoShopping);
+            if (foundBuilding != 0)
+            {
+                residentAI.GoToBuilding(citizenId, ref citizen, foundBuilding);
 
                 return true;
             }

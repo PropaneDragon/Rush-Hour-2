@@ -1,7 +1,6 @@
 ﻿using ColossalFramework;
 using RushHour2.Citizens.Extensions;
 using RushHour2.Citizens.Reporting;
-using RushHour2.Core.Reporting;
 using RushHour2.Core.Settings;
 using System;
 
@@ -114,7 +113,7 @@ namespace RushHour2.Citizens.Location
                 {
                     var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home, rather than work
 
-                    if (residentAI.FindAShop(citizenId, proximityBuilding))
+                    if (residentAI.FindAShop(citizenId, ref citizen, proximityBuilding))
                     {
                         return true;
                     }
@@ -141,7 +140,7 @@ namespace RushHour2.Citizens.Location
                             var goOut = simulationManager.m_randomizer.Int32(10) <= 6;
                             if (goOut)
                             {
-                                var allLeisure = residentAI.FindAllClosePlaces(citizenId, ref citizen, BuildingManager.BUILDINGGRID_CELL_SIZE, citizen.WorkBuildingInstance().Value.m_position, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure });
+                                var allLeisure = residentAI.FindAllClosePlaces(citizenId, ref citizen, citizen.WorkBuildingInstance().Value.m_position, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure }, BuildingManager.BUILDINGGRID_CELL_SIZE);
                                 var currentBuildingInt = (int)citizen.GetBuilding();
                                 var closest = -1;
                                 var chosenBuilding = (ushort)0;
@@ -234,7 +233,7 @@ namespace RushHour2.Citizens.Location
                 if (ageGroup <= Citizen.AgeGroup.Child || ageGroup > Citizen.AgeGroup.Adult)
                 {
                     var ventureDistance = BuildingManager.BUILDINGGRID_CELL_SIZE * ((int)happinessLevel + 1);
-                    var closeActivity = randomActivityNumber < 50 ? residentAI.FindClosePark(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value) : residentAI.FindCloseShop(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value);
+                    var closeActivity = randomActivityNumber < 50 ? residentAI.FindPark(citizenId, ref citizen, currentBuildingInstance.Value, ventureDistance) : residentAI.FindShop(citizenId, ref citizen, currentBuildingInstance.Value, ventureDistance);
 
                     if (closeActivity != 0)
                     {
@@ -256,15 +255,15 @@ namespace RushHour2.Citizens.Location
 
                         if (randomActivityNumber < 26 || simulationManager.m_currentGameTime.Hour >= 21)
                         {
-                            closeActivity = residentAI.FindCloseLeisure(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value);
+                            closeActivity = residentAI.FindLeisure(citizenId, ref citizen, currentBuildingInstance.Value, ventureDistance);
                         }
                         else if (randomActivityNumber < 52)
                         {
-                            closeActivity = residentAI.FindClosePark(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value);
+                            closeActivity = residentAI.FindPark(citizenId, ref citizen, currentBuildingInstance.Value, ventureDistance);
                         }
                         else
                         {
-                            closeActivity = residentAI.FindCloseShop(citizenId, ref citizen, ventureDistance, currentBuildingInstance.Value);
+                            closeActivity = residentAI.FindShop(citizenId, ref citizen, currentBuildingInstance.Value, ventureDistance);
                         }
 
                         if (closeActivity != 0)

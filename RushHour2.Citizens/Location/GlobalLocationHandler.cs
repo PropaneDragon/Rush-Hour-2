@@ -32,7 +32,7 @@ namespace RushHour2.Citizens.Location
 
         private static string[] _globalBadBuildingNames = new[]
         {
-            "parking", "carpark", "car_park", "parking_lot", "parking lot", "car park"
+            "parking", "carpark", "parking lot", "car park"
         };
 
         public static bool ShouldMove()
@@ -52,6 +52,18 @@ namespace RushHour2.Citizens.Location
             return randomPercentage > (percentageCitizens > percentageVehicles ? percentageCitizens : percentageVehicles);
         }
 
+        public static bool GoodBuildingToVisit(ushort buildingId)
+        {
+            if (buildingId != 0)
+            {
+                var building = BuildingManager.instance.m_buildings.m_buffer[buildingId];
+
+                return GoodBuildingToVisit(ref building);
+            }
+
+            return false;
+        }
+
         public static bool GoodBuildingToVisit(ushort buildingId, ref Citizen citizen)
         {
             if (buildingId != 0)
@@ -64,23 +76,11 @@ namespace RushHour2.Citizens.Location
             return false;
         }
 
-        public static bool GoodBuildingToVisit(ref Building building, ref Citizen citizen)
+        public static bool GoodBuildingToVisit(ref Building building)
         {
             var info = building.Info;
             var @class = info.m_class;
-            var ageGroup = Citizen.GetAgeGroup(citizen.Age);
             var buildingName = info.name.ToLower();
-
-            if (_badBuildingNames.ContainsKey(ageGroup))
-            {
-                foreach (var badName in _badBuildingNames[ageGroup])
-                {
-                    if (buildingName.Contains(badName))
-                    {
-                        return false;
-                    }
-                }
-            }
 
             foreach (var globalBadName in _globalBadBuildingNames)
             {
@@ -91,6 +91,47 @@ namespace RushHour2.Citizens.Location
             }
 
             return true;
+        }
+
+        public static bool GoodBuildingToVisit(ref Building building, ref Citizen citizen)
+        {
+            if (GoodBuildingToVisit(ref building))
+            {
+                var info = building.Info;
+                var @class = info.m_class;
+                var ageGroup = Citizen.GetAgeGroup(citizen.Age);
+                var buildingName = info.name.ToLower();
+
+                if (_badBuildingNames.ContainsKey(ageGroup))
+                {
+                    foreach (var badName in _badBuildingNames[ageGroup])
+                    {
+                        if (buildingName.Contains(badName))
+                        {
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public static List<ushort> FilterAcceptableBuildingsForCitizen(ref Citizen citizen, List<ushort> originalList)
+        {
+            List<ushort> filteredList = new List<ushort>();
+
+            foreach (var buildingId in originalList)
+            {
+                if (GoodBuildingToVisit(buildingId, ref citizen))
+                {
+                    filteredList.Add(buildingId);
+                }
+            }
+
+            return filteredList;
         }
     }
 }
