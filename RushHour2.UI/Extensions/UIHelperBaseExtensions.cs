@@ -6,6 +6,18 @@ namespace RushHour2.UI.Extensions
 {
     public static class UIHelperBaseExtensions
     {
+        public static object AddSliderWithTooltip(this UIHelperBase helperBase, string text, float min, float max, float step, float defaultValue, OnValueChanged eventCallback, Func<float, string> tooltipFunction)
+        {
+            var sliderObject = helperBase.AddSlider(text, min, max, step, defaultValue, eventCallback);
+            if (sliderObject is UISlider slider)
+            {
+                slider.eventValueChanged += (component, eventParam) => UpdateTooltipUsingFunction(component, tooltipFunction);
+                slider.eventTooltipHover += (component, value) => UpdateTooltipUsingFunction(component, tooltipFunction);
+            }
+
+            return sliderObject;
+        }
+
         public static object AddTimeSpanHoursSlider(this UIHelperBase helperBase, string text, TimeSpan minimum, TimeSpan maximum, TimeSpan defaultValue, OnValueChanged valueChanged, string format = "HH:mm")
         {
             var resolution = (1f / 60f) * 5f;
@@ -32,14 +44,29 @@ namespace RushHour2.UI.Extensions
 
         private static void UpdateTooltipForTimeSpan(UIComponent component, Func<float, TimeSpan> valueToTimeSpanFunction, string format)
         {
-            if (component is UISlider slider)
+            UpdateTooltipUsingFunction(component, value =>
             {
-                var currentTime = valueToTimeSpanFunction.Invoke(slider.value);
+                var currentTime = valueToTimeSpanFunction.Invoke(value);
                 var temporaryDate = DateTime.Today.Add(currentTime);
 
-                slider.tooltip = temporaryDate.ToString(format);
-                slider.Update();
-                slider.RefreshTooltip();
+                return temporaryDate.ToString(format);
+            });
+        }
+
+        private static void UpdateTooltipUsingFunction(UIComponent component, Func<float, string> tooltipFunction)
+        {
+            var tooltipValue = "";
+
+            if (component is UISlider slider)
+            {
+                tooltipValue = tooltipFunction.Invoke(slider.value);
+            }
+
+            if (tooltipValue != null)
+            {
+                component.tooltip = tooltipValue;
+                component.Update();
+                component.RefreshTooltip();
             }
         }
     }

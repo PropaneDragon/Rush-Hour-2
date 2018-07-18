@@ -30,6 +30,12 @@ namespace RushHour2.UI.Settings
 
             var time = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Time));
             {
+                time.AddSliderWithTooltip(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_SimulationSpeed), 0, 5, 1, 5f - (float)Math.Log((1f / UserModSettings.Settings.Simulation_Speed), 2), new OnValueChanged(value => UserModSettings.Settings.Simulation_Speed = 1f / (float)Math.Pow(2, (5 - value))), value =>
+                {
+                    var speed = Math.Pow(2, (5 - value));
+                    return speed > 1 ? $"1/{speed}x" : $"{1 / speed}x";
+                });
+                time.AddSpace(5);
                 time.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Time_ModifyDateTimeBar), UserModSettings.Settings.DateTimeBar_Modify, new OnCheckChanged(value => UserModSettings.Settings.DateTimeBar_Modify = value));
                 time.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Time_24hrTime), UserModSettings.Settings.Time_24Hour, new OnCheckChanged(value => UserModSettings.Settings.Time_24Hour = value));
             }
