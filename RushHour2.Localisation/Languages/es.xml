@@ -22,6 +22,7 @@
   <Settings_University_StartTime>Start time</Settings_University_StartTime>
   <Settings_University_Duration>Duration</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'h' mm'm'</Settings_University_DurationFormat>
+  <Settings_Group_Work>Work</Settings_Group_Work>
   <Settings_Work_StartTime>Start time</Settings_Work_StartTime>
   <Settings_Work_Duration>Duration</Settings_Work_Duration>
   <Settings_Work_DurationFormat>HH'h' mm'm'</Settings_Work_DurationFormat>
