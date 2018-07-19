@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Localisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <IsoLanguageCode>zh</IsoLanguageCode>
+  <IsoLanguageCode>zh-cn</IsoLanguageCode>
   <ReadableName>简体中文 (ZH)</ReadableName>
   <CanTranslateIfUnavailable>true</CanTranslateIfUnavailable>
   <Settings_SaveToDisk>保存设置</Settings_SaveToDisk>
