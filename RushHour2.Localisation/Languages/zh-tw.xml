@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Localisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsoLanguageCode>zh-tw</IsoLanguageCode>
+  <ReadableName>正體中文 (ZH)</ReadableName>
+  <CanTranslateIfUnavailable>true</CanTranslateIfUnavailable>
+  <Settings_SaveToDisk>保存至磁碟</Settings_SaveToDisk>
+  <Settings_SaveToDisk_Tooltip>設定將自動應用於遊戲中。單擊此按鈕可將這些設置保存到磁碟，並在重新啟動時再次加載。</Settings_SaveToDisk_Tooltip>
+  <Settings_Group_Core>核心設定</Settings_Group_Core>
+  <Settings_Core_Language>語言</Settings_Core_Language>
+  <Settings_Core_Enabled>啟用</Settings_Core_Enabled>
+  <Settings_Core_ModifyDateTimeBar>修改日期/時間欄以顯示時間</Settings_Core_ModifyDateTimeBar>
+  <Settings_Core_ModifyCitizenBehaviour>修改市民的行為</Settings_Core_ModifyCitizenBehaviour>
+  <Settings_Core_ModifyTouristBehaviour>修改遊客的行為</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Group_School>學校</Settings_Group_School>
+  <Settings_School_StartTime>學校上課時間</Settings_School_StartTime>
+  <Settings_School_Duration>留校時間</Settings_School_Duration>
+  <Settings_School_DurationFormat>HH'小時' mm'分鐘'</Settings_School_DurationFormat>
+  <Settings_Group_University>大學</Settings_Group_University>
+  <Settings_University_StartTime>大學上課時間</Settings_University_StartTime>
+  <Settings_University_Duration>留校時間</Settings_University_Duration>
+  <Settings_University_DurationFormat>HH'小時' mm'分鐘'</Settings_University_DurationFormat>+ 
+  <Settings_Group_Work>上班</Settings_Group_Work>
+  <Settings_Work_StartTime>工作開始時間</Settings_Work_StartTime>
+  <Settings_Work_Duration>留在公司的時數</Settings_Work_Duration>
+  <Settings_Work_DurationFormat>HH'小時' mm'分鐘'</Settings_Work_DurationFormat>
+  <Settings_Work_AllowLeisure>允許一些上班族在週五下班後前往休閒區進行休閒活動。</Settings_Work_AllowLeisure>
+  <Settings_Group_Citizens>市民</Settings_Group_Citizens>
+  <Settings_Citizens_ReactToWeather>市民會根據天氣作出反應</Settings_Citizens_ReactToWeather>
+  <Settings_Group_DangerZone>請謹慎設定以下選項</Settings_Group_DangerZone>
+  <Settings_DangerZone_IgnoreVehiclePercentages>產出市民時無視車輛百分比</Settings_DangerZone_IgnoreVehiclePercentages>
+  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>啟用此功能會產出更多市民，但當你接近地圖内車輛數量最大值時，或會導致車輛隨機消失。</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
+  <Settings_DangerZone_EnableMessageBoxes>啟用消息框</Settings_DangerZone_EnableMessageBoxes>
+  <Settings_DangerZone_EnableMessageBoxes_Tooltip>禁用此功能將阻止顯示所有 {0} 消息框。這可能會導致您錯過重要的信息。</Settings_DangerZone_EnableMessageBoxes_Tooltip>
+  <Settings_Group_Logging>記錄</Settings_Group_Logging>
+  <Settings_Logging_LogToFile>生成記錄檔案</Settings_Logging_LogToFile>
+  <Settings_Logging_LogToDebugPanel>記錄至調試面板</Settings_Logging_LogToDebugPanel>
+  <Settings_Logging_LogToConsole>記錄至控制台</Settings_Logging_LogToConsole>
+  <Settings_Logging_LogToFileInterval>記錄至文件間隔</Settings_Logging_LogToFileInterval>
+  <Settings_Logging_LogToFileIntervalFormat>m'分' ss'秒'</Settings_Logging_LogToFileIntervalFormat>
+  <ExperimentalBuild_Title>{0} - 實驗性版本</ExperimentalBuild_Title>
+  <ExperimentalBuild_Description>Rush Hour II 實驗性版本 {0} 正在運行中。
+
+本版本或存在錯誤和問題，以及不完整的功能，因為它僅供測試用途。如果您不打算協助測試 {0} ，請訂閱本模組的正式發行版本</ExperimentalBuild_Description>
+</Localisation>
