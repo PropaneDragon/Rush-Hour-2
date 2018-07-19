@@ -5,14 +5,26 @@ namespace RushHour2.Citizens.Extensions
 {
     public static class TouristAIExtensions
     {
-        public static bool FindAFunActivity(this TouristAI touristAI, uint citizenId, ushort proximityBuilding)
+        public static bool FindAFunActivity(this TouristAI touristAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding)
         {
-            var entertainmentReason = new Traverse(touristAI).Method("GetEntertainmentReason").GetValue<TransferManager.TransferReason>();
-            if (entertainmentReason != TransferManager.TransferReason.None)
-            {
-                new Traverse(touristAI).Method("FindVisitPlace", citizenId, proximityBuilding, entertainmentReason);
+            var visitMonument = SimulationManager.instance.m_randomizer.Int32(10) < 3;
+            var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
 
-                CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.AttemptingToGoForEntertainment);
+            if (visitMonument && proximityBuilding != 0)
+            {
+                var monument = touristAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Monument }, new[] { ItemClass.SubService.None });
+                if (monument != 0)
+                {
+                    touristAI.GoToBuilding(citizenId, ref citizen, monument);
+
+                    return true;
+                }
+            }
+
+            var foundBuilding = touristAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Beautification, ItemClass.Service.Commercial, ItemClass.Service.Natural, ItemClass.Service.Tourism }, new[] { ItemClass.SubService.None });
+            if (foundBuilding != 0)
+            {
+                touristAI.GoToBuilding(citizenId, ref citizen, foundBuilding);
 
                 return true;
             }
@@ -24,17 +36,17 @@ namespace RushHour2.Citizens.Extensions
         {
             var buildingId = citizen.GetBuilding();
 
-            return touristAI.FindAShop(citizenId, buildingId);
+            return touristAI.FindAShop(citizenId, ref citizen, buildingId);
         }
 
-        public static bool FindAShop(this TouristAI touristAI, uint citizenId, ushort proximityBuilding)
+        public static bool FindAShop(this TouristAI touristAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding)
         {
-            var shoppingReason = new Traverse(touristAI).Method("GetShoppingReason").GetValue<TransferManager.TransferReason>();
-            if (shoppingReason != TransferManager.TransferReason.None)
-            {
-                new Traverse(touristAI).Method("FindVisitPlace", citizenId, proximityBuilding, shoppingReason);
+            var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
+            var foundBuilding = touristAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialEco, ItemClass.SubService.CommercialHigh, ItemClass.SubService.CommercialLow });
 
-                CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.AttemptingToGoShopping);
+            if (foundBuilding != 0)
+            {
+                touristAI.GoToBuilding(citizenId, ref citizen, foundBuilding);
 
                 return true;
             }

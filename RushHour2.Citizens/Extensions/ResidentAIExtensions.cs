@@ -21,7 +21,7 @@ namespace RushHour2.Citizens.Extensions
                 }
             }
 
-            var foundBuilding = residentAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Beautification | ItemClass.Service.Commercial | ItemClass.Service.Natural | ItemClass.Service.Tourism }, new[] { ItemClass.SubService.None });
+            var foundBuilding = residentAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Beautification, ItemClass.Service.Commercial, ItemClass.Service.Natural, ItemClass.Service.Tourism }, new[] { ItemClass.SubService.None });
             if (foundBuilding != 0)
             {
                 residentAI.GoToBuilding(citizenId, ref citizen, foundBuilding);
@@ -42,7 +42,7 @@ namespace RushHour2.Citizens.Extensions
         public static bool FindAShop(this ResidentAI residentAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding)
         {
             var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
-            var foundBuilding = residentAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialEco | ItemClass.SubService.CommercialHigh | ItemClass.SubService.CommercialLow });
+            var foundBuilding = residentAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialEco, ItemClass.SubService.CommercialHigh, ItemClass.SubService.CommercialLow });
 
             if (foundBuilding != 0)
             {
