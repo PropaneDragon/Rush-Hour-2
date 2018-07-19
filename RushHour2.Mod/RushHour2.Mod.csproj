@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Extensions\LoadingExtension.cs" />
     <Compile Include="Extensions\SimulationExtension.cs" />
+    <Compile Include="Legacy\CitizenCustomMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RushHourMod.cs" />
   </ItemGroup>
