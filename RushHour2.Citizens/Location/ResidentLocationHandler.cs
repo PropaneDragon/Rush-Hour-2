@@ -16,7 +16,7 @@ namespace RushHour2.Citizens.Location
 
                 if (citizen.IsAtABuilding())
                 {
-                    ProcessInBuilding(ref residentAI, citizenId, ref citizen);
+                    return ProcessInBuilding(ref residentAI, citizenId, ref citizen);
                 }
                 else if (citizen.IsMoving())
                 {
@@ -41,19 +41,19 @@ namespace RushHour2.Citizens.Location
 
                 if (citizen.AtHome())
                 {
-                    return ProcessAtHome(ref residentAI, citizenId, ref citizen);
+                    ProcessAtHome(ref residentAI, citizenId, ref citizen);
                 }
                 else if (citizen.AtWork())
                 {
-                    return ProcessAtWork(ref residentAI, citizenId, ref citizen);
+                    ProcessAtWork(ref residentAI, citizenId, ref citizen);
                 }
                 else if (citizen.IsVisiting())
                 {
-                    return ProcessVisiting(ref residentAI, citizenId, ref citizen);
+                    ProcessVisiting(ref residentAI, citizenId, ref citizen);
                 }
             }
 
-            return false;
+            return true;
         }
 
         private static bool ProcessVisiting(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)

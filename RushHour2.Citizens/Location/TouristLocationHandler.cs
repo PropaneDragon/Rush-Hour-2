@@ -1,7 +1,6 @@
 ﻿using ColossalFramework;
 using RushHour2.Citizens.Extensions;
 using RushHour2.Citizens.Reporting;
-using RushHour2.Core.Reporting;
 using System;
 
 namespace RushHour2.Citizens.Location
@@ -41,11 +40,11 @@ namespace RushHour2.Citizens.Location
 
                 if (citizen.IsVisiting())
                 {
-                    return ProcessVisiting(ref touristAI, citizenId, ref citizen);
+                    ProcessVisiting(ref touristAI, citizenId, ref citizen);
                 }
             }
 
-            return false;
+            return true;
         }
 
         private static bool ProcessVisiting(ref TouristAI touristAI, uint citizenId, ref Citizen citizen)
@@ -154,7 +153,7 @@ namespace RushHour2.Citizens.Location
         {
             CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Moving);
 
-            return citizen.m_vehicle != 0 || citizen.IsVisible();
+            return false;
         }
     }
 }
