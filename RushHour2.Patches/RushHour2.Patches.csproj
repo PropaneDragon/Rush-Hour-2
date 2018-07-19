@@ -84,6 +84,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /v /e /y "$(TargetDir)*.dll" "%25SteamDir%25\SteamApps\workshop\content\255710\1432430887\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /v /e /y "$(TargetDir)*.dll" "%25SteamDir%25\SteamApps\workshop\content\255710\1432430887\"
+xcopy /v /e /y "$(TargetDir)*.dll" "%25SteamDir%25\SteamApps\workshop\content\255710\605590542\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
