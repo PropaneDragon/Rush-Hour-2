@@ -97,7 +97,7 @@ namespace RushHour2.Citizens.Extensions
             return humanAI.FindSomewhere(citizenId, ref citizen, building, new[] { ItemClass.Service.Beautification, ItemClass.Service.Monument, ItemClass.Service.Natural }, new[] { ItemClass.SubService.None }, distance);
         }
 
-        public static bool FindAFunActivity(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding, float distance)
+        public static bool GoToAFunActivity(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding, float distance)
         {
             var visitMonument = SimulationManager.instance.m_randomizer.Int32(10) < (humanAI is TouristAI ? 6 : 2);
             var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
@@ -124,14 +124,14 @@ namespace RushHour2.Citizens.Extensions
             return false;
         }
 
-        public static bool FindAShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance)
+        public static bool GoToAShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance)
         {
             var buildingId = citizen.GetBuilding();
 
-            return humanAI.FindAShop(citizenId, ref citizen, buildingId);
+            return humanAI.GoToAShop(citizenId, ref citizen, buildingId, distance);
         }
 
-        public static bool FindAShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding, float distance)
+        public static bool GoToAShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding, float distance)
         {
             var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
             var foundBuilding = humanAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialEco, ItemClass.SubService.CommercialHigh, ItemClass.SubService.CommercialLow }, distance);

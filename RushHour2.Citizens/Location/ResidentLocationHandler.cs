@@ -113,7 +113,7 @@ namespace RushHour2.Citizens.Location
                 {
                     var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home, rather than work
 
-                    if (residentAI.FindAShop(citizenId, ref citizen, proximityBuilding, BuildingManager.BUILDINGGRID_CELL_SIZE * 2))
+                    if (residentAI.GoToAShop(citizenId, ref citizen, proximityBuilding, BuildingManager.BUILDINGGRID_CELL_SIZE * 2))
                     {
                         return true;
                     }
@@ -165,7 +165,7 @@ namespace RushHour2.Citizens.Location
                     var shouldGoSomewhereElseFirst = simulationManager.m_randomizer.Int32(10) <= 3 + (int)happinessLevel;
                     if (shouldGoSomewhereElseFirst)
                     {
-                        if (residentAI.FindAFunActivity(citizenId, ref citizen, citizen.WorkBuilding(), BuildingManager.BUILDINGGRID_CELL_SIZE))
+                        if (residentAI.GoToAFunActivity(citizenId, ref citizen, citizen.WorkBuilding(), BuildingManager.BUILDINGGRID_CELL_SIZE))
                         {
                             return true;
                         }
@@ -200,7 +200,7 @@ namespace RushHour2.Citizens.Location
             {
                 var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home, rather than work
 
-                if (residentAI.FindAShop(citizenId, ref citizen, proximityBuilding, BuildingManager.BUILDINGGRID_CELL_SIZE * 2))
+                if (residentAI.GoToAShop(citizenId, ref citizen, proximityBuilding, BuildingManager.BUILDINGGRID_CELL_SIZE * 2))
                 {
                     return true;
                 }
@@ -287,11 +287,11 @@ namespace RushHour2.Citizens.Location
 
                         if (goShopping)
                         {
-                            residentAI.FindAShop(citizenId, ref citizen, extendedVentureDistance);
+                            residentAI.GoToAShop(citizenId, ref citizen, extendedVentureDistance);
                         }
                         else
                         {
-                            residentAI.FindAFunActivity(citizenId, ref citizen, currentBuilding, extendedVentureDistance);
+                            residentAI.GoToAFunActivity(citizenId, ref citizen, currentBuilding, extendedVentureDistance);
                         }
                     }
 

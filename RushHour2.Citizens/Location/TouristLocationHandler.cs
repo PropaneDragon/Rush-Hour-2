@@ -129,11 +129,11 @@ namespace RushHour2.Citizens.Location
 
                     if (goShopping)
                     {
-                        touristAI.FindAShop(citizenId, ref citizen, extendedVentureDistance);
+                        touristAI.GoToAShop(citizenId, ref citizen, extendedVentureDistance);
                     }
                     else
                     {
-                        touristAI.FindAFunActivity(citizenId, ref citizen, citizen.GetBuilding(), extendedVentureDistance);
+                        touristAI.GoToAFunActivity(citizenId, ref citizen, citizen.GetBuilding(), extendedVentureDistance);
                     }
                 }
             }
