@@ -1,4 +1,5 @@
 ﻿using ColossalFramework.Math;
+using RushHour2.Buildings.Extensions;
 using RushHour2.Core.Settings;
 using RushHour2.Patches.HarmonyLocal;
 using System;
@@ -20,7 +21,7 @@ namespace RushHour2.Patches.AI
                 var weatherManager = WeatherManager.instance;
                 var rainPercentage = weatherManager.m_currentRain * 100f;
 
-                if (data.m_eventIndex == 0 && rainPercentage > 0.5)
+                if (data.m_eventIndex == 0 && data.Enterable() && rainPercentage > 0.5 && UserModSettings.Settings.Citizens_ReactToWeather)
                 {
                     __instance.CalculateSpawnPosition(buildingID, ref data, ref randomizer, info, out var spawnPosition, out var spawnTarget);
 

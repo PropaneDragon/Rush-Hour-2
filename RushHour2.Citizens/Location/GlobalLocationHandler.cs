@@ -1,4 +1,5 @@
-﻿using RushHour2.Core.Settings;
+﻿using RushHour2.Buildings.Extensions;
+using RushHour2.Core.Settings;
 using System.Collections.Generic;
 
 namespace RushHour2.Citizens.Location
@@ -78,19 +79,24 @@ namespace RushHour2.Citizens.Location
 
         public static bool GoodBuildingToVisit(ref Building building)
         {
-            var info = building.Info;
-            var @class = info.m_class;
-            var buildingName = info.name.ToLower();
-
-            foreach (var globalBadName in _globalBadBuildingNames)
+            if (building.Visitable())
             {
-                if (buildingName.Contains(globalBadName))
+                var info = building.Info;
+                var @class = info.m_class;
+                var buildingName = info.name.ToLower();
+
+                foreach (var globalBadName in _globalBadBuildingNames)
                 {
-                    return false;
+                    if (buildingName.Contains(globalBadName))
+                    {
+                        return false;
+                    }
                 }
+
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public static bool GoodBuildingToVisit(ref Building building, ref Citizen citizen)
