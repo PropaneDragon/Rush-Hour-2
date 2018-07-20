@@ -1,5 +1,5 @@
-﻿using ColossalFramework;
-using RushHour2.Core.Reporting;
+﻿using RushHour2.Core.Reporting;
+using RushHour2.Core.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,9 +48,12 @@ namespace RushHour2.Citizens.Reporting
 
         public static void LogActivity(uint citizenId, Activity activity)
         {
-            lock (_logLockObject)
+            if (UserModSettings.Settings.Log_Citizen_Status)
             {
-                _activitiesLog[citizenId] = activity;
+                lock (_logLockObject)
+                {
+                    _activitiesLog[citizenId] = activity;
+                }
             }
         }
 
@@ -66,34 +69,37 @@ namespace RushHour2.Citizens.Reporting
 
         public static void WriteLog(LoggingWrapper.LogArea logArea)
         {
-            lock (_logLockObject)
+            if (UserModSettings.Settings.Log_Citizen_Status)
             {
-                var activityValues = Enum.GetValues(typeof(Activity));
-                var output = new List<string>();
-                var citizenManager = CitizenManager.instance;
-                var vehicleCount = VehicleManager.instance.m_vehicleCount;
-                var citizenCount = CitizenManager.instance.m_instanceCount;
-                var percentageVehicles = (vehicleCount / (double)VehicleManager.MAX_VEHICLE_COUNT) * 100d;
-                var percentageCitizens = (citizenCount / (double)CitizenManager.MAX_CITIZEN_COUNT) * 100d;
-
-                foreach (Activity activity in activityValues)
+                lock (_logLockObject)
                 {
-                    var citizensForActivity = _activitiesLog.Where(citizenLog => citizenLog.Value == activity);
-                    var agesForActivity = citizensForActivity.GroupBy(citizenLog => Citizen.GetAgeGroup(citizenManager.m_citizens.m_buffer[citizenLog.Key].Age));
-                    var ageOutput = new List<string>();
-                    var total = 0;
+                    var activityValues = Enum.GetValues(typeof(Activity));
+                    var output = new List<string>();
+                    var citizenManager = CitizenManager.instance;
+                    var vehicleCount = VehicleManager.instance.m_vehicleCount;
+                    var citizenCount = CitizenManager.instance.m_instanceCount;
+                    var percentageVehicles = (vehicleCount / (double)VehicleManager.MAX_VEHICLE_COUNT) * 100d;
+                    var percentageCitizens = (citizenCount / (double)CitizenManager.MAX_CITIZEN_COUNT) * 100d;
 
-                    foreach (var ageForActivity in agesForActivity)
+                    foreach (Activity activity in activityValues)
                     {
-                        ageOutput.Add($"[{ageForActivity.Count()} {ageForActivity.Key}]");
+                        var citizensForActivity = _activitiesLog.Where(citizenLog => citizenLog.Value == activity);
+                        var agesForActivity = citizensForActivity.GroupBy(citizenLog => Citizen.GetAgeGroup(citizenManager.m_citizens.m_buffer[citizenLog.Key].Age));
+                        var ageOutput = new List<string>();
+                        var total = 0;
 
-                        total += ageForActivity.Count();
+                        foreach (var ageForActivity in agesForActivity)
+                        {
+                            ageOutput.Add($"[{ageForActivity.Count()} {ageForActivity.Key}]");
+
+                            total += ageForActivity.Count();
+                        }
+
+                        output.Add($"{activity.ToString()}: {string.Join(" ", ageOutput.ToArray())} (total: {total})");
                     }
-                    
-                    output.Add($"{activity.ToString()}: {string.Join(" ", ageOutput.ToArray())} (total: {total})");
-                }
 
-                LoggingWrapper.Log(logArea, LoggingWrapper.LogType.Message, $"Current activities: \n{string.Join("\n", output.ToArray())}\nCitizen instances: {percentageCitizens}%, Vehicle instances: {percentageVehicles}%");
+                    LoggingWrapper.Log(logArea, LoggingWrapper.LogType.Message, $"Current activities: \n{string.Join("\n", output.ToArray())}\nCitizen instances: {percentageCitizens}%, Vehicle instances: {percentageVehicles}%");
+                }
             }
         }
     }

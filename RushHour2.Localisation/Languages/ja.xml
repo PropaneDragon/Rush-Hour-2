@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Localisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsoLanguageCode>ja</IsoLanguageCode>
+  <ReadableName>日本語</ReadableName>
+  <CanTranslateIfUnavailable>false</CanTranslateIfUnavailable>
+  <Settings_SaveToDisk>ディスクに保存</Settings_SaveToDisk>
+  <Settings_SaveToDisk_Tooltip>設定は自動的にゲームに適用されます。このボタンをクリックすると、設定がディスクに保存され、ゲームを起動する度に読み込まれます。</Settings_SaveToDisk_Tooltip>
+  <Settings_Group_Core>コア</Settings_Group_Core>
+  <Settings_Core_Language>言語</Settings_Core_Language>
+  <Settings_Core_Enabled>有効にする</Settings_Core_Enabled>
+  <Settings_Core_ModifyCitizenBehaviour>市民の行動を変更する</Settings_Core_ModifyCitizenBehaviour>
+  <Settings_Core_ModifyTouristBehaviour>観光客の行動を変更する</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Group_Time>時間</Settings_Group_Time>
+  <Settings_SimulationSpeed>シミュレーション速度の調整</Settings_SimulationSpeed>
+  <Settings_Time_ModifyDateTimeBar>日付／時間バーを変更して時刻を表示する</Settings_Time_ModifyDateTimeBar>
+  <Settings_Time_24hrTime>24 時間表記</Settings_Time_24hrTime>
+  <Settings_Group_School>学校</Settings_Group_School>
+  <Settings_School_StartTime>開始時刻</Settings_School_StartTime>
+  <Settings_School_Duration>時間の長さ</Settings_School_Duration>
+  <Settings_School_DurationFormat>HH'時' mm'分'</Settings_School_DurationFormat>
+  <Settings_Group_University>大学</Settings_Group_University>
+  <Settings_University_StartTime>開始時刻</Settings_University_StartTime>
+  <Settings_University_Duration>時間の長さ</Settings_University_Duration>
+  <Settings_University_DurationFormat>HH'時' mm'分'</Settings_University_DurationFormat>
+  <Settings_Group_Work>仕事</Settings_Group_Work>
+  <Settings_Work_StartTime>開始時刻</Settings_Work_StartTime>
+  <Settings_Work_Duration>時間の長さ</Settings_Work_Duration>
+  <Settings_Work_DurationFormat>HH'時' mm'分'</Settings_Work_DurationFormat>
+  <Settings_Work_AllowLeisure>金曜日ごとに労働者が仕事の後にレジャー区画へ遊びに行くようにする</Settings_Work_AllowLeisure>
+  <Settings_Group_Citizens>市民</Settings_Group_Citizens>
+  <Settings_Citizens_ReactToWeather>天候に反応して行動させる</Settings_Citizens_ReactToWeather>
+  <Settings_Group_DangerZone>危険なオプション</Settings_Group_DangerZone>
+  <Settings_DangerZone_IgnoreVehiclePercentages>市民が生み出される際、乗り物の割合を無視</Settings_DangerZone_IgnoreVehiclePercentages>
+  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>これを有効にすると、より多くの市民が生み出されますが、都市の限界近くまで乗り物が存在すると、ランダムに乗り物が消失することがあります。</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
+  <Settings_DangerZone_EnableMessageBoxes>メッセージボックスを使用する</Settings_DangerZone_EnableMessageBoxes>
+  <Settings_DangerZone_EnableMessageBoxes_Tooltip>これを無効にすると、{0} のメッセージボックスがすべて表示されなくなります。その結果、重要な情報に気がつかなくなるかも知れません。</Settings_DangerZone_EnableMessageBoxes_Tooltip>
+  <Settings_Group_Logging>ログ</Settings_Group_Logging>
+  <Settings_Logging_LogCitizenStatus>Log citizen activity status to file</Settings_Logging_LogCitizenStatus>
+  <Settings_Logging_LogToFile>ファイルにログを記録</Settings_Logging_LogToFile>
+  <Settings_Logging_LogToDebugPanel>デバッグパネルにログを表示</Settings_Logging_LogToDebugPanel>
+  <Settings_Logging_LogToConsole>コンソールにログを表示</Settings_Logging_LogToConsole>
+  <Settings_Logging_LogToFileInterval>ファイルにログを記録する周期</Settings_Logging_LogToFileInterval>
+  <Settings_Logging_LogToFileIntervalFormat>m'分' ss'秒'</Settings_Logging_LogToFileIntervalFormat>
+  <ExperimentalBuild_Title>{0} - 試験ビルド</ExperimentalBuild_Title>
+  <ExperimentalBuild_Description>現在実行中の {0} は試験ビルドです。
+
+テスト目的にのみ使用されることを想定しているため、このビルドにはバグや問題があり、機能も不完全です。{0} のテストが目的でない方は、正規版の MOD をサブスクライブして下さい。</ExperimentalBuild_Description>
+</Localisation>

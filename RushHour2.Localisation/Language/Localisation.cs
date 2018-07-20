@@ -52,6 +52,7 @@
         public string Settings_DangerZone_EnableMessageBoxes_Tooltip = "Disabling this will prevent all {0} message boxes from appearing. This could lead to you missing out on important information.";
 
         public string Settings_Group_Logging = "Logging";
+        public string Settings_Logging_LogCitizenStatus = "Log citizen activity status to file";
         public string Settings_Logging_LogToFile = "Log to file";
         public string Settings_Logging_LogToDebugPanel = "Log to debug panel";
         public string Settings_Logging_LogToConsole = "Log to console";

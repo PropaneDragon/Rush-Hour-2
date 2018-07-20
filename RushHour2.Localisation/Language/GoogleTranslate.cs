@@ -13,23 +13,31 @@ namespace RushHour2.Localisation.Language
         {
             LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Message, $"Translating {text} into {toIsoCode} from {fromIsoCode}...");
 
-            var safeText = WWW.EscapeURL(text);
-            var request = new Request("get", $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={fromIsoCode}&tl={toIsoCode}&dt=t&q={safeText}");
-            request.AddHeader("Accept-Language", "en");
-            request.acceptGzip = false;
-
-            request.Send();
-
-            var timeout = DateTime.Now + TimeSpan.FromSeconds(5);
-            
-            while (!request.isDone || DateTime.Now > timeout)
+            try
             {
-                Thread.Sleep(10);
+                var safeText = WWW.EscapeURL(text);
+                var request = new Request("get", $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={fromIsoCode}&tl={toIsoCode}&dt=t&q={safeText}");
+                request.AddHeader("Accept-Language", "en");
+                request.acceptGzip = false;
+
+                request.Send();
+
+                var timeout = DateTime.Now + TimeSpan.FromSeconds(5);
+
+                while (!request.isDone || DateTime.Now > timeout)
+                {
+                    Thread.Sleep(10);
+                }
+
+                if (request.response != null)
+                {
+                    return GetTranslation(request.response);
+                }
             }
-
-            if (request.response != null)
+            catch (Exception ex)
             {
-                return GetTranslation(request.response);
+                LoggingWrapper.Log(LoggingWrapper.LogArea.File, LoggingWrapper.LogType.Error, "There was an issue trying to get an automatic translation from Google Translate");
+                LoggingWrapper.Log(LoggingWrapper.LogArea.File, ex);
             }
 
             return null;
