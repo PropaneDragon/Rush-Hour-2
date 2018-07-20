@@ -10,10 +10,10 @@
   <Settings_Core_Enabled>啟用</Settings_Core_Enabled>
   <Settings_Core_ModifyCitizenBehaviour>修改市民的行為</Settings_Core_ModifyCitizenBehaviour>
   <Settings_Core_ModifyTouristBehaviour>修改遊客的行為</Settings_Core_ModifyTouristBehaviour>
-  <Settings_Group_Time>Time</Settings_Group_Time>
-  <Settings_SimulationSpeed>Simulation speed modifier</Settings_SimulationSpeed>
-  <Settings_Time_ModifyDateTimeBar>Modify the date/time bar to show the time</Settings_Time_ModifyDateTimeBar>
-  <Settings_Time_24hrTime>24 hour clock</Settings_Time_24hrTime>
+  <Settings_Group_Time>時間</Settings_Group_Time>
+  <Settings_SimulationSpeed>修改日夜循環速度</Settings_SimulationSpeed>
+  <Settings_Time_ModifyDateTimeBar>修改日期/時間欄以顯示時間</Settings_Time_ModifyDateTimeBar>
+  <Settings_Time_24hrTime>使用24小時制時鐘</Settings_Time_24hrTime>
   <Settings_Group_School>學校</Settings_Group_School>
   <Settings_School_StartTime>學校上課時間</Settings_School_StartTime>
   <Settings_School_Duration>留校時間</Settings_School_Duration>
@@ -22,7 +22,7 @@
   <Settings_University_StartTime>大學上課時間</Settings_University_StartTime>
   <Settings_University_Duration>留校時間</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'小時' mm'分鐘'</Settings_University_DurationFormat>
-  <Settings_Group_Work>上班</Settings_Group_Work>
+  <Settings_Group_Work>上班族</Settings_Group_Work>
   <Settings_Work_StartTime>工作開始時間</Settings_Work_StartTime>
   <Settings_Work_Duration>留在公司的時數</Settings_Work_Duration>
   <Settings_Work_DurationFormat>HH'小時' mm'分鐘'</Settings_Work_DurationFormat>
@@ -35,14 +35,14 @@
   <Settings_DangerZone_EnableMessageBoxes>啟用消息框</Settings_DangerZone_EnableMessageBoxes>
   <Settings_DangerZone_EnableMessageBoxes_Tooltip>禁用此功能將阻止顯示所有 {0} 消息框。這可能會導致您錯過重要的信息。</Settings_DangerZone_EnableMessageBoxes_Tooltip>
   <Settings_Group_Logging>記錄</Settings_Group_Logging>
-  <Settings_Logging_LogCitizenStatus>Log citizen activity status to file</Settings_Logging_LogCitizenStatus>
+  <Settings_Logging_LogCitizenStatus>將市民活動狀態記錄至檔案</Settings_Logging_LogCitizenStatus>
   <Settings_Logging_LogToFile>生成記錄檔案</Settings_Logging_LogToFile>
   <Settings_Logging_LogToDebugPanel>記錄至調試面板</Settings_Logging_LogToDebugPanel>
   <Settings_Logging_LogToConsole>記錄至控制台</Settings_Logging_LogToConsole>
-  <Settings_Logging_LogToFileInterval>記錄至文件間隔</Settings_Logging_LogToFileInterval>
+  <Settings_Logging_LogToFileInterval>記錄至檔案相隔時間</Settings_Logging_LogToFileInterval>
   <Settings_Logging_LogToFileIntervalFormat>m'分' ss'秒'</Settings_Logging_LogToFileIntervalFormat>
   <ExperimentalBuild_Title>{0} - 實驗性版本</ExperimentalBuild_Title>
-  <ExperimentalBuild_Description>Rush Hour II 實驗性版本 {0} 正在運行中。
+  <ExperimentalBuild_Description>實驗性 {0} 正在運行中。
 
-本版本或存在錯誤和問題，以及不完整的功能，因為它僅供測試用途。如果您不打算協助測試 {0} ，請訂閱本模組的正式發行版本</ExperimentalBuild_Description>
+本版本或存在錯誤和問題，以及不完整的功能，因為它僅供測試用途。如果您不打算協助測試 {0} ，請訂閱本模組的正式發行版本。</ExperimentalBuild_Description>
 </Localisation>
