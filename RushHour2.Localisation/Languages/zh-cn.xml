@@ -8,9 +8,12 @@
   <Settings_Group_Core>核心</Settings_Group_Core>
   <Settings_Core_Language>语言</Settings_Core_Language>
   <Settings_Core_Enabled>启用</Settings_Core_Enabled>
-  <Settings_Core_ModifyDateTimeBar>更改日期/时间栏以显示时间</Settings_Core_ModifyDateTimeBar>
   <Settings_Core_ModifyCitizenBehaviour>更改市民行为</Settings_Core_ModifyCitizenBehaviour>
   <Settings_Core_ModifyTouristBehaviour>更改游客行为</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Group_Time>Time</Settings_Group_Time>
+  <Settings_SimulationSpeed>Simulation speed modifier</Settings_SimulationSpeed>
+  <Settings_Time_ModifyDateTimeBar>Modify the date/time bar to show the time</Settings_Time_ModifyDateTimeBar>
+  <Settings_Time_24hrTime>24 hour clock</Settings_Time_24hrTime>
   <Settings_Group_School>学校</Settings_Group_School>
   <Settings_School_StartTime>开始时间</Settings_School_StartTime>
   <Settings_School_Duration>持续时间</Settings_School_Duration>
@@ -32,6 +35,7 @@
   <Settings_DangerZone_EnableMessageBoxes>启用消息框</Settings_DangerZone_EnableMessageBoxes>
   <Settings_DangerZone_EnableMessageBoxes_Tooltip>禁用此选项将防止出现 {0} 消息框，同时可能使你错过重要信息。</Settings_DangerZone_EnableMessageBoxes_Tooltip>
   <Settings_Group_Logging>日志</Settings_Group_Logging>
+  <Settings_Logging_LogCitizenStatus>Log citizen activity status to file</Settings_Logging_LogCitizenStatus>
   <Settings_Logging_LogToFile>写入日志文件</Settings_Logging_LogToFile>
   <Settings_Logging_LogToDebugPanel>写入debug面板</Settings_Logging_LogToDebugPanel>
   <Settings_Logging_LogToConsole>写入控制台</Settings_Logging_LogToConsole>

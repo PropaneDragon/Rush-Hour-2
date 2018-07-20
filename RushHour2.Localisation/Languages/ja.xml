@@ -12,7 +12,7 @@
   <Settings_Core_ModifyTouristBehaviour>観光客の行動を変更する</Settings_Core_ModifyTouristBehaviour>
   <Settings_Group_Time>時間</Settings_Group_Time>
   <Settings_SimulationSpeed>シミュレーション速度の調整</Settings_SimulationSpeed>
-  <Settings_Core_ModifyDateTimeBar>日付／時間バーを変更して時刻を表示する</Settings_Core_ModifyDateTimeBar>
+  <Settings_Time_ModifyDateTimeBar>日付／時間バーを変更して時刻を表示する</Settings_Time_ModifyDateTimeBar>
   <Settings_Time_24hrTime>24 時間表記</Settings_Time_24hrTime>
   <Settings_Group_School>学校</Settings_Group_School>
   <Settings_School_StartTime>開始時刻</Settings_School_StartTime>
@@ -35,6 +35,7 @@
   <Settings_DangerZone_EnableMessageBoxes>メッセージボックスを使用する</Settings_DangerZone_EnableMessageBoxes>
   <Settings_DangerZone_EnableMessageBoxes_Tooltip>これを無効にすると、{0} のメッセージボックスがすべて表示されなくなります。その結果、重要な情報に気がつかなくなるかも知れません。</Settings_DangerZone_EnableMessageBoxes_Tooltip>
   <Settings_Group_Logging>ログ</Settings_Group_Logging>
+  <Settings_Logging_LogCitizenStatus>Log citizen activity status to file</Settings_Logging_LogCitizenStatus>
   <Settings_Logging_LogToFile>ファイルにログを記録</Settings_Logging_LogToFile>
   <Settings_Logging_LogToDebugPanel>デバッグパネルにログを表示</Settings_Logging_LogToDebugPanel>
   <Settings_Logging_LogToConsole>コンソールにログを表示</Settings_Logging_LogToConsole>

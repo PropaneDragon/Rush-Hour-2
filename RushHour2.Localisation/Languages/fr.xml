@@ -35,6 +35,7 @@
   <Settings_DangerZone_EnableMessageBoxes>Enable message boxes</Settings_DangerZone_EnableMessageBoxes>
   <Settings_DangerZone_EnableMessageBoxes_Tooltip>Disabling this will prevent all {0} message boxes from appearing. This could lead to you missing out on important information.</Settings_DangerZone_EnableMessageBoxes_Tooltip>
   <Settings_Group_Logging>Logging</Settings_Group_Logging>
+  <Settings_Logging_LogCitizenStatus>Log citizen activity status to file</Settings_Logging_LogCitizenStatus>
   <Settings_Logging_LogToFile>Log to file</Settings_Logging_LogToFile>
   <Settings_Logging_LogToDebugPanel>Log to debug panel</Settings_Logging_LogToDebugPanel>
   <Settings_Logging_LogToConsole>Log to console</Settings_Logging_LogToConsole>

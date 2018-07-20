@@ -79,6 +79,7 @@ namespace RushHour2.UI.Settings
 
             var logging = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Logging));
             {
+                logging.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Logging_LogCitizenStatus), UserModSettings.Settings.Log_Citizen_Status, new OnCheckChanged(value => UserModSettings.Settings.Log_Citizen_Status = value));
                 logging.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Logging_LogToFile), UserModSettings.Settings.Logging_ToFile, new OnCheckChanged(value => UserModSettings.Settings.Logging_ToFile = value));
                 logging.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Logging_LogToDebugPanel), UserModSettings.Settings.Logging_ToDebug, new OnCheckChanged(value => UserModSettings.Settings.Logging_ToDebug = value));
                 logging.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Logging_LogToConsole), UserModSettings.Settings.Logging_ToConsole, new OnCheckChanged(value => UserModSettings.Settings.Logging_ToConsole = value));
