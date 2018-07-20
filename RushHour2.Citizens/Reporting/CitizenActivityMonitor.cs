@@ -1,5 +1,4 @@
-﻿using ColossalFramework;
-using RushHour2.Core.Reporting;
+﻿using RushHour2.Core.Reporting;
 using System;
 using System.Collections.Generic;
 using System.Linq;

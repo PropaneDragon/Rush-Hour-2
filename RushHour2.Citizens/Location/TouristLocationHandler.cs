@@ -131,7 +131,7 @@ namespace RushHour2.Citizens.Location
                     }
                     else
                     {
-                        touristAI.FindAFunActivity(citizenId, citizen.GetBuilding());
+                        touristAI.FindAFunActivity(citizenId, ref citizen, citizen.GetBuilding());
                     }
                 }
             }
