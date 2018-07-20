@@ -21,14 +21,21 @@ namespace RushHour2.Patches.AI
                 var weatherManager = WeatherManager.instance;
                 var rainPercentage = weatherManager.m_currentRain * 100f;
 
-                if (data.m_eventIndex == 0 && data.Enterable() && rainPercentage > 0.5 && UserModSettings.Settings.Citizens_ReactToWeather)
+                if (data.m_eventIndex == 0)
                 {
-                    __instance.CalculateSpawnPosition(buildingID, ref data, ref randomizer, info, out var spawnPosition, out var spawnTarget);
+                    if (data.Enterable() && rainPercentage > 0.5 && UserModSettings.Settings.Citizens_ReactToWeather)
+                    {
+                        __instance.CalculateSpawnPosition(buildingID, ref data, ref randomizer, info, out var spawnPosition, out var spawnTarget);
 
-                    position = spawnPosition;
-                    target = spawnTarget;
+                        position = spawnPosition;
+                        target = spawnTarget;
 
-                    specialFlags &= ~(CitizenInstance.Flags.HangAround | CitizenInstance.Flags.SittingDown);
+                        specialFlags &= ~(CitizenInstance.Flags.HangAround | CitizenInstance.Flags.SittingDown);
+                    }
+                    else if (!data.Enterable() && (specialFlags & (CitizenInstance.Flags.HangAround | CitizenInstance.Flags.SittingDown)) == CitizenInstance.Flags.None)
+                    {
+                        specialFlags &= (~CitizenInstance.Flags.InsideBuilding) | CitizenInstance.Flags.HangAround;
+                    }
                 }
             }
         }
