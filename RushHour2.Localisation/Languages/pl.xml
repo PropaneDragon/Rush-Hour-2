@@ -2,7 +2,7 @@
 <Localisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <IsoLanguageCode>pl</IsoLanguageCode>
   <ReadableName>Polski (PL)</ReadableName>
-  <CanTranslateIfUnavailable>false</CanTranslateIfUnavailable>
+  <CanTranslateIfUnavailable>true</CanTranslateIfUnavailable>
   <Settings_SaveToDisk>Zapisz</Settings_SaveToDisk>
   <Settings_SaveToDisk_Tooltip>Ustawienia są stosowane automatycznie.</Settings_SaveToDisk_Tooltip>
   <Settings_Group_Core>Główne</Settings_Group_Core>
