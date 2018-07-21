@@ -4,46 +4,46 @@
   <ReadableName>Polski (PL)</ReadableName>
   <CanTranslateIfUnavailable>false</CanTranslateIfUnavailable>
   <Settings_SaveToDisk>Zapisz</Settings_SaveToDisk>
-  <Settings_SaveToDisk_Tooltip>Ustawienia s¹ stosowane automatycznie.</Settings_SaveToDisk_Tooltip>
-  <Settings_Group_Core>G³ówne</Settings_Group_Core>
-  <Settings_Core_Language>Jêzyk</Settings_Core_Language>
+  <Settings_SaveToDisk_Tooltip>Ustawienia sÄ… stosowane automatycznie.</Settings_SaveToDisk_Tooltip>
+  <Settings_Group_Core>GÅ‚Ã³wne</Settings_Group_Core>
+  <Settings_Core_Language>JÄ™zyk</Settings_Core_Language>
   <Settings_Core_Enabled>Aktywne</Settings_Core_Enabled>
-  <Settings_Core_ModifyCitizenBehaviour>Zachowanie mieszkañców</Settings_Core_ModifyCitizenBehaviour>
-  <Settings_Core_ModifyTouristBehaviour>Zachowanie turystów</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Core_ModifyCitizenBehaviour>Zachowanie mieszkaÅ„cÃ³w</Settings_Core_ModifyCitizenBehaviour>
+  <Settings_Core_ModifyTouristBehaviour>Zachowanie turystÃ³w</Settings_Core_ModifyTouristBehaviour>
   <Settings_Group_Time>Czas</Settings_Group_Time>
-  <Settings_SimulationSpeed>Prêdkoœæ czasu</Settings_SimulationSpeed>
-  <Settings_Time_ModifyDateTimeBar>Poka¿ czas na pasku daty w grze</Settings_Time_ModifyDateTimeBar>
+  <Settings_SimulationSpeed>PrÄ™dkoÅ›Ä‡ czasu</Settings_SimulationSpeed>
+  <Settings_Time_ModifyDateTimeBar>PokaÅ¼ czas na pasku daty w grze</Settings_Time_ModifyDateTimeBar>
   <Settings_Time_24hrTime>Format 24 godzinny czasu</Settings_Time_24hrTime>
-  <Settings_Group_School>Szko³y</Settings_Group_School>
-  <Settings_School_StartTime>Pocz¹tek zajêæ</Settings_School_StartTime>
-  <Settings_School_Duration>D³ugoœæ</Settings_School_Duration>
+  <Settings_Group_School>SzkoÅ‚y</Settings_Group_School>
+  <Settings_School_StartTime>PoczÄ…tek zajÄ™Ä‡</Settings_School_StartTime>
+  <Settings_School_Duration>DÅ‚ugoÅ›Ä‡</Settings_School_Duration>
   <Settings_School_DurationFormat>HH'h' mm'm'</Settings_School_DurationFormat>
   <Settings_Group_University>Uniwersytety</Settings_Group_University>
-  <Settings_University_StartTime>Pocz¹tek zajêæ</Settings_University_StartTime>
-  <Settings_University_Duration>D³ugoœæ</Settings_University_Duration>
+  <Settings_University_StartTime>poczÄ…tek zajÄ™Ä‡</Settings_University_StartTime>
+  <Settings_University_Duration>DÅ‚ugoÅ›Ä‡</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'h' mm'm'</Settings_University_DurationFormat>
   <Settings_Group_Work>Praca</Settings_Group_Work>
-  <Settings_Work_StartTime>Czas rozpoczêcia</Settings_Work_StartTime>
-  <Settings_Work_Duration>D³ugoœæ</Settings_Work_Duration>
+  <Settings_Work_StartTime>Czas rozpoczÄ™cia</Settings_Work_StartTime>
+  <Settings_Work_Duration>DÅ‚ugoÅ›Ä‡</Settings_Work_Duration>
   <Settings_Work_DurationFormat>HH'h' mm'm'</Settings_Work_DurationFormat>
-  <Settings_Work_AllowLeisure>Pozwól czêœci pracowników relaksowaæ siê w pi¹tki</Settings_Work_AllowLeisure>
-  <Settings_Group_Citizens>Mieszkañcy</Settings_Group_Citizens>
+  <Settings_Work_AllowLeisure>PozwÃ³l czÄ™Å›ci pracownikÃ³w relaksowaÄ‡ siÄ™ w piÄ…tki</Settings_Work_AllowLeisure>
+  <Settings_Group_Citizens>MieszkaÅ„cy</Settings_Group_Citizens>
   <Settings_Citizens_ReactToWeather>Reakcja na pogode</Settings_Citizens_ReactToWeather>
-  <Settings_Group_DangerZone>Strefa zagro¿enia</Settings_Group_DangerZone>
-  <Settings_DangerZone_IgnoreVehiclePercentages>Ignoruj procent pojazdów przy spawnienu mieszkañców</Settings_DangerZone_IgnoreVehiclePercentages>
-  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>w³¹czenie tej opcji pozwala na pojawienie siê wiêkszej iloœci mieszkañców, ale mo¿e powodowaæ znikanie pojazdów w du¿ych miastach</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
-  <Settings_DangerZone_EnableMessageBoxes>Poka¿ komunikaty</Settings_DangerZone_EnableMessageBoxes>
-  <Settings_DangerZone_EnableMessageBoxes_Tooltip>Wy³¹czenie tej opcji wy³¹czy komunikaty {0}</Settings_DangerZone_EnableMessageBoxes_Tooltip>
+  <Settings_Group_DangerZone>Strefa zagroÅ¼enia</Settings_Group_DangerZone>
+  <Settings_DangerZone_IgnoreVehiclePercentages>Ignoruj procent pojazdÃ³w przy spawnienu mieszkaÅ„cÃ³w</Settings_DangerZone_IgnoreVehiclePercentages>
+  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>wÅ‚Ä…czenie tej opcji pozwala na pojawienie siÄ™ wiÄ™kszej iloÅ›ci mieszkaÅ„cÃ³w, ale moÅ¼e powodowaÄ‡ znikanie pojazdÃ³w w duÅ¼ych miastach</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
+  <Settings_DangerZone_EnableMessageBoxes>PokaÅ¼ komunikaty</Settings_DangerZone_EnableMessageBoxes>
+  <Settings_DangerZone_EnableMessageBoxes_Tooltip>WyÅ‚Ä…czenie tej opcji wyÅ‚Ä…czy komunikaty {0}</Settings_DangerZone_EnableMessageBoxes_Tooltip>
   <Settings_Group_Logging>Rejestrowanie</Settings_Group_Logging>
-  <Settings_Logging_LogCitizenStatus>Rejestruj aktywnoœæ mieszkañców do pliku</Settings_Logging_LogCitizenStatus>
+  <Settings_Logging_LogCitizenStatus>Rejestruj aktywnoÅ›Ä‡ mieszkaÅ„cÃ³w do pliku</Settings_Logging_LogCitizenStatus>
   <Settings_Logging_LogToFile>Rejestruj do pliku</Settings_Logging_LogToFile>
   <Settings_Logging_LogToDebugPanel>Rejestruj do panelu debugowania</Settings_Logging_LogToDebugPanel>
   <Settings_Logging_LogToConsole>Rejestruj do konsoli</Settings_Logging_LogToConsole>
-  <Settings_Logging_LogToFileInterval>Czêstotliwoœæ rejestrowania</Settings_Logging_LogToFileInterval>
+  <Settings_Logging_LogToFileInterval>CzÄ™stotliwos rejestrowania</Settings_Logging_LogToFileInterval>
   <Settings_Logging_LogToFileIntervalFormat>m'm' ss's'</Settings_Logging_LogToFileIntervalFormat>
   <ExperimentalBuild_Title>{0} - wersja eksperymentalna</ExperimentalBuild_Title>
-  <ExperimentalBuild_Description>Urzywasz wersji eksperymentalnej moda {0} .
+  <ExperimentalBuild_Description>UÅ¼ywasz wersji eksperymentalnej moda {0} .
 
-Zasubskrybuj do wersji eksperymentalnej moda jak nie lubisz b³êdów</ExperimentalBuild_Description>
+Zasubskrybuj do wersji eksperymentalnej moda jak nie lubisz bÅ‚Ä™dÃ³w</ExperimentalBuild_Description>
 </Localisation>
-<!--T³umaczenie Hakier Grzonzo-->
+<!--TÅ‚umaczenie Hakier Grzonzo-->
