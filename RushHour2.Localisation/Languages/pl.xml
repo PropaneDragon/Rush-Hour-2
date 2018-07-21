@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Localisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsoLanguageCode>pl</IsoLanguageCode>
+  <ReadableName>Polski (PL)</ReadableName>
+  <CanTranslateIfUnavailable>false</CanTranslateIfUnavailable>
+  <Settings_SaveToDisk>Zapisz</Settings_SaveToDisk>
+  <Settings_SaveToDisk_Tooltip>Ustawienia są stosowane automatycznie.</Settings_SaveToDisk_Tooltip>
+  <Settings_Group_Core>Główne</Settings_Group_Core>
+  <Settings_Core_Language>Język</Settings_Core_Language>
+  <Settings_Core_Enabled>Aktywne</Settings_Core_Enabled>
+  <Settings_Core_ModifyCitizenBehaviour>Zachowanie mieszkańców</Settings_Core_ModifyCitizenBehaviour>
+  <Settings_Core_ModifyTouristBehaviour>Zachowanie turystów</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Group_Time>Czas</Settings_Group_Time>
+  <Settings_SimulationSpeed>Prędkość czasu</Settings_SimulationSpeed>
+  <Settings_Time_ModifyDateTimeBar>Pokaż czas na pasku daty w grze</Settings_Time_ModifyDateTimeBar>
+  <Settings_Time_24hrTime>Format 24 godzinny czasu</Settings_Time_24hrTime>
+  <Settings_Group_School>Szkoły</Settings_Group_School>
+  <Settings_School_StartTime>Początek zajęć</Settings_School_StartTime>
+  <Settings_School_Duration>Długość</Settings_School_Duration>
+  <Settings_School_DurationFormat>HH'h' mm'm'</Settings_School_DurationFormat>
+  <Settings_Group_University>Uniwersytety</Settings_Group_University>
+  <Settings_University_StartTime>początek zajęć</Settings_University_StartTime>
+  <Settings_University_Duration>Długość</Settings_University_Duration>
+  <Settings_University_DurationFormat>HH'h' mm'm'</Settings_University_DurationFormat>
+  <Settings_Group_Work>Praca</Settings_Group_Work>
+  <Settings_Work_StartTime>Czas rozpoczęcia</Settings_Work_StartTime>
+  <Settings_Work_Duration>Długość</Settings_Work_Duration>
+  <Settings_Work_DurationFormat>HH'h' mm'm'</Settings_Work_DurationFormat>
+  <Settings_Work_AllowLeisure>Pozwól części pracowników relaksować się w piątki</Settings_Work_AllowLeisure>
+  <Settings_Group_Citizens>Mieszkańcy</Settings_Group_Citizens>
+  <Settings_Citizens_ReactToWeather>Reakcja na pogode</Settings_Citizens_ReactToWeather>
+  <Settings_Group_DangerZone>Strefa zagrożenia</Settings_Group_DangerZone>
+  <Settings_DangerZone_IgnoreVehiclePercentages>Ignoruj procent pojazdów przy spawnienu mieszkańców</Settings_DangerZone_IgnoreVehiclePercentages>
+  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>włączenie tej opcji pozwala na pojawienie się większej ilości mieszkańców, ale może powodować znikanie pojazdów w dużych miastach</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
+  <Settings_DangerZone_EnableMessageBoxes>Pokaż komunikaty</Settings_DangerZone_EnableMessageBoxes>
+  <Settings_DangerZone_EnableMessageBoxes_Tooltip>Wyłączenie tej opcji wyłączy komunikaty {0}</Settings_DangerZone_EnableMessageBoxes_Tooltip>
+  <Settings_Group_Logging>Rejestrowanie</Settings_Group_Logging>
+  <Settings_Logging_LogCitizenStatus>Rejestruj aktywność mieszkańców do pliku</Settings_Logging_LogCitizenStatus>
+  <Settings_Logging_LogToFile>Rejestruj do pliku</Settings_Logging_LogToFile>
+  <Settings_Logging_LogToDebugPanel>Rejestruj do panelu debugowania</Settings_Logging_LogToDebugPanel>
+  <Settings_Logging_LogToConsole>Rejestruj do konsoli</Settings_Logging_LogToConsole>
+  <Settings_Logging_LogToFileInterval>Częstotliwos rejestrowania</Settings_Logging_LogToFileInterval>
+  <Settings_Logging_LogToFileIntervalFormat>m'm' ss's'</Settings_Logging_LogToFileIntervalFormat>
+  <ExperimentalBuild_Title>{0} - wersja eksperymentalna</ExperimentalBuild_Title>
+  <ExperimentalBuild_Description>Używasz wersji eksperymentalnej moda {0} .
+
+Zasubskrybuj do wersji eksperymentalnej moda jak nie lubisz błędów</ExperimentalBuild_Description>
+</Localisation>
+<!--Tłumaczenie Hakier Grzonzo-->
