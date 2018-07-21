@@ -93,7 +93,7 @@ namespace RushHour2.Citizens.Location
             var goSomewhere = (simulationManager.m_randomizer.Int32(10) < 3 || citizen.InHotel()) && !citizen.AfraidOfGettingWet();
             if (goSomewhere)
             {
-                var keepItLocal = simulationManager.m_randomizer.Int32(10) < 6;
+                var keepItLocal = simulationManager.m_randomizer.Int32(10) < 8;
                 if (keepItLocal)
                 {
                     var ventureDistance = (BuildingManager.BUILDINGGRID_CELL_SIZE * 2) + (simulationManager.m_randomizer.Int32(3) * BuildingManager.BUILDINGGRID_CELL_SIZE);
@@ -125,13 +125,15 @@ namespace RushHour2.Citizens.Location
                 else
                 {
                     var goShopping = simulationManager.m_randomizer.Int32(10) < 5;
+                    var extendedVentureDistance = BuildingManager.BUILDINGGRID_CELL_SIZE * 6;
+
                     if (goShopping)
                     {
-                        touristAI.FindAShop(citizenId, ref citizen);
+                        touristAI.GoToAShop(citizenId, ref citizen, extendedVentureDistance);
                     }
                     else
                     {
-                        touristAI.FindAFunActivity(citizenId, ref citizen, citizen.GetBuilding());
+                        touristAI.GoToAFunActivity(citizenId, ref citizen, citizen.GetBuilding(), extendedVentureDistance);
                     }
                 }
             }

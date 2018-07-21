@@ -9,7 +9,7 @@ namespace RushHour2.Citizens.Extensions
 {
     public static class HumanAIExtensions
     {
-        private const float MAX_DISTANCE = BuildingManager.BUILDINGGRID_CELL_SIZE * BuildingManager.BUILDINGGRID_RESOLUTION;
+        public const float MAX_DISTANCE = BuildingManager.BUILDINGGRID_CELL_SIZE * BuildingManager.BUILDINGGRID_RESOLUTION;
 
         public static bool LeaveTheCity(this HumanAI humanAI, uint citizenId, ref Citizen citizen)
         {
@@ -77,27 +77,76 @@ namespace RushHour2.Citizens.Extensions
             return false;
         }
 
-        public static ushort FindLeisure(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance = MAX_DISTANCE)
+        public static ushort FindLeisure(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance)
         {
             return humanAI.FindSomewhere(citizenId, ref citizen, building, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure }, distance);
         }
 
-        public static ushort FindHotel(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance = MAX_DISTANCE)
+        public static ushort FindHotel(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance)
         {
             return humanAI.FindSomewhere(citizenId, ref citizen, building, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialTourist }, distance);
         }
 
-        public static ushort FindShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance = MAX_DISTANCE)
+        public static ushort FindShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance)
         {
             return humanAI.FindSomewhere(citizenId, ref citizen, building, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialHigh, ItemClass.SubService.CommercialLow }, distance);
         }
 
-        public static ushort FindPark(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance = MAX_DISTANCE)
+        public static ushort FindPark(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, float distance)
         {
             return humanAI.FindSomewhere(citizenId, ref citizen, building, new[] { ItemClass.Service.Beautification, ItemClass.Service.Monument, ItemClass.Service.Natural }, new[] { ItemClass.SubService.None }, distance);
         }
 
-        public static ushort FindSomewhere(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, ItemClass.Service[] services, ItemClass.SubService[] subServices, float distance = MAX_DISTANCE)
+        public static bool GoToAFunActivity(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding, float distance)
+        {
+            var visitMonument = SimulationManager.instance.m_randomizer.Int32(10) < (humanAI is TouristAI ? 6 : 2);
+            var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
+
+            if (visitMonument && proximityBuilding != 0)
+            {
+                var monument = humanAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Monument }, new[] { ItemClass.SubService.None }, distance * 5);
+                if (monument != 0)
+                {
+                    humanAI.GoToBuilding(citizenId, ref citizen, monument);
+
+                    return true;
+                }
+            }
+
+            var foundBuilding = humanAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Beautification, ItemClass.Service.Commercial, ItemClass.Service.Natural, ItemClass.Service.Tourism }, new[] { ItemClass.SubService.None }, distance);
+            if (foundBuilding != 0)
+            {
+                humanAI.GoToBuilding(citizenId, ref citizen, foundBuilding);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool GoToAShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, float distance)
+        {
+            var buildingId = citizen.GetBuilding();
+
+            return humanAI.GoToAShop(citizenId, ref citizen, buildingId, distance);
+        }
+
+        public static bool GoToAShop(this HumanAI humanAI, uint citizenId, ref Citizen citizen, ushort proximityBuilding, float distance)
+        {
+            var proximityBuildingInstance = BuildingManager.instance.m_buildings.m_buffer[proximityBuilding];
+            var foundBuilding = humanAI.FindSomewhere(citizenId, ref citizen, proximityBuildingInstance, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialEco, ItemClass.SubService.CommercialHigh, ItemClass.SubService.CommercialLow }, distance);
+
+            if (foundBuilding != 0)
+            {
+                humanAI.GoToBuilding(citizenId, ref citizen, foundBuilding);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public static ushort FindSomewhere(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Building building, ItemClass.Service[] services, ItemClass.SubService[] subServices, float distance)
         {
             var buildingInstance = citizen.GetBuildingInstance();
             if (buildingInstance.HasValue)
@@ -108,7 +157,7 @@ namespace RushHour2.Citizens.Extensions
             return 0;
         }
 
-        public static ushort FindSomewhere(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Vector3 position, ItemClass.Service[] services, ItemClass.SubService[] subServices, float distance = MAX_DISTANCE)
+        public static ushort FindSomewhere(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Vector3 position, ItemClass.Service[] services, ItemClass.SubService[] subServices, float distance)
         {
             var simulationManager = SimulationManager.instance;
             var closeBuildings = humanAI.FindAllClosePlaces(citizenId, ref citizen, position, services, subServices, distance);
@@ -121,7 +170,7 @@ namespace RushHour2.Citizens.Extensions
             return 0;
         }
 
-        public static List<ushort> FindAllClosePlaces(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Vector3 position, ItemClass.Service[] services, ItemClass.SubService[] subServices, float distance = MAX_DISTANCE)
+        public static List<ushort> FindAllClosePlaces(this HumanAI humanAI, uint citizenId, ref Citizen citizen, Vector3 position, ItemClass.Service[] services, ItemClass.SubService[] subServices, float distance)
         {
             var simulationManager = SimulationManager.instance;
             var currentBuilding = citizen.GetBuilding();

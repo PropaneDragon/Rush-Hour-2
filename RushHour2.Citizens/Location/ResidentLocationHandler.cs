@@ -113,7 +113,7 @@ namespace RushHour2.Citizens.Location
                 {
                     var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home, rather than work
 
-                    if (residentAI.FindAShop(citizenId, ref citizen, proximityBuilding))
+                    if (residentAI.GoToAShop(citizenId, ref citizen, proximityBuilding, BuildingManager.BUILDINGGRID_CELL_SIZE * 2))
                     {
                         return true;
                     }
@@ -125,58 +125,56 @@ namespace RushHour2.Citizens.Location
 
                     return true;
                 }
-                else
+
+                var simulationManager = SimulationManager.instance;
+                var time = simulationManager.m_currentGameTime;
+                var ageGroup = Citizen.GetAgeGroup(citizen.Age);
+                var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
+                var happinessLevel = Citizen.GetHappinessLevel(happiness);
+
+                if (happinessLevel >= Citizen.Happiness.Good)
                 {
-                    var simulationManager = SimulationManager.instance;
-                    var time = simulationManager.m_currentGameTime;
-                    var ageGroup = Citizen.GetAgeGroup(citizen.Age);
-                    var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
-                    var happinessLevel = Citizen.GetHappinessLevel(happiness);
-                    
-                    if (happinessLevel >= Citizen.Happiness.Good)
+                    if (UserModSettings.Settings.Citizens_AllowLeisureAfterWork && time.DayOfWeek == DayOfWeek.Friday && (ageGroup == Citizen.AgeGroup.Adult || ageGroup == Citizen.AgeGroup.Young))
                     {
-                        if (UserModSettings.Settings.Citizens_AllowLeisureAfterWork && time.DayOfWeek == DayOfWeek.Friday && (ageGroup == Citizen.AgeGroup.Adult || ageGroup == Citizen.AgeGroup.Young))
+                        var goOut = simulationManager.m_randomizer.Int32(10) <= 6;
+                        if (goOut)
                         {
-                            var goOut = simulationManager.m_randomizer.Int32(10) <= 6;
-                            if (goOut)
+                            var allLeisure = residentAI.FindAllClosePlaces(citizenId, ref citizen, citizen.WorkBuildingInstance().Value.m_position, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure }, BuildingManager.BUILDINGGRID_CELL_SIZE);
+                            var currentBuildingInt = (int)citizen.GetBuilding();
+                            var closest = -1;
+                            var chosenBuilding = (ushort)0;
+
+                            foreach (var leisure in allLeisure)
                             {
-                                var allLeisure = residentAI.FindAllClosePlaces(citizenId, ref citizen, citizen.WorkBuildingInstance().Value.m_position, new[] { ItemClass.Service.Commercial }, new[] { ItemClass.SubService.CommercialLeisure }, BuildingManager.BUILDINGGRID_CELL_SIZE);
-                                var currentBuildingInt = (int)citizen.GetBuilding();
-                                var closest = -1;
-                                var chosenBuilding = (ushort)0;
-                                
-                                foreach (var leisure in allLeisure)
+                                var leisureInt = (int)leisure;
+                                var difference = Math.Abs(leisureInt - currentBuildingInt);
+                                if (closest < 0 || difference < closest)
                                 {
-                                    var leisureInt = (int)leisure;
-                                    var difference = Math.Abs(leisureInt - currentBuildingInt);
-                                    if (closest < 0 || difference < closest)
-                                    {
-                                        closest = difference;
-                                        chosenBuilding = leisure;
-                                    }
-                                }
-                                
-                                if (chosenBuilding != 0 && residentAI.TryVisit(citizenId, ref citizen, chosenBuilding))
-                                {
-                                    return true;
+                                    closest = difference;
+                                    chosenBuilding = leisure;
                                 }
                             }
-                        }
 
-                        var shouldGoSomewhereElseFirst = simulationManager.m_randomizer.Int32(10) <= 3 + (int)happinessLevel;
-                        if (shouldGoSomewhereElseFirst)
-                        {
-                            if (residentAI.FindAFunActivity(citizenId, ref citizen, citizen.HomeBuilding()))
+                            if (chosenBuilding != 0 && residentAI.TryVisit(citizenId, ref citizen, chosenBuilding))
                             {
                                 return true;
                             }
                         }
                     }
 
-                    residentAI.GoHome(citizenId, ref citizen);
-
-                    return true;
+                    var shouldGoSomewhereElseFirst = simulationManager.m_randomizer.Int32(10) <= 3 + (int)happinessLevel;
+                    if (shouldGoSomewhereElseFirst)
+                    {
+                        if (residentAI.GoToAFunActivity(citizenId, ref citizen, citizen.WorkBuilding(), BuildingManager.BUILDINGGRID_CELL_SIZE))
+                        {
+                            return true;
+                        }
+                    }
                 }
+
+                residentAI.GoHome(citizenId, ref citizen);
+
+                return true;
             }
 
             return true;
@@ -198,23 +196,30 @@ namespace RushHour2.Citizens.Location
 
                 return true;
             }
-            else
+            else if (citizen.NeedsGoods())
             {
-                var simulationManager = SimulationManager.instance;
-                var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
-                var wealth = citizen.WealthLevel;
-                var happinessLevel = Citizen.GetHappinessLevel(happiness);
-                var dayOfWeek = simulationManager.m_currentGameTime.DayOfWeek;
-                var weekend = !citizen.ValidWorkBuilding() || dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday;
-                var goSomewhere = simulationManager.m_randomizer.Int32(16) < ((int)happinessLevel + (int)wealth) * (weekend ? 2 : 1);
+                var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home, rather than work
 
-                if (goSomewhere)
+                if (residentAI.GoToAShop(citizenId, ref citizen, proximityBuilding, BuildingManager.BUILDINGGRID_CELL_SIZE * 2))
                 {
-                    ProcessActivity(ref residentAI, citizenId, ref citizen);
+                    return true;
                 }
-
-                return true;
             }
+
+            var simulationManager = SimulationManager.instance;
+            var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
+            var wealth = citizen.WealthLevel;
+            var happinessLevel = Citizen.GetHappinessLevel(happiness);
+            var dayOfWeek = simulationManager.m_currentGameTime.DayOfWeek;
+            var weekend = !citizen.ValidWorkBuilding() || dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday;
+            var goSomewhere = simulationManager.m_randomizer.Int32(16) < ((int)happinessLevel + (int)wealth) * (weekend ? 2 : 1);
+
+            if (goSomewhere)
+            {
+                ProcessActivity(ref residentAI, citizenId, ref citizen);
+            }
+
+            return true;
         }
 
         private static bool ProcessActivity(ref ResidentAI residentAI, uint citizenId, ref Citizen citizen)
@@ -248,9 +253,9 @@ namespace RushHour2.Citizens.Location
                 }
                 else if (ageGroup <= Citizen.AgeGroup.Adult)
                 {
-                    if (randomActivityNumber < 80)
+                    if (randomActivityNumber < 90)
                     {
-                        var ventureDistance = (BuildingManager.BUILDINGGRID_CELL_SIZE * 2) * ((int)happinessLevel + 1);
+                        var ventureDistance = (BuildingManager.BUILDINGGRID_CELL_SIZE * 1.5f) * ((int)happinessLevel + 1);
                         ushort closeActivity = 0;
 
                         if (randomActivityNumber < 26 || simulationManager.m_currentGameTime.Hour >= 21)
@@ -278,14 +283,15 @@ namespace RushHour2.Citizens.Location
                     else
                     {
                         var goShopping = simulationManager.m_randomizer.Int32(10) < 5;
+                        var extendedVentureDistance = BuildingManager.BUILDINGGRID_CELL_SIZE * 6;
 
                         if (goShopping)
                         {
-                            residentAI.FindAShop(citizenId, ref citizen);
+                            residentAI.GoToAShop(citizenId, ref citizen, extendedVentureDistance);
                         }
                         else
                         {
-                            residentAI.FindAFunActivity(citizenId, ref citizen, currentBuilding);
+                            residentAI.GoToAFunActivity(citizenId, ref citizen, currentBuilding, extendedVentureDistance);
                         }
                     }
 
