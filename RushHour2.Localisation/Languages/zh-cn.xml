@@ -65,4 +65,8 @@
   <ExperimentalBuild_Description>你目前在使用 {0} 的实验版本。
 
 此版本可能有bug或未完成的特性，因为此版本是用于测试的。若不想参与测试 {0}，请订阅此mod的非实验版本。</ExperimentalBuild_Description>
+  <Incompatibility_Title>{0} - Incompatibility detected</Incompatibility_Title>
+  <Incompatibility_Description>There appears to be an issue overriding part of the game, likely due to another conflicting mod.
+
+Some features have been disabled, but everything else will still work.</Incompatibility_Description>
 </Localisation>

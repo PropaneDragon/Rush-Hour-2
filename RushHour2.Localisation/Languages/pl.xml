@@ -65,4 +65,8 @@
   <ExperimentalBuild_Description>Używasz wersji eksperymentalnej moda {0} .
 
 Zasubskrybuj do wersji eksperymentalnej moda jak nie lubisz błędów</ExperimentalBuild_Description>
+  <Incompatibility_Title>{0} - Incompatibility detected</Incompatibility_Title>
+  <Incompatibility_Description>There appears to be an issue overriding part of the game, likely due to another conflicting mod.
+
+Some features have been disabled, but everything else will still work.</Incompatibility_Description>
 </Localisation>

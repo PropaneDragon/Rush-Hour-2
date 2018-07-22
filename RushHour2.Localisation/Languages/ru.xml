@@ -37,7 +37,7 @@
   <Settings_Group_Offices>Офисы</Settings_Group_Offices>
   <Settings_Offices_Weekday_StartTime>Начало в будни</Settings_Offices_Weekday_StartTime>
   <Settings_Offices_Weekday_Duration>Время работы в будний день</Settings_Offices_Weekday_Duration>
-  <Settings_Offices_DurationFormat>HH'ч' mm'мин'</Settings_Offices_DurationFormat> 
+  <Settings_Offices_DurationFormat>HH'ч' mm'мин'</Settings_Offices_DurationFormat>
   <Settings_Group_Work>Работа</Settings_Group_Work>
   <Settings_Work_AllowLeisure>Разрешить посещение зон отдыха после работы по пятницам</Settings_Work_AllowLeisure>
   <Settings_Group_Citizens>Граждане</Settings_Group_Citizens>
@@ -48,7 +48,7 @@
   <Settings_Lighting_LightsCommercial>Контроль освещения коммерческих зданий</Settings_Lighting_LightsCommercial>
   <Settings_Lighting_LightsOffices>Контроль освещения оффисных зданий</Settings_Lighting_LightsOffices>
   <Settings_Lighting_LightsResidential>Контроль освещения жилых зданий</Settings_Lighting_LightsResidential>
-  <Settings_Lighting_LightsIndustrial>Контроль освещения индустриальных зданий</Settings_Lighting_LightsIndustrial>  
+  <Settings_Lighting_LightsIndustrial>Контроль освещения индустриальных зданий</Settings_Lighting_LightsIndustrial>
   <Settings_Group_DangerZone>Пожалуйста, аккуратно установите следующие параметры</Settings_Group_DangerZone>
   <Settings_DangerZone_IgnoreVehiclePercentages>Игнорировать макс. кол-во транспорта при появлении новых граждан</Settings_DangerZone_IgnoreVehiclePercentages>
   <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>Включение этой функции приведет к большему количеству людей, но когда вы приблизитесь к максимальному количеству транспортных средств на карте, это может привести к случайному исчезновению транспортных средств.</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
@@ -65,4 +65,8 @@
   <ExperimentalBuild_Description>Тест {0} включён.
 
 У этой сборки могут быть ошибки и проблемы, а также неполные функции, поскольку они предназначены только для тестирования. Подпишитесь на неэкспериментальную версию мода, если вы не собираетесь тестировать {0}.</ExperimentalBuild_Description>
+  <Incompatibility_Title>{0} - Incompatibility detected</Incompatibility_Title>
+  <Incompatibility_Description>There appears to be an issue overriding part of the game, likely due to another conflicting mod.
+
+Some features have been disabled, but everything else will still work.</Incompatibility_Description>
 </Localisation>

@@ -65,4 +65,8 @@
   <ExperimentalBuild_Description>現在実行中の {0} は試験ビルドです。
 
 テスト目的にのみ使用されることを想定しているため、このビルドにはバグや問題があり、機能も不完全です。{0} のテストが目的でない方は、正規版の MOD をサブスクライブして下さい。</ExperimentalBuild_Description>
+  <Incompatibility_Title>{0} - Incompatibility detected</Incompatibility_Title>
+  <Incompatibility_Description>There appears to be an issue overriding part of the game, likely due to another conflicting mod.
+
+Some features have been disabled, but everything else will still work.</Incompatibility_Description>
 </Localisation>
