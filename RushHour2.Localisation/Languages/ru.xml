@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Localisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <IsoLanguageCode>ru</IsoLanguageCode>
-  <ReadableName>русский (RU)</ReadableName>
-  <CanTranslateIfUnavailable>true</CanTranslateIfUnavailable>
-  <Settings_SaveToDisk>Save to disk</Settings_SaveToDisk>
-  <Settings_SaveToDisk_Tooltip>Settings are applied automatically ingame. Clicking this button saves these settings to disk and will be loaded again on a restart.</Settings_SaveToDisk_Tooltip>
-  <Settings_Group_Core>Core</Settings_Group_Core>
-  <Settings_Core_Language>Language</Settings_Core_Language>
-  <Settings_Core_Enabled>Enabled</Settings_Core_Enabled>
-  <Settings_Core_ModifyCitizenBehaviour>Modify citizen behaviours</Settings_Core_ModifyCitizenBehaviour>
-  <Settings_Core_ModifyTouristBehaviour>Modify tourist behaviours</Settings_Core_ModifyTouristBehaviour>
-  <Settings_Group_Time>Time</Settings_Group_Time>
-  <Settings_SimulationSpeed>Simulation speed modifier</Settings_SimulationSpeed>
-  <Settings_Time_ModifyDateTimeBar>Modify the date/time bar to show the time</Settings_Time_ModifyDateTimeBar>
-  <Settings_Time_24hrTime>24 hour clock</Settings_Time_24hrTime>
-  <Settings_Group_School>School</Settings_Group_School>
-  <Settings_School_StartTime>Start time</Settings_School_StartTime>
-  <Settings_School_Duration>Duration</Settings_School_Duration>
-  <Settings_School_DurationFormat>HH'h' mm'm'</Settings_School_DurationFormat>
-  <Settings_Group_University>University</Settings_Group_University>
-  <Settings_University_StartTime>Start time</Settings_University_StartTime>
-  <Settings_University_Duration>Duration</Settings_University_Duration>
-  <Settings_University_DurationFormat>HH'h' mm'm'</Settings_University_DurationFormat>
-  <Settings_Group_Commercial>Commercial</Settings_Group_Commercial>
-  <Settings_Commercial_Weekday_StartTime>Weekday start time</Settings_Commercial_Weekday_StartTime>
-  <Settings_Commercial_Weekday_Duration>Weekday duration</Settings_Commercial_Weekday_Duration>
-  <Settings_Commercial_Weekend_StartTime>Weekend start time</Settings_Commercial_Weekend_StartTime>
-  <Settings_Commercial_Weekend_Duration>Weekend duration</Settings_Commercial_Weekend_Duration>
-  <Settings_Commercial_DurationFormat>HH'h' mm'm'</Settings_Commercial_DurationFormat>
-  <Settings_Group_Industrial>Industrial</Settings_Group_Industrial>
-  <Settings_Industrial_Weekday_StartTime>Weekday start time</Settings_Industrial_Weekday_StartTime>
-  <Settings_Industrial_Weekday_Duration>Weekday duration</Settings_Industrial_Weekday_Duration>
-  <Settings_Industrial_Weekend_StartTime>Weekend start time</Settings_Industrial_Weekend_StartTime>
-  <Settings_Industrial_Weekend_Duration>Weekend duration</Settings_Industrial_Weekend_Duration>
-  <Settings_Industrial_DurationFormat>HH'h' mm'm'</Settings_Industrial_DurationFormat>
-  <Settings_Group_Offices>Offices</Settings_Group_Offices>
-  <Settings_Offices_Weekday_StartTime>Weekday start time</Settings_Offices_Weekday_StartTime>
-  <Settings_Offices_Weekday_Duration>Weekday duration</Settings_Offices_Weekday_Duration>
-  <Settings_Offices_DurationFormat>HH'h' mm'm'</Settings_Offices_DurationFormat>
-  <Settings_Group_Work>Work</Settings_Group_Work>
-  <Settings_Work_AllowLeisure>Allow some workers to go to leisure areas after work on Fridays</Settings_Work_AllowLeisure>
-  <Settings_Group_Citizens>Citizens</Settings_Group_Citizens>
-  <Settings_Citizens_ReactToWeather>React to weather</Settings_Citizens_ReactToWeather>
-  <Settings_Group_Lighting>Lighting</Settings_Group_Lighting>
-  <Settings_Lighting_OverrideLights>Allow control of building lighting</Settings_Lighting_OverrideLights>
-  <Settings_Lighting_LightsEducation>Allow control of educational building lighting</Settings_Lighting_LightsEducation>
-  <Settings_Lighting_LightsCommercial>Allow control of commercial building lighting</Settings_Lighting_LightsCommercial>
-  <Settings_Lighting_LightsOffices>Allow control of office building lighting</Settings_Lighting_LightsOffices>
-  <Settings_Lighting_LightsResidential>Allow control of residential building lighting</Settings_Lighting_LightsResidential>
-  <Settings_Lighting_LightsIndustrial>Allow control of industrial building lighting</Settings_Lighting_LightsIndustrial>
-  <Settings_Group_DangerZone>Danger zone</Settings_Group_DangerZone>
-  <Settings_DangerZone_IgnoreVehiclePercentages>Ignore vehicle percentages when spawning citizens</Settings_DangerZone_IgnoreVehiclePercentages>
-  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>Enabling this will allow more citizens to spawn, however it may cause vehicles to randomly disappear if you are near the maximum allowed vehicles in your city.</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
-  <Settings_DangerZone_EnableMessageBoxes>Enable message boxes</Settings_DangerZone_EnableMessageBoxes>
-  <Settings_DangerZone_EnableMessageBoxes_Tooltip>Disabling this will prevent all {0} message boxes from appearing. This could lead to you missing out on important information.</Settings_DangerZone_EnableMessageBoxes_Tooltip>
-  <Settings_Group_Logging>Logging</Settings_Group_Logging>
-  <Settings_Logging_LogCitizenStatus>Log citizen activity status to file</Settings_Logging_LogCitizenStatus>
-  <Settings_Logging_LogToFile>Log to file</Settings_Logging_LogToFile>
-  <Settings_Logging_LogToDebugPanel>Log to debug panel</Settings_Logging_LogToDebugPanel>
-  <Settings_Logging_LogToConsole>Log to console</Settings_Logging_LogToConsole>
-  <Settings_Logging_LogToFileInterval>Log to file interval</Settings_Logging_LogToFileInterval>
-  <Settings_Logging_LogToFileIntervalFormat>m'm' ss's'</Settings_Logging_LogToFileIntervalFormat>
-  <ExperimentalBuild_Title>{0} - experimental build</ExperimentalBuild_Title>
-  <ExperimentalBuild_Description>You currently have an experimental build of {0} running.
+  <ReadableName>Русский (RU)</ReadableName>
+  <CanTranslateIfUnavailable>false</CanTranslateIfUnavailable>
+  <Settings_SaveToDisk>Сохранить</Settings_SaveToDisk>
+  <Settings_SaveToDisk_Tooltip>Настройки применяются автоматически. Нажатие этой кнопки сохраняет настройки на диск и загружает их при перезапуске.</Settings_SaveToDisk_Tooltip>
+  <Settings_Group_Core>Основные настройки</Settings_Group_Core>
+  <Settings_Core_Language>Язык</Settings_Core_Language>
+  <Settings_Core_Enabled>Включить</Settings_Core_Enabled>
+  <Settings_Core_ModifyCitizenBehaviour>Изменение поведения граждан</Settings_Core_ModifyCitizenBehaviour>
+  <Settings_Core_ModifyTouristBehaviour>Изменение поведения туристов</Settings_Core_ModifyTouristBehaviour>
+  <Settings_Group_Time>Время</Settings_Group_Time>
+  <Settings_SimulationSpeed>Настройка скорости моделирования</Settings_SimulationSpeed>
+  <Settings_Time_ModifyDateTimeBar>Показывать время на панели дат</Settings_Time_ModifyDateTimeBar>
+  <Settings_Time_24hrTime>24-часовой формат</Settings_Time_24hrTime>
+  <Settings_Group_School>Школа</Settings_Group_School>
+  <Settings_School_StartTime>Начало</Settings_School_StartTime>
+  <Settings_School_Duration>Продолжительность</Settings_School_Duration>
+  <Settings_School_DurationFormat>HH'ч' mm'мин'</Settings_School_DurationFormat>
+  <Settings_Group_University>Университет</Settings_Group_University>
+  <Settings_University_StartTime>Начало</Settings_University_StartTime>
+  <Settings_University_Duration>Продолжительность</Settings_University_Duration>
+  <Settings_University_DurationFormat>HH'ч' mm'мин'</Settings_University_DurationFormat>
+  <Settings_Group_Commercial>Коммерция</Settings_Group_Commercial>
+  <Settings_Commercial_Weekday_StartTime>Начало в будни</Settings_Commercial_Weekday_StartTime>
+  <Settings_Commercial_Weekday_Duration>Время работы в будний день</Settings_Commercial_Weekday_Duration>
+  <Settings_Commercial_Weekend_StartTime>Начало в выходной день</Settings_Commercial_Weekend_StartTime>
+  <Settings_Commercial_Weekend_Duration>Время работы в выходной день</Settings_Commercial_Weekend_Duration>
+  <Settings_Commercial_DurationFormat>HH'ч' mm'мин'</Settings_Commercial_DurationFormat>
+  <Settings_Group_Industrial>Индустрия</Settings_Group_Industrial>
+  <Settings_Industrial_Weekday_StartTime>Начало в будни</Settings_Industrial_Weekday_StartTime>
+  <Settings_Industrial_Weekday_Duration>Время работы в будний день</Settings_Industrial_Weekday_Duration>
+  <Settings_Industrial_Weekend_StartTime>Начало в выходной день</Settings_Industrial_Weekend_StartTime>
+  <Settings_Industrial_Weekend_Duration>Время работы в выходной день</Settings_Industrial_Weekend_Duration>
+  <Settings_Industrial_DurationFormat>HH'ч' mm'мин'</Settings_Industrial_DurationFormat>
+  <Settings_Group_Offices>Офисы</Settings_Group_Offices>
+  <Settings_Offices_Weekday_StartTime>Начало в будни</Settings_Offices_Weekday_StartTime>
+  <Settings_Offices_Weekday_Duration>Время работы в будний день</Settings_Offices_Weekday_Duration>
+  <Settings_Offices_DurationFormat>HH'ч' mm'мин'</Settings_Offices_DurationFormat> 
+  <Settings_Group_Work>Работа</Settings_Group_Work>
+  <Settings_Work_AllowLeisure>Разрешить посещение зон отдыха после работы по пятницам</Settings_Work_AllowLeisure>
+  <Settings_Group_Citizens>Граждане</Settings_Group_Citizens>
+  <Settings_Citizens_ReactToWeather>Реагировать на погоду</Settings_Citizens_ReactToWeather>
+  <Settings_Group_Lighting>Освещение</Settings_Group_Lighting>
+  <Settings_Lighting_OverrideLights>Управление освещением зданий</Settings_Lighting_OverrideLights>
+  <Settings_Lighting_LightsEducation>Контроль освещения образовательных зданий</Settings_Lighting_LightsEducation>
+  <Settings_Lighting_LightsCommercial>Контроль освещения коммерческих зданий</Settings_Lighting_LightsCommercial>
+  <Settings_Lighting_LightsOffices>Контроль освещения оффисных зданий</Settings_Lighting_LightsOffices>
+  <Settings_Lighting_LightsResidential>Контроль освещения жилых зданий</Settings_Lighting_LightsResidential>
+  <Settings_Lighting_LightsIndustrial>Контроль освещения индустриальных зданий</Settings_Lighting_LightsIndustrial>  
+  <Settings_Group_DangerZone>Пожалуйста, аккуратно установите следующие параметры</Settings_Group_DangerZone>
+  <Settings_DangerZone_IgnoreVehiclePercentages>Игнорировать макс. кол-во транспорта при появлении новых граждан</Settings_DangerZone_IgnoreVehiclePercentages>
+  <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>Включение этой функции приведет к большему количеству людей, но когда вы приблизитесь к максимальному количеству транспортных средств на карте, это может привести к случайному исчезновению транспортных средств.</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
+  <Settings_DangerZone_EnableMessageBoxes>Окна сообщений</Settings_DangerZone_EnableMessageBoxes>
+  <Settings_DangerZone_EnableMessageBoxes_Tooltip>Отключение всех сообщений {0} может привести к тому, что вы потеряете важную информацию.</Settings_DangerZone_EnableMessageBoxes_Tooltip>
+  <Settings_Group_Logging>Запись</Settings_Group_Logging>
+  <Settings_Logging_LogCitizenStatus>Записать активность граждан в файл</Settings_Logging_LogCitizenStatus>
+  <Settings_Logging_LogToFile>Создать файл записи</Settings_Logging_LogToFile>
+  <Settings_Logging_LogToDebugPanel>Запись на панель отладки</Settings_Logging_LogToDebugPanel>
+  <Settings_Logging_LogToConsole>Запись на консоль</Settings_Logging_LogToConsole>
+  <Settings_Logging_LogToFileInterval>Интервал записи</Settings_Logging_LogToFileInterval>
+  <Settings_Logging_LogToFileIntervalFormat>m'мин' ss'сек'</Settings_Logging_LogToFileIntervalFormat>
+  <ExperimentalBuild_Title>{0} - тестовая сборка</ExperimentalBuild_Title>
+  <ExperimentalBuild_Description>Тест {0} включён.
 
-This build may have bugs and issues, as well as incomplete features as it is intended for testing only. Please subscribe to the non-experimental version of the mod if you don't intend on testing {0}.</ExperimentalBuild_Description>
+У этой сборки могут быть ошибки и проблемы, а также неполные функции, поскольку они предназначены только для тестирования. Подпишитесь на неэкспериментальную версию мода, если вы не собираетесь тестировать {0}.</ExperimentalBuild_Description>
 </Localisation>
