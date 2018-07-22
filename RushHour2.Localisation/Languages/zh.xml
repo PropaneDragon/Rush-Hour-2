@@ -22,13 +22,33 @@
   <Settings_University_StartTime>大學上課時間</Settings_University_StartTime>
   <Settings_University_Duration>留校時間</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'小時' mm'分鐘'</Settings_University_DurationFormat>
+  <Settings_Group_Commercial>Commercial</Settings_Group_Commercial>
+  <Settings_Commercial_Weekday_StartTime>Weekday start time</Settings_Commercial_Weekday_StartTime>
+  <Settings_Commercial_Weekday_Duration>Weekday duration</Settings_Commercial_Weekday_Duration>
+  <Settings_Commercial_Weekend_StartTime>Weekend start time</Settings_Commercial_Weekend_StartTime>
+  <Settings_Commercial_Weekend_Duration>Weekend duration</Settings_Commercial_Weekend_Duration>
+  <Settings_Commercial_DurationFormat>HH'h' mm'm'</Settings_Commercial_DurationFormat>
+  <Settings_Group_Industrial>Industrial</Settings_Group_Industrial>
+  <Settings_Industrial_Weekday_StartTime>Weekday start time</Settings_Industrial_Weekday_StartTime>
+  <Settings_Industrial_Weekday_Duration>Weekday duration</Settings_Industrial_Weekday_Duration>
+  <Settings_Industrial_Weekend_StartTime>Weekend start time</Settings_Industrial_Weekend_StartTime>
+  <Settings_Industrial_Weekend_Duration>Weekend duration</Settings_Industrial_Weekend_Duration>
+  <Settings_Industrial_DurationFormat>HH'h' mm'm'</Settings_Industrial_DurationFormat>
+  <Settings_Group_Offices>Offices</Settings_Group_Offices>
+  <Settings_Offices_Weekday_StartTime>Weekday start time</Settings_Offices_Weekday_StartTime>
+  <Settings_Offices_Weekday_Duration>Weekday duration</Settings_Offices_Weekday_Duration>
+  <Settings_Offices_DurationFormat>HH'h' mm'm'</Settings_Offices_DurationFormat>
   <Settings_Group_Work>上班</Settings_Group_Work>
-  <Settings_Work_StartTime>工作開始時間</Settings_Work_StartTime>
-  <Settings_Work_Duration>留在公司的時數</Settings_Work_Duration>
-  <Settings_Work_DurationFormat>HH'小時' mm'分鐘'</Settings_Work_DurationFormat>
   <Settings_Work_AllowLeisure>允許一些上班族在週五下班後前往休閒區進行休閒活動。</Settings_Work_AllowLeisure>
   <Settings_Group_Citizens>市民</Settings_Group_Citizens>
   <Settings_Citizens_ReactToWeather>市民會根據天氣作出反應</Settings_Citizens_ReactToWeather>
+  <Settings_Group_Lighting>Lighting</Settings_Group_Lighting>
+  <Settings_Lighting_OverrideLights>Allow control of building lighting</Settings_Lighting_OverrideLights>
+  <Settings_Lighting_LightsEducation>Allow control of educational building lighting</Settings_Lighting_LightsEducation>
+  <Settings_Lighting_LightsCommercial>Allow control of commercial building lighting</Settings_Lighting_LightsCommercial>
+  <Settings_Lighting_LightsOffices>Allow control of office building lighting</Settings_Lighting_LightsOffices>
+  <Settings_Lighting_LightsResidential>Allow control of residential building lighting</Settings_Lighting_LightsResidential>
+  <Settings_Lighting_LightsIndustrial>Allow control of industrial building lighting</Settings_Lighting_LightsIndustrial>
   <Settings_Group_DangerZone>請謹慎設定以下選項</Settings_Group_DangerZone>
   <Settings_DangerZone_IgnoreVehiclePercentages>產出市民時無視車輛百分比</Settings_DangerZone_IgnoreVehiclePercentages>
   <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>啟用此功能會產出更多市民，但當你接近地圖内車輛數量最大值時，或會導致車輛隨機消失。</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>

@@ -1,6 +1,8 @@
 ﻿using ColossalFramework;
-using RushHour2.Citizens.Location;
+using RushHour2.Buildings.Extensions;
 using RushHour2.Core.Settings;
+using RushHour2.Locations.Citizens;
+using RushHour2.Locations.Travel;
 using System;
 
 namespace RushHour2.Citizens.Extensions
@@ -18,41 +20,6 @@ namespace RushHour2.Citizens.Extensions
         public static bool CanMove(this Citizen citizen) => citizen.IsVisible() || GlobalLocationHandler.ShouldMove();
 
         public static bool IsMoving(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Moving;
-
-        public static bool AtHome(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Home;
-
-        public static bool AtWork(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Work;
-
-        public static bool InHotel(this Citizen citizen) => (citizen.VisitBuildingInstance()?.Info.m_class.m_subService ?? ItemClass.SubService.None) == ItemClass.SubService.CommercialTourist;
-
-        public static bool IsVisiting(this Citizen citizen) => citizen.CurrentLocation == Citizen.Location.Visit;
-
-        public static bool ValidHomeBuilding(this Citizen citizen) => citizen.HomeBuilding() != 0;
-
-        public static bool ValidWorkBuilding(this Citizen citizen) => citizen.WorkBuilding() != 0;
-
-        public static bool ValidVisitBuilding(this Citizen citizen) => citizen.VisitBuilding() != 0;
-
-        public static ushort HomeBuilding(this Citizen citizen) => citizen.m_homeBuilding;
-
-        public static ushort WorkBuilding(this Citizen citizen) => citizen.m_workBuilding;
-
-        public static ushort VisitBuilding(this Citizen citizen) => citizen.m_visitBuilding;
-
-        public static Building? HomeBuildingInstance(this Citizen citizen) => GetBuildingFromId(citizen.HomeBuilding());
-
-        public static Building? WorkBuildingInstance(this Citizen citizen) => GetBuildingFromId(citizen.WorkBuilding());
-
-        public static Building? VisitBuildingInstance(this Citizen citizen) => GetBuildingFromId(citizen.VisitBuilding());
-
-        public static bool ValidBuilding(this Citizen citizen)
-        {
-            var validHome = citizen.AtHome() && citizen.ValidHomeBuilding();
-            var validWork = citizen.AtWork() && citizen.ValidWorkBuilding();
-            var validVisit = citizen.IsVisiting() && citizen.ValidVisitBuilding();
-
-            return validHome || validWork || validVisit;
-        }
 
         public static bool ShouldGoHome(this Citizen citizen)
         {
@@ -75,9 +42,9 @@ namespace RushHour2.Citizens.Extensions
             return false;
         }
 
-        public static bool ShouldGoToWork(this Citizen citizen)
+        public static bool ShouldGoToWork(this Citizen citizen, uint citizenId)
         {
-            if (citizen.ValidWorkBuilding() && (citizen.ShouldBeAtWork() || citizen.ShouldBeAtWork(TimeSpan.FromHours(6))))
+            if (citizen.ValidWorkBuilding() && (citizen.ShouldBeAtWork(citizenId) || citizen.ShouldBeAtWork(citizenId, TimeSpan.FromHours(6))))
             {
                 var currentBuildingInstance = citizen.GetBuildingInstance();
                 var workBuildingInstance = citizen.WorkBuildingInstance();
@@ -85,46 +52,49 @@ namespace RushHour2.Citizens.Extensions
                 if (currentBuildingInstance.HasValue)
                 {
                     var travelTime = TravelTime.EstimateTravelTime(currentBuildingInstance.Value, workBuildingInstance.Value);
-                    return citizen.ShouldBeAtWork(travelTime);
+                    return citizen.ShouldBeAtWork(citizenId, travelTime);
                 }
                 else
                 {
-                    return citizen.ShouldBeAtWork(TimeSpan.FromHours(2));
+                    return citizen.ShouldBeAtWork(citizenId, TimeSpan.FromHours(2));
                 }
             }
 
             return false;
         }
 
-        public static bool ShouldBeAtWork(this Citizen citizen)
+        public static bool ShouldBeAtWork(this Citizen citizen, uint citizenId)
         {
-            return citizen.ShouldBeAtWork(new TimeSpan(0));
+            return citizen.ShouldBeAtWork(citizenId, new TimeSpan(0));
         }
 
-        public static bool ShouldBeAtWork(this Citizen citizen, TimeSpan offset)
+        public static bool ShouldBeAtWork(this Citizen citizen, uint citizenID, TimeSpan offset)
         {
             var simulationManager = SimulationManager.instance;
             var currentTime = simulationManager.m_currentGameTime;
 
-            return citizen.ShouldBeAtWork(currentTime + offset);
+            return citizen.ShouldBeAtWork(citizenID, currentTime + offset);
         }
 
-        public static bool ShouldBeAtWork(this Citizen citizen, DateTime time)
+        public static bool ShouldBeAtWork(this Citizen citizen, uint citizenId, DateTime time)
         {
-            if (citizen.ValidWorkBuilding() && time.DayOfWeek != DayOfWeek.Saturday && time.DayOfWeek != DayOfWeek.Sunday)
+            var weekend = time.DayOfWeek == DayOfWeek.Saturday || time.DayOfWeek == DayOfWeek.Sunday;
+
+            if (citizen.ValidWorkBuilding())
             {
                 var ageGroup = Citizen.GetAgeGroup(citizen.m_age);
                 if (ageGroup <= Citizen.AgeGroup.Teen)
                 {
-                    return UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_Schools, UserModSettings.Settings.Duration_Schools) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_Schools));
+                    return !weekend && UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_Schools, UserModSettings.Settings.Duration_Schools) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_Schools));
                 }
                 else if (ageGroup <= Citizen.AgeGroup.Young && citizen.Education3)
                 {
-                    return UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_University, UserModSettings.Settings.Duration_University) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_University));
+                    return !weekend && UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_University, UserModSettings.Settings.Duration_University) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_University));
                 }
                 else if (ageGroup <= Citizen.AgeGroup.Senior)
                 {
-                    return UserModSettings.TimeIsBetween(time, UserModSettings.Settings.StartTime_Work, UserModSettings.Settings.Duration_Work) || (citizen.AtWork() && UserModSettings.TimeIsBefore(time, UserModSettings.Settings.StartTime_Work));
+                    var workInstance = citizen.WorkBuildingInstance();
+                    return workInstance.HasValue ? citizen.WorkBuildingInstance().Value.ShouldBeAtWork(citizenId, time) : false;
                 }
             }
 
@@ -158,7 +128,6 @@ namespace RushHour2.Citizens.Extensions
             var happiness = Citizen.GetHappiness(health, wellbeing);
             var happinessLevel = Citizen.GetHappinessLevel(happiness);
             var education = citizen.EducationLevel;
-            var simulationManager = SimulationManager.instance;
 
             if (ageGroup <= Citizen.AgeGroup.Child)
             {
@@ -216,42 +185,6 @@ namespace RushHour2.Citizens.Extensions
             var currentRain = weatherManager.m_currentRain;
 
             return UserModSettings.Settings.Citizens_ReactToWeather && currentRain > 0.15;
-        }
-
-        public static ushort GetBuilding(this Citizen citizen)
-        {
-            if (citizen.AtHome() && citizen.ValidHomeBuilding())
-            {
-                return citizen.HomeBuilding();
-            }
-            else if (citizen.AtWork() && citizen.ValidWorkBuilding())
-            {
-                return citizen.WorkBuilding();
-            }
-            else if (citizen.IsVisiting() && citizen.ValidVisitBuilding())
-            {
-                return citizen.VisitBuilding();
-            }
-
-            return 0;
-        }
-
-        public static Building? GetBuildingInstance(this Citizen citizen)
-        {
-            var buildingId = citizen.GetBuilding();
-
-            return GetBuildingFromId(buildingId);
-        }
-
-        private static Building? GetBuildingFromId(ushort buildingId)
-        {
-            if (buildingId != 0)
-            {
-                var buildingManager = BuildingManager.instance;
-                return buildingManager.m_buildings.m_buffer[buildingId];
-            }
-
-            return null;
         }
     }
 }

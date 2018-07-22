@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RushHour2.Citizens.Reporting
+namespace RushHour2.Monitoring.Citizens
 {
     public static class CitizenActivityMonitor
     {

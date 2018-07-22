@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{622AEDE5-DF49-4C06-B29A-32B5F5590E17}</ProjectGuid>
+    <ProjectGuid>{42E55D9F-9498-4EB1-A07C-8AD91DDBC79A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RushHour2.Citizens</RootNamespace>
-    <AssemblyName>RushHour2.Citizens</AssemblyName>
+    <RootNamespace>RushHour2.Monitoring</RootNamespace>
+    <AssemblyName>RushHour2.Monitoring</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -70,32 +70,17 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Extensions\CitizenExtensions.cs" />
-    <Compile Include="Extensions\HumanAIExtensions.cs" />
-    <Compile Include="Location\ResidentLocationHandler.cs" />
-    <Compile Include="Location\TouristLocationHandler.cs" />
+    <Compile Include="Citizens\CitizenActivityMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Harmony\Harmony\Harmony.csproj">
-      <Project>{c6afcedb-8e3d-4289-bee9-8fe97b0885fb}</Project>
+      <Project>{C6AFCEDB-8E3D-4289-BEE9-8FE97B0885FB}</Project>
       <Name>Harmony</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RushHour2.Buildings\RushHour2.Buildings.csproj">
-      <Project>{2D3CE375-60A5-4187-8DAC-AD33F6FC7042}</Project>
-      <Name>RushHour2.Buildings</Name>
     </ProjectReference>
     <ProjectReference Include="..\RushHour2.Core\RushHour2.Core.csproj">
       <Project>{E16EE6BF-300F-4D6F-AB88-6F6E00FA34EC}</Project>
       <Name>RushHour2.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RushHour2.Locations\RushHour2.Locations.csproj">
-      <Project>{CC301823-AC72-4E30-B4FE-B1949C2C5CC9}</Project>
-      <Name>RushHour2.Locations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RushHour2.Monitoring\RushHour2.Monitoring.csproj">
-      <Project>{42E55D9F-9498-4EB1-A07C-8AD91DDBC79A}</Project>
-      <Name>RushHour2.Monitoring</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

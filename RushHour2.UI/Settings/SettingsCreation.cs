@@ -52,16 +52,46 @@ namespace RushHour2.UI.Settings
                 universityHours.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_University_Duration), TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_University, new OnValueChanged(value => UserModSettings.Settings.Duration_University = TimeSpan.FromHours(value)), LocalisationHolder.CurrentLocalisation.Settings_University_DurationFormat);
             }
 
-            var workHours = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Work));
+            var commercialHoursGroup = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Commercial));
             {
-                workHours.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Work_StartTime), TimeSpan.FromHours(6), TimeSpan.FromHours(11), UserModSettings.Settings.StartTime_Work, new OnValueChanged(value => UserModSettings.Settings.StartTime_Work = TimeSpan.FromHours(value)));
-                workHours.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Work_Duration), TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_Work, new OnValueChanged(value => UserModSettings.Settings.Duration_Work = TimeSpan.FromHours(value)), LocalisationHolder.CurrentLocalisation.Settings_Work_DurationFormat);
-                workHours.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Work_AllowLeisure), UserModSettings.Settings.Citizens_AllowLeisureAfterWork, new OnCheckChanged(value => { UserModSettings.Settings.Citizens_AllowLeisureAfterWork = value; }));
+                commercialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Commercial_Weekday_StartTime), TimeSpan.FromHours(6), TimeSpan.FromHours(11), UserModSettings.Settings.StartTime_Commercial_Weekday, new OnValueChanged(value => UserModSettings.Settings.StartTime_Commercial_Weekday = TimeSpan.FromHours(value)));
+                commercialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Commercial_Weekday_Duration), TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_Commercial_Weekday, new OnValueChanged(value => UserModSettings.Settings.Duration_Commercial_Weekday = TimeSpan.FromHours(value)), LocalisationHolder.CurrentLocalisation.Settings_Commercial_DurationFormat);
+                commercialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Commercial_Weekend_StartTime), TimeSpan.FromHours(6), TimeSpan.FromHours(11), UserModSettings.Settings.StartTime_Commercial_Weekend, new OnValueChanged(value => UserModSettings.Settings.StartTime_Commercial_Weekend = TimeSpan.FromHours(value)));
+                commercialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Commercial_Weekend_Duration), TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_Commercial_Weekend, new OnValueChanged(value => UserModSettings.Settings.Duration_Commercial_Weekend = TimeSpan.FromHours(value)), LocalisationHolder.CurrentLocalisation.Settings_Commercial_DurationFormat);
+            }
+
+            var industrialHoursGroup = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Industrial));
+            {
+                industrialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Industrial_Weekday_StartTime), TimeSpan.FromHours(6), TimeSpan.FromHours(11), UserModSettings.Settings.StartTime_Industrial_Weekday, new OnValueChanged(value => UserModSettings.Settings.StartTime_Industrial_Weekday = TimeSpan.FromHours(value)));
+                industrialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Industrial_Weekday_Duration), TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_Industrial_Weekday, new OnValueChanged(value => UserModSettings.Settings.Duration_Industrial_Weekday = TimeSpan.FromHours(value)), LocalisationHolder.CurrentLocalisation.Settings_Industrial_DurationFormat);
+                industrialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Industrial_Weekend_StartTime), TimeSpan.FromHours(6), TimeSpan.FromHours(11), UserModSettings.Settings.StartTime_Industrial_Weekend, new OnValueChanged(value => UserModSettings.Settings.StartTime_Industrial_Weekend = TimeSpan.FromHours(value)));
+                industrialHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Industrial_Weekend_Duration), TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_Industrial_Weekend, new OnValueChanged(value => UserModSettings.Settings.Duration_Industrial_Weekend = TimeSpan.FromHours(value)), LocalisationHolder.CurrentLocalisation.Settings_Industrial_DurationFormat);
+            }
+
+            var officesHoursGroup = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Offices));
+            {
+                officesHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Offices_Weekday_StartTime), TimeSpan.FromHours(6), TimeSpan.FromHours(11), UserModSettings.Settings.StartTime_Offices_Weekday, new OnValueChanged(value => UserModSettings.Settings.StartTime_Offices_Weekday = TimeSpan.FromHours(value)));
+                officesHoursGroup.AddTimeSpanHoursSlider(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Offices_Weekday_Duration), TimeSpan.FromHours(5), TimeSpan.FromHours(15), UserModSettings.Settings.Duration_Offices_Weekday, new OnValueChanged(value => UserModSettings.Settings.Duration_Offices_Weekday = TimeSpan.FromHours(value)), LocalisationHolder.CurrentLocalisation.Settings_Offices_DurationFormat);
+            }
+
+            var workGroup = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Work));
+            {
+                workGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Work_AllowLeisure), UserModSettings.Settings.Citizens_AllowLeisureAfterWork, new OnCheckChanged(value => { UserModSettings.Settings.Citizens_AllowLeisureAfterWork = value; }));
             }
 
             var citizens = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Citizens));
             {
                 citizens.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Citizens_ReactToWeather), UserModSettings.Settings.Citizens_ReactToWeather, new OnCheckChanged(value => { UserModSettings.Settings.Citizens_ReactToWeather = value; }));
+            }
+
+            var lightingGroup = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Lighting));
+            {
+                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_OverrideLights), UserModSettings.Settings.Buildings_OverrideLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideLights = value));
+                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsEducation), UserModSettings.Settings.Buildings_OverrideSchoolLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideSchoolLights = value));
+                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsCommercial), UserModSettings.Settings.Buildings_OverrideCommercialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideCommercialLights = value));
+                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsOffices), UserModSettings.Settings.Buildings_OverrideOfficeLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideOfficeLights = value));
+                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsIndustrial), UserModSettings.Settings.Buildings_OverrideIndustrialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideIndustrialLights = value));
+                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsResidential), UserModSettings.Settings.Buildings_OverrideResidentialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideResidentialLights = value));
             }
 
             var dangerZone = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_DangerZone));

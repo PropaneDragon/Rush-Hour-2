@@ -36,14 +36,38 @@
         public string Settings_University_Duration = "Duration";
         public string Settings_University_DurationFormat = "HH'h' mm'm'";
 
+        public string Settings_Group_Commercial = "Commercial";
+        public string Settings_Commercial_Weekday_StartTime = "Weekday start time";
+        public string Settings_Commercial_Weekday_Duration = "Weekday duration";
+        public string Settings_Commercial_Weekend_StartTime = "Weekend start time";
+        public string Settings_Commercial_Weekend_Duration = "Weekend duration";
+        public string Settings_Commercial_DurationFormat = "HH'h' mm'm'";
+
+        public string Settings_Group_Industrial = "Industrial";
+        public string Settings_Industrial_Weekday_StartTime = "Weekday start time";
+        public string Settings_Industrial_Weekday_Duration = "Weekday duration";
+        public string Settings_Industrial_Weekend_StartTime = "Weekend start time";
+        public string Settings_Industrial_Weekend_Duration = "Weekend duration";
+        public string Settings_Industrial_DurationFormat = "HH'h' mm'm'";
+
+        public string Settings_Group_Offices = "Offices";
+        public string Settings_Offices_Weekday_StartTime = "Weekday start time";
+        public string Settings_Offices_Weekday_Duration = "Weekday duration";
+        public string Settings_Offices_DurationFormat = "HH'h' mm'm'";
+
         public string Settings_Group_Work = "Work";
-        public string Settings_Work_StartTime = "Start time";
-        public string Settings_Work_Duration = "Duration";
-        public string Settings_Work_DurationFormat = "HH'h' mm'm'";
         public string Settings_Work_AllowLeisure = "Allow some workers to go to leisure areas after work on Fridays";
 
         public string Settings_Group_Citizens = "Citizens";
         public string Settings_Citizens_ReactToWeather = "React to weather";
+
+        public string Settings_Group_Lighting = "Lighting";
+        public string Settings_Lighting_OverrideLights = "Allow control of building lighting";
+        public string Settings_Lighting_LightsEducation = "Allow control of educational building lighting";
+        public string Settings_Lighting_LightsCommercial = "Allow control of commercial building lighting";
+        public string Settings_Lighting_LightsOffices = "Allow control of office building lighting";
+        public string Settings_Lighting_LightsResidential = "Allow control of residential building lighting";
+        public string Settings_Lighting_LightsIndustrial = "Allow control of industrial building lighting";
 
         public string Settings_Group_DangerZone = "Danger zone";
         public string Settings_DangerZone_IgnoreVehiclePercentages = "Ignore vehicle percentages when spawning citizens";

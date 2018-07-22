@@ -2,7 +2,7 @@
 using RushHour2.Core.Settings;
 using System.Collections.Generic;
 
-namespace RushHour2.Citizens.Location
+namespace RushHour2.Locations.Citizens
 {
     public static class GlobalLocationHandler
     {

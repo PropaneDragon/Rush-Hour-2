@@ -74,6 +74,10 @@
       <Project>{55DE2D6A-5CAC-4FC4-9D56-A09938CA694A}</Project>
       <Name>RushHour2.Localisation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RushHour2.Monitoring\RushHour2.Monitoring.csproj">
+      <Project>{42E55D9F-9498-4EB1-A07C-8AD91DDBC79A}</Project>
+      <Name>RushHour2.Monitoring</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RushHour2.Patches\RushHour2.Patches.csproj">
       <Project>{86C9A0EE-B766-46F9-8819-DD35058F90F1}</Project>
       <Name>RushHour2.Patches</Name>

@@ -1,8 +1,11 @@
 ﻿using ColossalFramework;
-using RushHour2.Citizens.Extensions;
-using RushHour2.Citizens.Reporting;
 using RushHour2.Core.Settings;
 using System;
+using RushHour2.Monitoring.Citizens;
+using RushHour2.Locations.Travel;
+using RushHour2.Locations.Citizens;
+using RushHour2.Citizens.Extensions;
+using RushHour2.Buildings.Extensions;
 
 namespace RushHour2.Citizens.Location
 {
@@ -60,7 +63,7 @@ namespace RushHour2.Citizens.Location
         {
             CitizenActivityMonitor.LogActivity(citizenId, GetBuildingActivity(ref citizen));
 
-            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
+            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork(citizenId))
             {
                 residentAI.GoToWork(citizenId, ref citizen);
 
@@ -107,7 +110,7 @@ namespace RushHour2.Citizens.Location
         {
             CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.AtWork);
 
-            if (!citizen.ShouldBeAtWork())
+            if (!citizen.ShouldBeAtWork(citizenId))
             {
                 if (citizen.NeedsGoods())
                 {
@@ -184,7 +187,7 @@ namespace RushHour2.Citizens.Location
         {
             CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.AtHome);
 
-            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
+            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork(citizenId))
             {
                 residentAI.GoToWork(citizenId, ref citizen);
 
@@ -306,7 +309,7 @@ namespace RushHour2.Citizens.Location
         {
             CitizenActivityMonitor.LogActivity(citizenId, CitizenActivityMonitor.Activity.Moving);
 
-            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork())
+            if (citizen.ValidWorkBuilding() && citizen.ShouldGoToWork(citizenId))
             {
                 residentAI.GoToWork(citizenId, ref citizen);
 

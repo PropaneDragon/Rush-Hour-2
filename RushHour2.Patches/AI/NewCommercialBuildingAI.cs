@@ -34,6 +34,11 @@ namespace RushHour2.Patches.AI
                         buildingData.m_outgoingProblemTimer = _lastProblemTimer;
                     }
                 }
+
+                if (buildingData.m_customBuffer2 > 0)
+                {
+                    buildingData.m_customBuffer2--;
+                }
             }
         }
     }

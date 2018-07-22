@@ -1,8 +1,8 @@
 ﻿using ColossalFramework.IO;
-using RushHour2.Citizens.Reporting;
 using RushHour2.Core.Info;
 using RushHour2.Core.Reporting;
 using RushHour2.Core.Settings;
+using RushHour2.Monitoring.Citizens;
 using System;
 using UnityEngine;
 

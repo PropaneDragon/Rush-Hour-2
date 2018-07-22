@@ -1,9 +1,9 @@
 ﻿using Harmony;
-using RushHour2.Buildings.Extensions;
-using RushHour2.Citizens.Reporting;
 using System.Collections.Generic;
 using UnityEngine;
-using RushHour2.Citizens.Location;
+using RushHour2.Monitoring.Citizens;
+using RushHour2.Locations.Citizens;
+using RushHour2.Buildings.Extensions;
 
 namespace RushHour2.Citizens.Extensions
 {

@@ -3,7 +3,7 @@ using RushHour2.Core.Settings;
 using System;
 using UnityEngine;
 
-namespace RushHour2.Citizens.Location
+namespace RushHour2.Locations.Travel
 {
     public static class TravelTime
     {

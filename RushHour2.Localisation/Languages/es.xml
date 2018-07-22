@@ -22,13 +22,33 @@
   <Settings_University_StartTime>Hora de Inicio</Settings_University_StartTime>
   <Settings_University_Duration>Duración</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'h' mm'm'</Settings_University_DurationFormat>
+  <Settings_Group_Commercial>Commercial</Settings_Group_Commercial>
+  <Settings_Commercial_Weekday_StartTime>Weekday start time</Settings_Commercial_Weekday_StartTime>
+  <Settings_Commercial_Weekday_Duration>Weekday duration</Settings_Commercial_Weekday_Duration>
+  <Settings_Commercial_Weekend_StartTime>Weekend start time</Settings_Commercial_Weekend_StartTime>
+  <Settings_Commercial_Weekend_Duration>Weekend duration</Settings_Commercial_Weekend_Duration>
+  <Settings_Commercial_DurationFormat>HH'h' mm'm'</Settings_Commercial_DurationFormat>
+  <Settings_Group_Industrial>Industrial</Settings_Group_Industrial>
+  <Settings_Industrial_Weekday_StartTime>Weekday start time</Settings_Industrial_Weekday_StartTime>
+  <Settings_Industrial_Weekday_Duration>Weekday duration</Settings_Industrial_Weekday_Duration>
+  <Settings_Industrial_Weekend_StartTime>Weekend start time</Settings_Industrial_Weekend_StartTime>
+  <Settings_Industrial_Weekend_Duration>Weekend duration</Settings_Industrial_Weekend_Duration>
+  <Settings_Industrial_DurationFormat>HH'h' mm'm'</Settings_Industrial_DurationFormat>
+  <Settings_Group_Offices>Offices</Settings_Group_Offices>
+  <Settings_Offices_Weekday_StartTime>Weekday start time</Settings_Offices_Weekday_StartTime>
+  <Settings_Offices_Weekday_Duration>Weekday duration</Settings_Offices_Weekday_Duration>
+  <Settings_Offices_DurationFormat>HH'h' mm'm'</Settings_Offices_DurationFormat>
   <Settings_Group_Work>Trabajo</Settings_Group_Work>
-  <Settings_Work_StartTime>Hora de Inicio</Settings_Work_StartTime>
-  <Settings_Work_Duration>Duración</Settings_Work_Duration>
-  <Settings_Work_DurationFormat>HH'h' mm'm'</Settings_Work_DurationFormat>
   <Settings_Work_AllowLeisure>Permitir a algunos trabajadores ir a zonas de ocio los viernes después del trabajo.</Settings_Work_AllowLeisure>
   <Settings_Group_Citizens>Ciudadanos</Settings_Group_Citizens>
   <Settings_Citizens_ReactToWeather>Reaccionar al clima</Settings_Citizens_ReactToWeather>
+  <Settings_Group_Lighting>Lighting</Settings_Group_Lighting>
+  <Settings_Lighting_OverrideLights>Allow control of building lighting</Settings_Lighting_OverrideLights>
+  <Settings_Lighting_LightsEducation>Allow control of educational building lighting</Settings_Lighting_LightsEducation>
+  <Settings_Lighting_LightsCommercial>Allow control of commercial building lighting</Settings_Lighting_LightsCommercial>
+  <Settings_Lighting_LightsOffices>Allow control of office building lighting</Settings_Lighting_LightsOffices>
+  <Settings_Lighting_LightsResidential>Allow control of residential building lighting</Settings_Lighting_LightsResidential>
+  <Settings_Lighting_LightsIndustrial>Allow control of industrial building lighting</Settings_Lighting_LightsIndustrial>
   <Settings_Group_DangerZone>Zona Peligrosa</Settings_Group_DangerZone>
   <Settings_DangerZone_IgnoreVehiclePercentages>Ignorar el porcentaje de vehiculos cuando aparecen ciudadanos</Settings_DangerZone_IgnoreVehiclePercentages>
   <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>Activa esto para permitir que aparezcan mas ciudadanos, aún así causará que los vehiculos desaparezcan aleatoriamente si estas cerca del máximo permitido en tu ciudad.</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>

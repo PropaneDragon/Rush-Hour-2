@@ -22,13 +22,33 @@
   <Settings_University_StartTime>開始時刻</Settings_University_StartTime>
   <Settings_University_Duration>時間の長さ</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'時' mm'分'</Settings_University_DurationFormat>
+  <Settings_Group_Commercial>Commercial</Settings_Group_Commercial>
+  <Settings_Commercial_Weekday_StartTime>Weekday start time</Settings_Commercial_Weekday_StartTime>
+  <Settings_Commercial_Weekday_Duration>Weekday duration</Settings_Commercial_Weekday_Duration>
+  <Settings_Commercial_Weekend_StartTime>Weekend start time</Settings_Commercial_Weekend_StartTime>
+  <Settings_Commercial_Weekend_Duration>Weekend duration</Settings_Commercial_Weekend_Duration>
+  <Settings_Commercial_DurationFormat>HH'h' mm'm'</Settings_Commercial_DurationFormat>
+  <Settings_Group_Industrial>Industrial</Settings_Group_Industrial>
+  <Settings_Industrial_Weekday_StartTime>Weekday start time</Settings_Industrial_Weekday_StartTime>
+  <Settings_Industrial_Weekday_Duration>Weekday duration</Settings_Industrial_Weekday_Duration>
+  <Settings_Industrial_Weekend_StartTime>Weekend start time</Settings_Industrial_Weekend_StartTime>
+  <Settings_Industrial_Weekend_Duration>Weekend duration</Settings_Industrial_Weekend_Duration>
+  <Settings_Industrial_DurationFormat>HH'h' mm'm'</Settings_Industrial_DurationFormat>
+  <Settings_Group_Offices>Offices</Settings_Group_Offices>
+  <Settings_Offices_Weekday_StartTime>Weekday start time</Settings_Offices_Weekday_StartTime>
+  <Settings_Offices_Weekday_Duration>Weekday duration</Settings_Offices_Weekday_Duration>
+  <Settings_Offices_DurationFormat>HH'h' mm'm'</Settings_Offices_DurationFormat>
   <Settings_Group_Work>仕事</Settings_Group_Work>
-  <Settings_Work_StartTime>開始時刻</Settings_Work_StartTime>
-  <Settings_Work_Duration>時間の長さ</Settings_Work_Duration>
-  <Settings_Work_DurationFormat>HH'時' mm'分'</Settings_Work_DurationFormat>
   <Settings_Work_AllowLeisure>金曜日ごとに労働者が仕事の後にレジャー区画へ遊びに行くようにする</Settings_Work_AllowLeisure>
   <Settings_Group_Citizens>市民</Settings_Group_Citizens>
   <Settings_Citizens_ReactToWeather>天候に反応して行動させる</Settings_Citizens_ReactToWeather>
+  <Settings_Group_Lighting>Lighting</Settings_Group_Lighting>
+  <Settings_Lighting_OverrideLights>Allow control of building lighting</Settings_Lighting_OverrideLights>
+  <Settings_Lighting_LightsEducation>Allow control of educational building lighting</Settings_Lighting_LightsEducation>
+  <Settings_Lighting_LightsCommercial>Allow control of commercial building lighting</Settings_Lighting_LightsCommercial>
+  <Settings_Lighting_LightsOffices>Allow control of office building lighting</Settings_Lighting_LightsOffices>
+  <Settings_Lighting_LightsResidential>Allow control of residential building lighting</Settings_Lighting_LightsResidential>
+  <Settings_Lighting_LightsIndustrial>Allow control of industrial building lighting</Settings_Lighting_LightsIndustrial>
   <Settings_Group_DangerZone>危険なオプション</Settings_Group_DangerZone>
   <Settings_DangerZone_IgnoreVehiclePercentages>市民が生み出される際、乗り物の割合を無視</Settings_DangerZone_IgnoreVehiclePercentages>
   <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>これを有効にすると、より多くの市民が生み出されますが、都市の限界近くまで乗り物が存在すると、ランダムに乗り物が消失することがあります。</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>

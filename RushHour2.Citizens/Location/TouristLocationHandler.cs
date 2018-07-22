@@ -1,7 +1,9 @@
 ﻿using ColossalFramework;
-using RushHour2.Citizens.Extensions;
-using RushHour2.Citizens.Reporting;
 using System;
+using RushHour2.Monitoring.Citizens;
+using RushHour2.Locations.Travel;
+using RushHour2.Citizens.Extensions;
+using RushHour2.Buildings.Extensions;
 
 namespace RushHour2.Citizens.Location
 {

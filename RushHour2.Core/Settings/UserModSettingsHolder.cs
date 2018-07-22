@@ -1,5 +1,4 @@
-﻿using RushHour2.Core.Info;
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -75,6 +74,24 @@ namespace RushHour2.Core.Settings
         [XmlElement]
         public bool Tourists_Override = true;
 
+        [XmlElement]
+        public bool Buildings_OverrideLights = true;
+
+        [XmlElement]
+        public bool Buildings_OverrideSchoolLights = true;
+
+        [XmlElement]
+        public bool Buildings_OverrideCommercialLights = true;
+
+        [XmlElement]
+        public bool Buildings_OverrideOfficeLights = true;
+
+        [XmlElement]
+        public bool Buildings_OverrideIndustrialLights = true;
+
+        [XmlElement]
+        public bool Buildings_OverrideResidentialLights = true;
+
         [XmlElement(DataType = "duration")]
         public string StartTime_Schools_String
         {
@@ -90,10 +107,38 @@ namespace RushHour2.Core.Settings
         }
 
         [XmlElement(DataType = "duration")]
-        public string StartTime_Work_String
+        public string StartTime_Commercial_Weekday_String
         {
-            get => XmlConvert.ToString(StartTime_Work);
-            set => StartTime_Work = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
+            get => XmlConvert.ToString(StartTime_Commercial_Weekday);
+            set => StartTime_Commercial_Weekday = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
+        }
+
+        [XmlElement(DataType = "duration")]
+        public string StartTime_Commercial_Weekend_String
+        {
+            get => XmlConvert.ToString(StartTime_Commercial_Weekend);
+            set => StartTime_Commercial_Weekend = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
+        }
+
+        [XmlElement(DataType = "duration")]
+        public string StartTime_Industrial_Weekday_String
+        {
+            get => XmlConvert.ToString(StartTime_Industrial_Weekday);
+            set => StartTime_Industrial_Weekday = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
+        }
+
+        [XmlElement(DataType = "duration")]
+        public string StartTime_Industrial_Weekend_String
+        {
+            get => XmlConvert.ToString(StartTime_Industrial_Weekend);
+            set => StartTime_Industrial_Weekend = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
+        }
+
+        [XmlElement(DataType = "duration")]
+        public string StartTime_Offices_Weekday_String
+        {
+            get => XmlConvert.ToString(StartTime_Offices_Weekday);
+            set => StartTime_Offices_Weekday = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
         }
 
         [XmlElement(DataType = "duration")]
@@ -113,8 +158,8 @@ namespace RushHour2.Core.Settings
         [XmlElement(DataType = "duration")]
         public string Duration_Work_String
         {
-            get => XmlConvert.ToString(Duration_Work);
-            set => Duration_Work = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
+            get => XmlConvert.ToString(Duration_Commercial_Weekday);
+            set => Duration_Commercial_Weekday = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
         }
 
         [XmlIgnore]
@@ -122,13 +167,29 @@ namespace RushHour2.Core.Settings
         [XmlIgnore]
         public TimeSpan StartTime_University = TimeSpan.FromHours(10);
         [XmlIgnore]
-        public TimeSpan StartTime_Work = TimeSpan.FromHours(9);
+        public TimeSpan StartTime_Commercial_Weekday = TimeSpan.FromHours(8);
+        [XmlIgnore]
+        public TimeSpan StartTime_Commercial_Weekend = TimeSpan.FromHours(8);
+        [XmlIgnore]
+        public TimeSpan StartTime_Industrial_Weekday = TimeSpan.FromHours(9);
+        [XmlIgnore]
+        public TimeSpan StartTime_Industrial_Weekend = TimeSpan.FromHours(9);
+        [XmlIgnore]
+        public TimeSpan StartTime_Offices_Weekday = TimeSpan.FromHours(9);
 
         [XmlIgnore]
         public TimeSpan Duration_Schools = TimeSpan.FromHours(6.5);
         [XmlIgnore]
         public TimeSpan Duration_University = TimeSpan.FromHours(6);
         [XmlIgnore]
-        public TimeSpan Duration_Work = TimeSpan.FromHours(8);
+        public TimeSpan Duration_Commercial_Weekday = TimeSpan.FromHours(12);
+        [XmlIgnore]
+        public TimeSpan Duration_Commercial_Weekend = TimeSpan.FromHours(12);
+        [XmlIgnore]
+        public TimeSpan Duration_Industrial_Weekday = TimeSpan.FromHours(8);
+        [XmlIgnore]
+        public TimeSpan Duration_Industrial_Weekend = TimeSpan.FromHours(8);
+        [XmlIgnore]
+        public TimeSpan Duration_Offices_Weekday = TimeSpan.FromHours(8);
     }
 }

@@ -1,10 +1,10 @@
 ﻿using ColossalFramework.Math;
-using RushHour2.Buildings.Extensions;
 using RushHour2.Core.Settings;
 using RushHour2.Patches.HarmonyLocal;
 using System;
 using System.Reflection;
 using UnityEngine;
+using RushHour2.Buildings.Extensions;
 
 namespace RushHour2.Patches.AI
 {
