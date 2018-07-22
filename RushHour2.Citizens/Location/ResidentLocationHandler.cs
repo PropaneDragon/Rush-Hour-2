@@ -212,7 +212,7 @@ namespace RushHour2.Citizens.Location
             {
                 if (citizen.NeedsGoods())
                 {
-                    residentAI.GoToAShop(citizenId, ref citizen, citizen.HomeBuilding(), BuildingManager.BUILDINGGRID_CELL_SIZE * 2));
+                    residentAI.GoToAShop(citizenId, ref citizen, citizen.HomeBuilding(), BuildingManager.BUILDINGGRID_CELL_SIZE * 2);
                 }
                 else
                 {
