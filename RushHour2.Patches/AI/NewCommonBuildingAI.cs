@@ -13,7 +13,7 @@ namespace RushHour2.Patches.AI
         public override MethodBase BaseMethod => typeof(CommonBuildingAI).GetMethod("GetColor", BindingFlags.Instance | BindingFlags.Public, null, new Type[] { typeof(ushort), typeof(Building).MakeByRefType(), typeof(InfoManager.InfoMode) }, new ParameterModifier[] { });
         public override MethodInfo Postfix => typeof(NewCommonBuildingAI_GetColor).GetMethod(nameof(GetColorPostfix), BindingFlags.Static | BindingFlags.Public);
 
-        public static void GetColorPostfix(ushort buildingID, ref Building data, InfoManager.InfoMode infoMode, ref Color __result)
+        public static void GetColorPostfix(ref CommonBuildingAI __instance, ushort buildingID, ref Building data, InfoManager.InfoMode infoMode, ref Color __result)
         {
             if (UserModSettings.Settings.Enabled && UserModSettings.Settings.Buildings_OverrideLights && infoMode == InfoManager.InfoMode.None && __result.a > 0f)
             {

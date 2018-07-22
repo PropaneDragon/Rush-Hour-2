@@ -87,5 +87,8 @@
         public string ExperimentalBuild_Description = "You currently have an experimental build of {0} running.\n\n" +
                     "This build may have bugs and issues, as well as incomplete features as it is intended for testing only. " +
                     "Please subscribe to the non-experimental version of the mod if you don't intend on testing {0}.";
+
+        public string Incompatibility_Title = "{0} - Incompatibility detected";
+        public string Incompatibility_Description = "There appears to be an issue overriding part of the game, likely due to another conflicting mod.\n\nSome features have been disabled, but everything else will still work.";
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace RushHour2.Core.Settings
 {
-    public class FeatureToggles
+    public static class FeatureToggles
     {
+        public static bool LightingModificationsActive = true;
     }
 }

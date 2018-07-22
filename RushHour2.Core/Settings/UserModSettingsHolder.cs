@@ -81,16 +81,16 @@ namespace RushHour2.Core.Settings
         public bool Buildings_OverrideSchoolLights = true;
 
         [XmlElement]
-        public bool Buildings_OverrideCommercialLights = true;
+        public bool Buildings_OverrideCommercialLights = false;
 
         [XmlElement]
-        public bool Buildings_OverrideOfficeLights = true;
+        public bool Buildings_OverrideOfficeLights = false;
 
         [XmlElement]
-        public bool Buildings_OverrideIndustrialLights = true;
+        public bool Buildings_OverrideIndustrialLights = false;
 
         [XmlElement]
-        public bool Buildings_OverrideResidentialLights = true;
+        public bool Buildings_OverrideResidentialLights = false;
 
         [XmlElement(DataType = "duration")]
         public string StartTime_Schools_String

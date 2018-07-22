@@ -84,14 +84,17 @@ namespace RushHour2.UI.Settings
                 citizens.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Citizens_ReactToWeather), UserModSettings.Settings.Citizens_ReactToWeather, new OnCheckChanged(value => { UserModSettings.Settings.Citizens_ReactToWeather = value; }));
             }
 
-            var lightingGroup = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Lighting));
+            if (FeatureToggles.LightingModificationsActive)
             {
-                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_OverrideLights), UserModSettings.Settings.Buildings_OverrideLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideLights = value));
-                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsEducation), UserModSettings.Settings.Buildings_OverrideSchoolLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideSchoolLights = value));
-                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsCommercial), UserModSettings.Settings.Buildings_OverrideCommercialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideCommercialLights = value));
-                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsOffices), UserModSettings.Settings.Buildings_OverrideOfficeLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideOfficeLights = value));
-                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsIndustrial), UserModSettings.Settings.Buildings_OverrideIndustrialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideIndustrialLights = value));
-                lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsResidential), UserModSettings.Settings.Buildings_OverrideResidentialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideResidentialLights = value));
+                var lightingGroup = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_Lighting));
+                {
+                    lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_OverrideLights), UserModSettings.Settings.Buildings_OverrideLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideLights = value));
+                    lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsEducation), UserModSettings.Settings.Buildings_OverrideSchoolLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideSchoolLights = value));
+                    lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsCommercial), UserModSettings.Settings.Buildings_OverrideCommercialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideCommercialLights = value));
+                    lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsOffices), UserModSettings.Settings.Buildings_OverrideOfficeLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideOfficeLights = value));
+                    lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsIndustrial), UserModSettings.Settings.Buildings_OverrideIndustrialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideIndustrialLights = value));
+                    lightingGroup.AddCheckbox(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Lighting_LightsResidential), UserModSettings.Settings.Buildings_OverrideResidentialLights, new OnCheckChanged(value => UserModSettings.Settings.Buildings_OverrideResidentialLights = value));
+                }
             }
 
             var dangerZone = helper.AddGroup(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Settings_Group_DangerZone));

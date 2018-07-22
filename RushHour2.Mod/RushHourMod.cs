@@ -15,6 +15,7 @@ namespace RushHour2.Mod
     public class RushHourMod : IUserMod
     {
         private static PublishedFileId experimentalId = new PublishedFileId(1432430887);
+        private UIHelperBase _settingsHelper = null;
 
         public string Name => Details.ModName;
         public string Description => $"{Details.ModDescription} v{Details.Version.ToString(3)}";
@@ -54,6 +55,11 @@ namespace RushHour2.Mod
             SimulationManager.RegisterSimulationManager(new SimulationExtension());
             UpdateText.DisplayIfRequired();
 
+            if (_settingsHelper != null)
+            {
+                SettingsCreation.Create(_settingsHelper);
+            }
+
             LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has loaded post intro.");
         }
 
@@ -61,7 +67,7 @@ namespace RushHour2.Mod
         {
             LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} is creating settings.");
 
-            SettingsCreation.Create(helper);
+            _settingsHelper = helper;
 
             LoggingWrapper.Log(LoggingWrapper.LogArea.All, LoggingWrapper.LogType.Message, $"{Name} has created settings.");
         }

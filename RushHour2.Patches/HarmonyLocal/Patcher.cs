@@ -6,6 +6,9 @@ using RushHour2.Patches.UI;
 using System;
 using System.Linq;
 using System.Threading;
+using RushHour2.Localisation.Language;
+using RushHour2.Core.Info;
+using RushHour2.Core.Settings;
 
 namespace RushHour2.Patches.HarmonyLocal
 {
@@ -68,6 +71,13 @@ namespace RushHour2.Patches.HarmonyLocal
             return false;
         }
 
+        public static bool OptionalPatch(IPatchable patchable, ref bool featureToggle)
+        {
+            featureToggle = Patch(patchable) && false;
+
+            return featureToggle;
+        }
+
         public static bool PatchAll()
         {
             var patched = true;
@@ -79,9 +89,22 @@ namespace RushHour2.Patches.HarmonyLocal
             patched = patched && Patch(new NewInfoPanel_Update());
             patched = patched && Patch(new NewCommercialBuildingAI_SimulationStepActive());
             patched = patched && Patch(new NewBuildingAI_CalculateUnspawnPosition());
-            patched = patched && Patch(new NewCommonBuildingAI_GetColor());
+
+            PatchOptional();
 
             return patched;
+        }
+
+        private static void PatchOptional()
+        {
+            var patched = true;
+
+            patched = patched && OptionalPatch(new NewCommonBuildingAI_GetColor(), ref FeatureToggles.LightingModificationsActive);
+
+            if (!patched)
+            {
+                MessageBoxWrapper.Show(MessageBoxWrapper.MessageType.Warning, string.Format(LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Incompatibility_Title), Details.BaseModName), LocalisationHolder.Translate(LocalisationHolder.CurrentLocalisation.Incompatibility_Description));
+            }
         }
     }
 }

@@ -164,18 +164,19 @@ namespace RushHour2.Buildings.Extensions
             return citizens;
         }
 
-        public static bool HasCitizensInside(this Building building, CitizenUnit.Flags flags)
+        public static bool HasCitizensInside(this Building building, CitizenUnit.Flags flags, int maxRecurseAmount = 5)
         {
             return building.AnyCitizenInside(flags, citizenId =>
             {
                 return true;
-            });
+            },
+            maxRecurseAmount);
         }
 
-        public static bool AnyCitizenInside(this Building building, CitizenUnit.Flags flags, Func<uint, bool> checkFunction)
+        public static bool AnyCitizenInside(this Building building, CitizenUnit.Flags flags, Func<uint, bool> checkFunction, int maxRecurseAmount = 5)
         {
             var citizenUnitId = building.m_citizenUnits;
-            while (citizenUnitId != 0)
+            while (citizenUnitId != 0 && maxRecurseAmount-- > 0)
             {
                 var citizenUnit = CitizenManager.instance.m_units.m_buffer[citizenUnitId];
                 if ((citizenUnit.m_flags & flags) != CitizenUnit.Flags.None)
