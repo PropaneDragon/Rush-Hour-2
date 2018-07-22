@@ -6,32 +6,21 @@ namespace RushHour2.Core.Settings
 {
     public class UserModSettingsHolder
     {
-        [XmlElement]
         public bool Enabled = true;
 
         [XmlIgnore]
         public Version LastVersion = new Version();
 
-        [XmlElement]
         public string LastVersion_String
         {
             get => LastVersion.ToString();
             set => LastVersion = string.IsNullOrEmpty(value) ? new Version() : new Version(value);
         }
-
-        [XmlElement]
+        
         public string Language = "English (GB)";
-
-        [XmlElement]
         public bool Log_Citizen_Status = false;
-
-        [XmlElement]
         public bool Logging_ToFile = true;
-
-        [XmlElement]
         public bool Logging_ToConsole = true;
-
-        [XmlElement]
         public bool Logging_ToDebug = true;
 
         [XmlIgnore]
@@ -43,54 +32,26 @@ namespace RushHour2.Core.Settings
             get => XmlConvert.ToString(Logging_ToFile_Duration);
             set => Logging_ToFile_Duration = string.IsNullOrEmpty(value) ? TimeSpan.Zero : XmlConvert.ToTimeSpan(value);
         }
-
-        [XmlElement]
+        
         public bool MessageBoxes_Enabled = true;
-
-        [XmlElement]
         public float Simulation_Speed = 0.25f;
-
-        [XmlElement]
         public bool DateTimeBar_Modify = true;
-
-        [XmlElement]
         public bool Time_24Hour = true;
-
-        [XmlElement]
         public string DateTimeBar_Format = "dddd HH:mm";
 
-        [XmlElement]
         public bool Citizens_Override = true;
-
-        [XmlElement]
         public bool Citizens_IgnoreVehicleCount = false;
-
-        [XmlElement]
         public bool Citizens_AllowLeisureAfterWork = true;
-
-        [XmlElement]
         public bool Citizens_ReactToWeather = true;
 
-        [XmlElement]
         public bool Tourists_Override = true;
-
-        [XmlElement]
-        public bool Buildings_OverrideLights = true;
-
-        [XmlElement]
-        public bool Buildings_OverrideSchoolLights = true;
-
-        [XmlElement]
-        public bool Buildings_OverrideCommercialLights = false;
-
-        [XmlElement]
-        public bool Buildings_OverrideOfficeLights = false;
-
-        [XmlElement]
-        public bool Buildings_OverrideIndustrialLights = false;
-
-        [XmlElement]
-        public bool Buildings_OverrideResidentialLights = false;
+        
+        public bool Buildings_OverrideLights_1 = true;
+        public bool Buildings_OverrideSchoolLights_1 = true;
+        public bool Buildings_OverrideCommercialLights_1 = false;
+        public bool Buildings_OverrideOfficeLights_1 = false;
+        public bool Buildings_OverrideIndustrialLights_1 = false;
+        public bool Buildings_OverrideResidentialLights_1 = false;
 
         [XmlElement(DataType = "duration")]
         public string StartTime_Schools_String

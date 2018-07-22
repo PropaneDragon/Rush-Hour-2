@@ -15,7 +15,7 @@ namespace RushHour2.Patches.AI
 
         public static void GetColorPostfix(ref CommonBuildingAI __instance, ushort buildingID, ref Building data, InfoManager.InfoMode infoMode, ref Color __result)
         {
-            if (UserModSettings.Settings.Enabled && UserModSettings.Settings.Buildings_OverrideLights && infoMode == InfoManager.InfoMode.None && __result.a > 0f)
+            if (UserModSettings.Settings.Enabled && UserModSettings.Settings.Buildings_OverrideLights_1 && infoMode == InfoManager.InfoMode.None && __result.a > 0f)
             {
                 var lightsOn = true;
                 var buildingAI = data.Info.m_buildingAI;
@@ -25,20 +25,20 @@ namespace RushHour2.Patches.AI
                 switch (service)
                 {
                     case ItemClass.Service.Commercial:
-                        var allowedLightsOff = UserModSettings.Settings.Buildings_OverrideCommercialLights && subService != ItemClass.SubService.CommercialTourist && subService != ItemClass.SubService.CommercialLeisure;
+                        var allowedLightsOff = UserModSettings.Settings.Buildings_OverrideCommercialLights_1 && subService != ItemClass.SubService.CommercialTourist && subService != ItemClass.SubService.CommercialLeisure;
                         lightsOn = !allowedLightsOff || data.HasCitizensInside(CitizenUnit.Flags.Visit | CitizenUnit.Flags.Work);
                         break;
                     case ItemClass.Service.Education:
-                        lightsOn = !UserModSettings.Settings.Buildings_OverrideSchoolLights || (!SimulationManager.instance.m_isNightTime && data.HasCitizensInside(CitizenUnit.Flags.Visit | CitizenUnit.Flags.Student | CitizenUnit.Flags.Work));
+                        lightsOn = !UserModSettings.Settings.Buildings_OverrideSchoolLights_1 || (!SimulationManager.instance.m_isNightTime && data.HasCitizensInside(CitizenUnit.Flags.Visit | CitizenUnit.Flags.Student | CitizenUnit.Flags.Work));
                         break;
                     case ItemClass.Service.Office:
-                        lightsOn = !UserModSettings.Settings.Buildings_OverrideOfficeLights || data.HasCitizensInside(CitizenUnit.Flags.Work);
+                        lightsOn = !UserModSettings.Settings.Buildings_OverrideOfficeLights_1 || data.HasCitizensInside(CitizenUnit.Flags.Work);
                         break;
                     case ItemClass.Service.Industrial:
-                        lightsOn = !UserModSettings.Settings.Buildings_OverrideIndustrialLights || data.HasCitizensInside(CitizenUnit.Flags.Work);
+                        lightsOn = !UserModSettings.Settings.Buildings_OverrideIndustrialLights_1 || data.HasCitizensInside(CitizenUnit.Flags.Work);
                         break;
                     case ItemClass.Service.Residential:
-                        if (UserModSettings.Settings.Buildings_OverrideResidentialLights)
+                        if (UserModSettings.Settings.Buildings_OverrideResidentialLights_1)
                         {
                             var citizensInside = data.HasCitizensInside(CitizenUnit.Flags.Home | CitizenUnit.Flags.Visit);
                             var highrise = subService == ItemClass.SubService.ResidentialHigh || subService == ItemClass.SubService.ResidentialHighEco;
