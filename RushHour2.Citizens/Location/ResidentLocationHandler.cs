@@ -199,15 +199,6 @@ namespace RushHour2.Citizens.Location
 
                 return true;
             }
-            else if (citizen.NeedsGoods())
-            {
-                var proximityBuilding = citizen.ValidHomeBuilding() ? citizen.HomeBuilding() : citizen.WorkBuilding(); //Prioritise something close to home, rather than work
-
-                if (residentAI.GoToAShop(citizenId, ref citizen, proximityBuilding, BuildingManager.BUILDINGGRID_CELL_SIZE * 2))
-                {
-                    return true;
-                }
-            }
 
             var simulationManager = SimulationManager.instance;
             var happiness = Citizen.GetHappiness(citizen.m_health, citizen.m_wellbeing);
@@ -215,11 +206,18 @@ namespace RushHour2.Citizens.Location
             var happinessLevel = Citizen.GetHappinessLevel(happiness);
             var dayOfWeek = simulationManager.m_currentGameTime.DayOfWeek;
             var weekend = !citizen.ValidWorkBuilding() || dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday;
-            var goSomewhere = simulationManager.m_randomizer.Int32(16) < ((int)happinessLevel + (int)wealth) * (weekend ? 2 : 1);
+            var goSomewhere = simulationManager.m_randomizer.Int32(40) < ((int)happinessLevel + (int)wealth) * (weekend ? 3 : 1);
 
             if (goSomewhere)
             {
-                ProcessActivity(ref residentAI, citizenId, ref citizen);
+                if (citizen.NeedsGoods())
+                {
+                    residentAI.GoToAShop(citizenId, ref citizen, citizen.HomeBuilding(), BuildingManager.BUILDINGGRID_CELL_SIZE * 2));
+                }
+                else
+                {
+                    ProcessActivity(ref residentAI, citizenId, ref citizen);
+                }
             }
 
             return true;
