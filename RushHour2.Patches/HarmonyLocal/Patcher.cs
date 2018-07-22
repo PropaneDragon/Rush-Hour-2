@@ -73,7 +73,7 @@ namespace RushHour2.Patches.HarmonyLocal
 
         public static bool OptionalPatch(IPatchable patchable, ref bool featureToggle)
         {
-            featureToggle = Patch(patchable) && false;
+            featureToggle = Patch(patchable);
 
             return featureToggle;
         }
