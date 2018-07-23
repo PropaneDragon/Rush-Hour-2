@@ -22,40 +22,40 @@
   <Settings_University_StartTime>開始時刻</Settings_University_StartTime>
   <Settings_University_Duration>時間の長さ</Settings_University_Duration>
   <Settings_University_DurationFormat>HH'時' mm'分'</Settings_University_DurationFormat>
-  <Settings_Group_Commercial>Commercial</Settings_Group_Commercial>
-  <Settings_Commercial_Weekday_StartTime>Weekday start time</Settings_Commercial_Weekday_StartTime>
-  <Settings_Commercial_Weekday_Duration>Weekday duration</Settings_Commercial_Weekday_Duration>
-  <Settings_Commercial_Weekend_StartTime>Weekend start time</Settings_Commercial_Weekend_StartTime>
-  <Settings_Commercial_Weekend_Duration>Weekend duration</Settings_Commercial_Weekend_Duration>
-  <Settings_Commercial_DurationFormat>HH'h' mm'm'</Settings_Commercial_DurationFormat>
-  <Settings_Group_Industrial>Industrial</Settings_Group_Industrial>
-  <Settings_Industrial_Weekday_StartTime>Weekday start time</Settings_Industrial_Weekday_StartTime>
-  <Settings_Industrial_Weekday_Duration>Weekday duration</Settings_Industrial_Weekday_Duration>
-  <Settings_Industrial_Weekend_StartTime>Weekend start time</Settings_Industrial_Weekend_StartTime>
-  <Settings_Industrial_Weekend_Duration>Weekend duration</Settings_Industrial_Weekend_Duration>
-  <Settings_Industrial_DurationFormat>HH'h' mm'm'</Settings_Industrial_DurationFormat>
-  <Settings_Group_Offices>Offices</Settings_Group_Offices>
-  <Settings_Offices_Weekday_StartTime>Weekday start time</Settings_Offices_Weekday_StartTime>
-  <Settings_Offices_Weekday_Duration>Weekday duration</Settings_Offices_Weekday_Duration>
-  <Settings_Offices_DurationFormat>HH'h' mm'm'</Settings_Offices_DurationFormat>
+  <Settings_Group_Commercial>商業</Settings_Group_Commercial>
+  <Settings_Commercial_Weekday_StartTime>平日の開始時刻</Settings_Commercial_Weekday_StartTime>
+  <Settings_Commercial_Weekday_Duration>平日の営業時間</Settings_Commercial_Weekday_Duration>
+  <Settings_Commercial_Weekend_StartTime>週末の開始時刻</Settings_Commercial_Weekend_StartTime>
+  <Settings_Commercial_Weekend_Duration>週末の営業時間</Settings_Commercial_Weekend_Duration>
+  <Settings_Commercial_DurationFormat>HH'時' mm'分'</Settings_Commercial_DurationFormat>
+  <Settings_Group_Industrial>工業</Settings_Group_Industrial>
+  <Settings_Industrial_Weekday_StartTime>平日の開始時刻</Settings_Industrial_Weekday_StartTime>
+  <Settings_Industrial_Weekday_Duration>平日の営業時間</Settings_Industrial_Weekday_Duration>
+  <Settings_Industrial_Weekend_StartTime>週末の開始時刻</Settings_Industrial_Weekend_StartTime>
+  <Settings_Industrial_Weekend_Duration>週末の営業時間</Settings_Industrial_Weekend_Duration>
+  <Settings_Industrial_DurationFormat>HH'時' mm'分'</Settings_Industrial_DurationFormat>
+  <Settings_Group_Offices>オフィス</Settings_Group_Offices>
+  <Settings_Offices_Weekday_StartTime>平日の開始時刻</Settings_Offices_Weekday_StartTime>
+  <Settings_Offices_Weekday_Duration>平日の営業時間</Settings_Offices_Weekday_Duration>
+  <Settings_Offices_DurationFormat>HH'時' mm'分'</Settings_Offices_DurationFormat>
   <Settings_Group_Work>仕事</Settings_Group_Work>
   <Settings_Work_AllowLeisure>金曜日ごとに労働者が仕事の後にレジャー区画へ遊びに行くようにする</Settings_Work_AllowLeisure>
   <Settings_Group_Citizens>市民</Settings_Group_Citizens>
   <Settings_Citizens_ReactToWeather>天候に反応して行動させる</Settings_Citizens_ReactToWeather>
-  <Settings_Group_Lighting>Lighting</Settings_Group_Lighting>
-  <Settings_Lighting_OverrideLights>Allow control of building lighting</Settings_Lighting_OverrideLights>
-  <Settings_Lighting_LightsEducation>Allow control of educational building lighting</Settings_Lighting_LightsEducation>
-  <Settings_Lighting_LightsCommercial>Allow control of commercial building lighting</Settings_Lighting_LightsCommercial>
-  <Settings_Lighting_LightsOffices>Allow control of office building lighting</Settings_Lighting_LightsOffices>
-  <Settings_Lighting_LightsResidential>Allow control of residential building lighting</Settings_Lighting_LightsResidential>
-  <Settings_Lighting_LightsIndustrial>Allow control of industrial building lighting</Settings_Lighting_LightsIndustrial>
+  <Settings_Group_Lighting>灯り</Settings_Group_Lighting>
+  <Settings_Lighting_OverrideLights>ビルの灯りをコントロールする</Settings_Lighting_OverrideLights>
+  <Settings_Lighting_LightsEducation>教育施設の灯りをコントロールする</Settings_Lighting_LightsEducation>
+  <Settings_Lighting_LightsCommercial>商業施設の灯りをコントロールする</Settings_Lighting_LightsCommercial>
+  <Settings_Lighting_LightsOffices>オフィスの灯りをコントロールする</Settings_Lighting_LightsOffices>
+  <Settings_Lighting_LightsResidential>住宅の灯りをコントロールする</Settings_Lighting_LightsResidential>
+  <Settings_Lighting_LightsIndustrial>工業施設の灯りをコントロールする</Settings_Lighting_LightsIndustrial>
   <Settings_Group_DangerZone>危険なオプション</Settings_Group_DangerZone>
   <Settings_DangerZone_IgnoreVehiclePercentages>市民が生み出される際、乗り物の割合を無視</Settings_DangerZone_IgnoreVehiclePercentages>
   <Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>これを有効にすると、より多くの市民が生み出されますが、都市の限界近くまで乗り物が存在すると、ランダムに乗り物が消失することがあります。</Settings_DangerZone_IgnoreVehiclePercentages_Tooltip>
   <Settings_DangerZone_EnableMessageBoxes>メッセージボックスを使用する</Settings_DangerZone_EnableMessageBoxes>
   <Settings_DangerZone_EnableMessageBoxes_Tooltip>これを無効にすると、{0} のメッセージボックスがすべて表示されなくなります。その結果、重要な情報に気がつかなくなるかも知れません。</Settings_DangerZone_EnableMessageBoxes_Tooltip>
   <Settings_Group_Logging>ログ</Settings_Group_Logging>
-  <Settings_Logging_LogCitizenStatus>Log citizen activity status to file</Settings_Logging_LogCitizenStatus>
+  <Settings_Logging_LogCitizenStatus>市民の活動状況をログファイルに記録</Settings_Logging_LogCitizenStatus>
   <Settings_Logging_LogToFile>ファイルにログを記録</Settings_Logging_LogToFile>
   <Settings_Logging_LogToDebugPanel>デバッグパネルにログを表示</Settings_Logging_LogToDebugPanel>
   <Settings_Logging_LogToConsole>コンソールにログを表示</Settings_Logging_LogToConsole>
@@ -65,8 +65,8 @@
   <ExperimentalBuild_Description>現在実行中の {0} は試験ビルドです。
 
 テスト目的にのみ使用されることを想定しているため、このビルドにはバグや問題があり、機能も不完全です。{0} のテストが目的でない方は、正規版の MOD をサブスクライブして下さい。</ExperimentalBuild_Description>
-  <Incompatibility_Title>{0} - Incompatibility detected</Incompatibility_Title>
-  <Incompatibility_Description>There appears to be an issue overriding part of the game, likely due to another conflicting mod.
+  <Incompatibility_Title>{0} - 互換性の欠落を検出</Incompatibility_Title>
+  <Incompatibility_Description>ゲームの一部が無効になる問題があるようです。よくある原因は他の MOD との競合です。
 
-Some features have been disabled, but everything else will still work.</Incompatibility_Description>
+機能の一部が無効になっていますが、それ以外はすべて引き続き動作します。</Incompatibility_Description>
 </Localisation>
